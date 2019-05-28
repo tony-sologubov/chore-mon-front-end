@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from 'react'
+import { FirebaseContext } from '../../firebase/index'
 
 const GroupCard = props => {
+  const { firebase } = useContext(FirebaseContext)
   return (
     <div className="group-card">
       <div className="row">
@@ -9,9 +11,9 @@ const GroupCard = props => {
             <div className="card-content white-text">
               <span className="card-title">Card Title</span>
               <p>
-                I am a very simple card. I am good at containing small bits of
-                information. I am convenient because I require little markup to
-                use effectively.
+                {firebase.dbFS
+                  .collection('groups')
+                  .onSnapshot(snapshot => console.log(snapshot.data()))}
               </p>
             </div>
             <div className="card-action">
@@ -22,7 +24,7 @@ const GroupCard = props => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GroupCard;
+export default GroupCard
