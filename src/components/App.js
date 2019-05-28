@@ -7,6 +7,7 @@ import Dashboard from '../views/Dashboard'
 import BillingPage from '../views/billing/BillingPage'
 import firebase, { FirebaseContext } from '../firebase'
 import useAuth from '../components/Auth/useAuth'
+import AddGroup from '../components/Groups/AddGroup'
 
 import '../styles/index.css'
 import Login from './Auth/Login'
@@ -33,6 +34,7 @@ const App = () => {
                     <Route path="/login" component={Login} />
                     <Route path="/forgot" component={ForgotPassword} />
                     <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/add-group" component={AddGroup} />
                     <Route path="/billing" component={BillingPage} />
                   </Switch>
                 </RouteContainer>

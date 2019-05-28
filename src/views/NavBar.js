@@ -7,8 +7,8 @@ const NavBar = () => {
   return (
     <nav className="nav-wrapper black">
       <ul>
-        <li>
-          <Link to={user ? '/dashboard' : '/login'}>Dashboard</Link>
+        <li className={user ? '' : 'toggle-link'}>
+          <Link to="/dashboard">Dashboard</Link>
         </li>
 
         <li>
