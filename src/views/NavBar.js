@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { FirebaseContext } from '../firebase/index'
 
-const NavBar = ({ history }) => {
+const NavBar = () => {
   const { firebase, user } = useContext(FirebaseContext)
   return (
     <nav className="nav-wrapper black">
@@ -27,8 +27,8 @@ const NavBar = ({ history }) => {
         {!user ? (
           <li>
             <Link
-              className="waves-effect waves-light pink-text lighten-5 btn transparent"
               to="/login"
+              className="waves-effect waves-light pink-text lighten-5 btn transparent"
             >
               Login
             </Link>
@@ -37,10 +37,14 @@ const NavBar = ({ history }) => {
           <li
             onClick={() => {
               firebase.logout()
-              history.push('/')
             }}
           >
-            Logout
+            <Link
+              to="/"
+              className="waves-effect waves-light pink-text lighten-5 btn transparent"
+            >
+              Logout
+            </Link>
           </li>
         )}
       </ul>
