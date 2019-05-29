@@ -1,5 +1,4 @@
 import React from 'react'
-import uuidv4 from 'uuid'
 
 function contentEditable(WrappedComponent) {
   return class extends React.Component {
@@ -57,6 +56,8 @@ function contentEditable(WrappedComponent) {
         case 'Escape':
           this.save()
           break
+        default:
+          break
       }
     }
 
@@ -82,43 +83,6 @@ function contentEditable(WrappedComponent) {
         </WrappedComponent>
       )
     }
-  }
-}
-
-export class App extends React.Component {
-  state = {
-    text: '',
-    notes: []
-  }
-  render() {
-    let EditableP = contentEditable('p')
-
-    return (
-      <div>
-        <form
-          onSubmit={e => {
-            e.preventDefault()
-            this.setState({
-              notes: [...this.state.notes, this.state.text],
-              text: ''
-            })
-          }}
-        >
-          <input
-            type="text"
-            value={this.state.text}
-            onChange={e => this.setState({ text: e.target.value })}
-          />
-          <input type="submit" value="submit" />
-        </form>
-
-        <div>
-          {this.state.notes.map(note => (
-            <EditableP key={uuidv4()} value={note} />
-          ))}
-        </div>
-      </div>
-    )
   }
 }
 
