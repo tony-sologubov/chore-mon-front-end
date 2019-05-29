@@ -1,26 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FirebaseContext } from '../../firebase/index'
 import GroupCard from './GroupCard'
+import uuidv4 from 'uuid'
 
-const RenderGroups = props => {
+const RenderGroups = () => {
   const { firebase, user } = useContext(FirebaseContext)
   const [groups, setGroups] = useState([])
 
   useEffect(() => {
-    const unsubscribe = async function getGroups() {
+    async function getGroups() {
       const snapshot = await firebase.dbFS
-        .collection(`users/${user.uid}/groupCards`)
+        .collection(`users/${user.uid}/groups`)
         .get()
-
-      snapshot.forEach(doc => {
-        const id = doc.id
-        const data = doc.data()
-        console.log({ id, data })
-      })
+      setGroups(
+        snapshot.docs.map(doc => {
+          return { id: doc.id, ...doc.data() }
+        })
+      )
     }
-    return () => unsubscribe()
-  }, [firebase.dbFS, user.uid])
-  return <GroupCard />
+    getGroups()
+  }, [])
+
+  return groups.map(group => <GroupCard groupName={group.groupName} />)
 }
 
 export default RenderGroups

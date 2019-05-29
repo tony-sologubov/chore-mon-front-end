@@ -15,7 +15,7 @@ function validateGroup(values) {
 }
 
 export default function AddGroup({ history }) {
-  const { firebase } = useContext(FirebaseContext)
+  const { firebase, user } = useContext(FirebaseContext)
   const { handleSubmit, handleChange, errors, values } = useFormValidation(
     initialState,
     validateGroup,
@@ -24,7 +24,7 @@ export default function AddGroup({ history }) {
   async function submitGroup() {
     try {
       await firebase.dbFS
-        .collection('groups')
+        .collection(`users/${user.uid}/groups`)
         .doc()
         .set({ groupName: values.groupName })
     } catch (err) {
