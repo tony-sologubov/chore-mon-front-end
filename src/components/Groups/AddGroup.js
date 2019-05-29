@@ -9,7 +9,7 @@ const initialState = {
 function validateGroup(values) {
   let errors = {}
   if (!values.groupName) {
-    errors.groupName = 'Group name is required'
+    errors.groupName = 'Group name is required.'
   }
   return errors
 }
