@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import contentEditable from '../../utils/contentEditable'
 import FirebaseContext from '../../firebase/context'
 
@@ -17,7 +17,7 @@ const Group = ({ groupName }) => {
 
   return (
     <div className="group-card">
-      <Link to={`group/${group}`}>
+      <Link to={`groups/${group}`}>
         <div className="row">
           <div className="col s12 m6">
             <div className="card blue-grey darken-1">

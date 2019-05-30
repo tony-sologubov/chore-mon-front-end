@@ -12,6 +12,7 @@ import AddGroup from '../components/Groups/AddGroup'
 import '../styles/index.css'
 import Login from './Auth/Login'
 import ForgotPassword from './Auth/ForgotPassword'
+import Group from '../views/Group'
 
 const RouteContainer = posed.div({
   enter: { opacity: 1, delay: 300 },
@@ -36,6 +37,7 @@ const App = () => {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/add-group" component={AddGroup} />
                     <Route path="/billing" component={BillingPage} />
+                    <Route path="/groups/:groupName" component={Group} />
                   </Switch>
                 </RouteContainer>
               </PoseGroup>
