@@ -38,8 +38,12 @@ const App = () => {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/add-group" component={AddGroup} />
                     <Route path="/billing" component={BillingPage} />
-                    <Route path="/add-task" component={AddTask} />
-                    <Route path="/groups/:groupName" component={Group} />
+                    <Route exact path="/groups/:groupName" component={Group} />
+                    <Route
+                      exact
+                      path="/groups/:groupName/add-task"
+                      component={AddTask}
+                    />
                   </Switch>
                 </RouteContainer>
               </PoseGroup>
