@@ -3,13 +3,14 @@ import { FirebaseContext } from '../../firebase/index'
 import Group from './Group'
 
 const GetGroups = () => {
-  const { firebase, user } = useContext(FirebaseContext)
+  const { firebase } = useContext(FirebaseContext)
   const [groups, setGroups] = useState([])
+  const id = JSON.parse(localStorage.getItem('user')).uid
 
   useEffect(() => {
     async function fetchGroups() {
       const unsubscribe = await firebase.dbFS
-        .collection(`users/${user.uid}/groups`)
+        .collection(`users/${id}/groups`)
         .onSnapshot(snapshot =>
           setGroups(
             snapshot.docs.map(doc => {
@@ -20,7 +21,7 @@ const GetGroups = () => {
       return () => unsubscribe()
     }
     fetchGroups()
-  }, [firebase.dbFS, user.uid])
+  }, [firebase.dbFS, id])
 
   return groups.map(group => <Group groupName={group.groupName} />)
 }

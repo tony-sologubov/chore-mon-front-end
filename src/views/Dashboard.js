@@ -8,7 +8,10 @@ function Dashboard({ history }) {
     <div className="Dashboard">
       <h1>Dashboard</h1>
       <div className="welcome-text">
-        <p> Welcome back, {user.displayName}</p>
+        <p>
+          Welcome back
+          {JSON.parse(localStorage.getItem('user')).displayName}
+        </p>
       </div>
       <button
         onClick={() => {

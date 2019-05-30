@@ -8,8 +8,10 @@ function useAuth() {
     const unsubscribe = firebase.auth.onAuthStateChanged(user => {
       if (user) {
         setAuthUser(user)
+        localStorage.setItem('user', JSON.stringify(user))
       } else {
         setAuthUser(null)
+        localStorage.clear()
       }
     })
     return () => unsubscribe()
