@@ -1,9 +1,7 @@
-import React, { useContext } from 'react'
-import { FirebaseContext } from '../firebase/index'
+import React from 'react'
 import GetGroups from '../components/Groups/GetGroups.js'
 
 function Dashboard({ history }) {
-  const { user } = useContext(FirebaseContext)
   return (
     <div className="Dashboard">
       <h1>Dashboard</h1>
