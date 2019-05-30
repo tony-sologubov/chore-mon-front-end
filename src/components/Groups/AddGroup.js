@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import useFormValidation from '../Auth/useFormValidation'
 import FirebaseContext from '../../firebase/context'
 
@@ -21,11 +21,22 @@ export default function AddGroup({ history }) {
     validateGroup,
     submitGroup
   )
+
+  useEffect(() => {
+    async function setUser() {
+      await firebase.dbFS
+        .collection('users')
+        .doc(`${user.uid}`)
+        .set({ id: user.uid })
+    }
+    setUser()
+  }, [firebase.dbFS, user.uid])
+
   async function submitGroup() {
     try {
       await firebase.dbFS
         .collection(`users/${user.uid}/groups`)
-        .doc()
+        .doc(`${values.groupName.split(' ').join('')}`)
         .set({ groupName: values.groupName })
     } catch (err) {
       console.error({ error: err.message })
