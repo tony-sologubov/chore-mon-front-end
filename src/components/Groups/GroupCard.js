@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import contentEditable from '../../utils/contentEditable'
 import FirebaseContext from '../../firebase/context'
 
-const Group = ({ groupName }) => {
+const GroupCard = ({ groupName }) => {
   let Span = contentEditable('span')
   const group = groupName.split(' ').join('')
   const { firebase, user } = useContext(FirebaseContext)
@@ -35,4 +35,4 @@ const Group = ({ groupName }) => {
   )
 }
 
-export default Group
+export default GroupCard
