@@ -9,17 +9,11 @@ import firebase, { FirebaseContext } from "../firebase";
 import useAuth from "../components/Auth/useAuth";
 import AddGroup from "../components/Groups/AddGroup";
 
-<<<<<<< Updated upstream
-import '../styles/index.css'
-import Login from './Auth/Login'
-import ForgotPassword from './Auth/ForgotPassword'
-import Group from '../views/Group'
-import AddTask from './Tasks/AddTask'
-=======
 import "../styles/index.css";
 import Login from "./Auth/Login";
 import ForgotPassword from "./Auth/ForgotPassword";
->>>>>>> Stashed changes
+import Group from "../views/Group";
+import AddTask from "./Tasks/AddTask";
 
 const RouteContainer = posed.div({
   enter: { opacity: 1, delay: 300 },

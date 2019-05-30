@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-import React from 'react'
-import GetGroups from '../components/Groups/GetGroups.js'
-
-function Dashboard({ history }) {
-=======
 import React, { useContext } from "react";
 import { FirebaseContext } from "../firebase/index";
 import GetGroups from "../components/Groups/GetGroups.js";
@@ -17,7 +11,6 @@ import { ReactComponent as SettingsIcon } from "../assets/dashboard/icons/settin
 
 function Dashboard({ history }) {
   const { user } = useContext(FirebaseContext);
->>>>>>> Stashed changes
   return (
     <div className="Dashboard">
       <div className="dash-header ">
