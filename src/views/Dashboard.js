@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { FirebaseContext } from '../firebase/index'
-import RenderGroups from '../components/Groups/RenderGroups.js'
+import GetGroups from '../components/Groups/GetGroups.js'
 
 function Dashboard({ history }) {
   const [groupList, setGroupList] = useState(null)
@@ -20,7 +20,7 @@ function Dashboard({ history }) {
         New Group
       </button>
       <h2>My Family Groups</h2>
-      <RenderGroups />
+      <GetGroups />
     </div>
   )
 }

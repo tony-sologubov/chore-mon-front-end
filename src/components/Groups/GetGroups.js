@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FirebaseContext } from '../../firebase/index'
-import GroupCard from './GroupCard'
+import Group from './Group'
 import uuidv4 from 'uuid'
 
-const RenderGroups = () => {
+const GetGroups = () => {
   const { firebase, user } = useContext(FirebaseContext)
   const [groups, setGroups] = useState([])
 
   useEffect(() => {
-    async function getGroups() {
+    async function fetchGroups() {
       const snapshot = await firebase.dbFS
         .collection(`users/${user.uid}/groups`)
         .get()
@@ -18,10 +18,10 @@ const RenderGroups = () => {
         })
       )
     }
-    getGroups()
+    fetchGroups()
   }, [])
 
-  return groups.map(group => <GroupCard groupName={group.groupName} />)
+  return groups.map(group => <Group groupName={group.groupName} />)
 }
 
-export default RenderGroups
+export default GetGroups

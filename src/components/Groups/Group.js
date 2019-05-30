@@ -1,8 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import contentEditable from '../../utils/contentEditable'
 
-const GroupCard = props => {
+const Group = props => {
   let Span = contentEditable('span')
+  const groupSpaceRemoved = props.groupName.split(' ').join('')
   return (
     <div className="group-card">
       <div className="row">
@@ -14,8 +16,8 @@ const GroupCard = props => {
               </span>
             </div>
             <div className="card-action">
-              <a href="#">This is a link</a>
-              <a href="#">This is a link</a>
+              <Link to={`group/${groupSpaceRemoved}`}>This is a link</Link>
+              <Link to="/linkB">This is a link</Link>
             </div>
           </div>
         </div>
@@ -24,4 +26,4 @@ const GroupCard = props => {
   )
 }
 
-export default GroupCard
+export default Group
