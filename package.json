@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "@firebase/app-types": "0.x",
+    "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
     "axios": "^0.18.0",
     "firebase": "^6.0.2",
     "firebase-tools": "^6.9.2",
+    "hover.css": "^2.3.2",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

@@ -9,7 +9,7 @@ class Firebase {
     app.initializeApp(config)
     this.auth = app.auth()
     this.db = app.database()
-    this.dbFS = app.firestore()
+    this.firestore = app.firestore()
     this.googleProvider = new app.auth.GoogleAuthProvider()
     this.facebookProvider = new app.auth.FacebookAuthProvider()
     this.twitterProvider = new app.auth.TwitterAuthProvider()

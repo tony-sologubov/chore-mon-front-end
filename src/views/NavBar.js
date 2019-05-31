@@ -36,6 +36,7 @@ const NavBar = () => {
         ) : (
           <li
             onClick={() => {
+              localStorage.clear()
               firebase.logout()
             }}
           >

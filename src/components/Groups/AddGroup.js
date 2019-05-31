@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import useFormValidation from '../Auth/useFormValidation'
 import FirebaseContext from '../../firebase/context'
 
@@ -9,23 +9,34 @@ const initialState = {
 function validateGroup(values) {
   let errors = {}
   if (!values.groupName) {
-    errors.groupName = 'Group name is required'
+    errors.groupName = 'Group name is required.'
   }
   return errors
 }
 
 export default function AddGroup({ history }) {
-  const { firebase } = useContext(FirebaseContext)
+  const { firebase, user } = useContext(FirebaseContext)
   const { handleSubmit, handleChange, errors, values } = useFormValidation(
     initialState,
     validateGroup,
     submitGroup
   )
+
+  useEffect(() => {
+    async function setUser() {
+      await firebase.firestore
+        .collection('users')
+        .doc(`${user.uid}`)
+        .set({ id: user.uid })
+    }
+    setUser()
+  }, [firebase.firestore, user.uid])
+
   async function submitGroup() {
     try {
-      await firebase.dbFS
-        .collection('groups')
-        .doc()
+      await firebase.firestore
+        .collection(`users/${user.uid}/groups`)
+        .doc(`${values.groupName.split(' ').join('')}`)
         .set({ groupName: values.groupName })
     } catch (err) {
       console.error({ error: err.message })
