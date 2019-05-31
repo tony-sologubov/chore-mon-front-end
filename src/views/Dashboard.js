@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { FirebaseContext } from '../firebase/index'
+import React from 'react'
 import GetGroups from '../components/Groups/GetGroups.js'
 import DashPhoto from '../components/Avatar.js'
 import { ReactComponent as ContactsIcon } from '../assets/dashboard/icons/contacts-icon.svg'
@@ -10,7 +9,6 @@ import { ReactComponent as CalendarIcon } from '../assets/dashboard/icons/calend
 import { ReactComponent as SettingsIcon } from '../assets/dashboard/icons/settings.svg'
 
 function Dashboard({ history }) {
-  const { user } = useContext(FirebaseContext)
   return (
     <div className="Dashboard">
       <div className="dash-header ">
