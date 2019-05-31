@@ -1,0 +1,11 @@
+.membersCardsView{
+    display:flex;
+}
+
+.bottomTableAndUsers{
+    display: flex;
+    justify-content: space-between;
+}
+.topHeaderAndButtons{
+    display: flex;
+}

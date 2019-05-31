@@ -15,6 +15,7 @@ import IMAGE4 from '../assets/group-page/png/IMAGE-3.png'
 const Group = ({ match }) => {
   return (
     <>
+    <div className="topHeaderAndButtons">
       <h1>
         <img src={DAILYPIC} alt="text saying daily chores"></img>
       </h1>
@@ -35,8 +36,9 @@ const Group = ({ match }) => {
             </img>
           </Link>
         </div>
-
-    <div>
+      </div>
+      
+    <div className="bottomTableAndUsers">
       <div className="bottomLeftView">
         <GetTasks groupRoute={match.params.groupName} />
       </div>
@@ -47,16 +49,18 @@ const Group = ({ match }) => {
         </div>
 
           <div className="membersCardsView">
-
-            <div className="invitedMembers"><img src={IMAGE1}>
-            </img></div>
-            <div className="invitedMembers"><img src={IMAGE2}>
-            </img></div>
-            <div className="invitedMembers"><img src={IMAGE3}>
-            </img></div>
-            <div className="invitedMembers"><img src={IMAGE4}>
-            </img></div>
-
+            <div>
+              <div className="invitedMembers"><img src={IMAGE1} alt="a users profile">
+              </img></div>
+              <div className="invitedMembers"><img src={IMAGE2} alt="a users profile">
+              </img></div>
+            </div>
+            <div>
+              <div className="invitedMembers"><img src={IMAGE3} alt="a users profile">
+              </img></div>
+              <div className="invitedMembers"><img src={IMAGE4} alt="a users profile">
+              </img></div>
+            </div>
           </div>
 
         <div>
