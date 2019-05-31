@@ -14,7 +14,7 @@ const GroupCard = ({ groupName }) => {
       .doc(`${group}`)
       .delete()
   }
-
+  async function editGroup() {}
   return (
     <div className="group-card">
       <Link to={`groups/${group}`}>
@@ -31,6 +31,7 @@ const GroupCard = ({ groupName }) => {
         </div>
       </Link>
       <button onClick={deleteGroup}>DELETE</button>
+      <button onClick={editGroup}>DELETE</button>
     </div>
   )
 }

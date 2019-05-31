@@ -10,6 +10,7 @@ const TaskCard = ({ id, chore, assigned, date, isDone, groupRoute }) => {
       .doc(`${id}`)
       .delete()
   }
+  async function editTask() {}
 
   return (
     <div className="TaskCard">
@@ -18,6 +19,7 @@ const TaskCard = ({ id, chore, assigned, date, isDone, groupRoute }) => {
       <p>{date}</p>
       <p>{isDone}</p>
       <button onClick={deleteTask}>DELETE</button>
+      <button onClick={editTask}>EDIT</button>
     </div>
   )
 }
