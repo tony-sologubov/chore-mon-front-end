@@ -1,27 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FirebaseContext } from '../../firebase/index'
-import Group from './Group'
-import uuidv4 from 'uuid'
+import GroupCard from './GroupCard'
 
 const GetGroups = () => {
-  const { firebase, user } = useContext(FirebaseContext)
+  const { firebase } = useContext(FirebaseContext)
   const [groups, setGroups] = useState([])
+  const id = JSON.parse(localStorage.getItem('user')).uid
 
   useEffect(() => {
     async function fetchGroups() {
-      const snapshot = await firebase.dbFS
-        .collection(`users/${user.uid}/groups`)
-        .get()
-      setGroups(
-        snapshot.docs.map(doc => {
-          return { id: doc.id, ...doc.data() }
-        })
-      )
+      const unsubscribe = await firebase.dbFS
+        .collection(`users/${id}/groups`)
+        .onSnapshot(snapshot =>
+          setGroups(
+            snapshot.docs.map(doc => {
+              return { id: doc.id, ...doc.data() }
+            })
+          )
+        )
+      return () => unsubscribe()
     }
     fetchGroups()
-  }, [])
+  }, [firebase.dbFS, id])
 
-  return groups.map(group => <Group groupName={group.groupName} />)
+  return groups.map(group => <GroupCard groupName={group.groupName} />)
 }
 
 export default GetGroups

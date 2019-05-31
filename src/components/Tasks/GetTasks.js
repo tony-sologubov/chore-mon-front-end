@@ -1,25 +1,36 @@
-import React, { useEffect, useContext } from 'react'
-import Task from './Task'
-import axios from 'axios'
-import uuidv4 from 'uuid'
+import React, { useContext, useState, useEffect } from 'react'
+import FirebaseContext from '../../firebase/context'
+import TaskCard from './TaskCard'
 
-export const Tasks = () => {
-  const { state, dispatch } = useContext(TasksContext)
-  const { tasks } = state
+const GetTasks = ({ groupRoute }) => {
+  const { firebase } = useContext(FirebaseContext)
+  const [tasks, setTasks] = useState([])
+  const id = JSON.parse(localStorage.getItem('user')).uid
   useEffect(() => {
-    async function getTasks() {
-      const res = await axios.get(
-        'https://chore-monkey.herokuapp.com/api/tasks'
-      )
-      dispatch({ type: 'GET_TASKS', payload: res.data.data })
+    async function fetchTasks() {
+      const unsubscribe = await firebase.dbFS
+        .collection(`users/${id}/tasks`)
+        .onSnapshot(snapshot =>
+          setTasks(
+            snapshot.docs.map(doc => {
+              return { id: doc.id, ...doc.data() }
+            })
+          )
+        )
+      return () => unsubscribe()
     }
-    getTasks()
-  }, [dispatch])
-  return (
-    <div>
-      {tasks.map(task => (
-        <Task {...task} key={uuidv4()} />
-      ))}
-    </div>
-  )
+    fetchTasks()
+  }, [firebase.dbFS, id, groupRoute])
+
+  console.log(tasks)
+  return tasks.map(task => (
+    <TaskCard
+      id={task.id}
+      chore={task.chore}
+      date={task.date}
+      isDone={task.isDone}
+      assigned={task.assigned}
+    />
+  ))
 }
+export default GetTasks

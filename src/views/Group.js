@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import GetTasks from '../components/Tasks/GetTasks'
 
-const Group = props => {
-  return <div>Group View</div>;
-};
+const Group = ({ match }) => {
+  return (
+    <>
+      <Link to={`/groups/${match.params.groupName}/add-task`}>Add Task</Link>
+      <GetTasks groupRoute={match.params.groupName} />
+    </>
+  )
+}
 
-export default Group;
+export default withRouter(Group)
