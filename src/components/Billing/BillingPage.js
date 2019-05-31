@@ -21,12 +21,33 @@ export default class BillingPage extends React.Component {
     render() {
       return (
         <div>
-          <h1>Please Buy Our Premium Things!</h1>
+          <h1>Premium option 1</h1>
         <StripeCheckout
         stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
         token={this.onToken}
-        description="For the coolest stuff in the world"
+        description="For the coolest stuff in the world 1"
         amount={1000}
+        label="Pay $10.00"
+        currency="USD"
+        name="ChoreMonkey"
+        />
+         <h1>Premium option 2</h1>
+        <StripeCheckout
+        stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
+        token={this.onToken}
+        description="For the coolest stuff in the world 2"
+        amount={2000}
+        label="Pay $20.00"
+        currency="USD"
+        name="ChoreMonkey"
+        />
+         <h1>Premium option 3</h1>
+        <StripeCheckout
+        stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
+        token={this.onToken}
+        description="For the coolest stuff in the world 3"
+        amount={3000}
+        label="Pay $30.00"
         currency="USD"
         name="ChoreMonkey"
         />
@@ -34,3 +55,4 @@ export default class BillingPage extends React.Component {
         )
     }
   }
+        
