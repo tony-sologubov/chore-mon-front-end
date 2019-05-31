@@ -23,14 +23,32 @@ const GetTasks = ({ groupRoute }) => {
   }, [firebase.dbFS, id, groupRoute])
 
   console.log(tasks)
-  return tasks.map(task => (
-    <TaskCard
-      id={task.id}
-      chore={task.chore}
-      date={task.date}
-      isDone={task.isDone}
-      assigned={task.assigned}
-    />
-  ))
-}
+  return (
+<div className="groupTableList">
+  <table className="highlight"> 
+    <thead>
+          <tr>
+            <th>Chore</th>
+            <th>Assigned</th>
+            <th>Date</th>
+            <th>Done</th>
+            <th>Actions</th>
+          </tr>
+    
+  { tasks.map(task => (
+    
+            <TaskCard
+              id={task.id}
+              chore={task.chore}
+              date={task.date}
+              isDone={task.isDone}
+              assigned={task.assigned}
+            />
+      ))}
+  
+    </thead>
+  </table>
+</div>
+  )
+} 
 export default GetTasks
