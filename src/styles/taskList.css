@@ -1,6 +1,7 @@
-/* .groupTableList{
-    width: 50%;
-} */
+.groupTableList{
+    width: 150%;
+    padding-left: 5%;
+}
 .membersCardsView{
     display: flex;
     justify-content: center;

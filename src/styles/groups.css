@@ -8,6 +8,7 @@
 }
 .topHeaderAndButtons{
     display: flex;
+    justify-content: space-between;
 }
 
 .groupTopButtons{
@@ -15,9 +16,8 @@
     height: 80%;
 }
 
-.groupHeader{
-    width: 60%;
-    height: 100%;
+.groupsHeader{
+padding-left: 2%;
 }
 
 .buttomInviteButton{

@@ -16,8 +16,9 @@ const Group = ({ match }) => {
   return (
     <>
     <div className="topHeaderAndButtons">
-      <h1>
-        <img src={DAILYPIC} alt="text saying daily chores" className="groupHeader"></img>
+      <h1 className="groupsHeader">
+        {/* <img src={DAILYPIC} alt="text saying daily chores" className="groupHeader"></img> */}
+        Daily Chores
       </h1>
         <div className="imageButtons">
 
@@ -45,7 +46,8 @@ const Group = ({ match }) => {
       <div className="rightBottomView">
 
         <div className="houseText">
-          <img src={HOUSEPIC} alt="Text saying House Members"></img>
+          {/* <img src={HOUSEPIC} alt="Text saying House Members" className="houseText"></img> */}
+          <h3>House Members</h3>
         </div>
 
           <div className="membersCardsView">
