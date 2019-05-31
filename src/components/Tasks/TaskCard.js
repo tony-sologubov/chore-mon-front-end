@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import FirebaseContext from '../../firebase/context'
 
-const TaskCard = ({ id, chore, assigned, date, isDone }) => {
+const TaskCard = ({ id, chore, assigned, date, isDone, groupRoute }) => {
   const { firebase, user } = useContext(FirebaseContext)
 
   async function deleteTask() {
     await firebase.firestore
-      .collection(`users/${user.uid}/tasks`)
+      .collection(`users/${user.uid}/groups/${groupRoute}/tasks`)
       .doc(`${id}`)
       .delete()
   }

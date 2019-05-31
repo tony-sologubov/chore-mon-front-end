@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FirebaseContext } from '../../firebase/index'
 import GroupCard from './GroupCard'
+import uuidv4 from 'uuid'
 
 const GetGroups = () => {
   const { firebase } = useContext(FirebaseContext)
@@ -23,7 +24,9 @@ const GetGroups = () => {
     fetchGroups()
   }, [firebase.firestore, id])
 
-  return groups.map(group => <GroupCard groupName={group.groupName} />)
+  return groups.map(group => (
+    <GroupCard key={uuidv4()} groupName={group.groupName} />
+  ))
 }
 
 export default GetGroups

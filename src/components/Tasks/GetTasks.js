@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import uuidv4 from 'uuid'
 import FirebaseContext from '../../firebase/context'
 import TaskCard from './TaskCard'
 
@@ -9,7 +11,7 @@ const GetTasks = ({ groupRoute }) => {
   useEffect(() => {
     async function fetchTasks() {
       const unsubscribe = await firebase.firestore
-        .collection(`users/${id}/tasks`)
+        .collection(`users/${id}/groups/${groupRoute}/tasks`)
         .onSnapshot(snapshot =>
           setTasks(
             snapshot.docs.map(doc => {
@@ -22,15 +24,24 @@ const GetTasks = ({ groupRoute }) => {
     fetchTasks()
   }, [firebase.firestore, id, groupRoute])
 
-  console.log(tasks)
-  return tasks.map(task => (
-    <TaskCard
-      id={task.id}
-      chore={task.chore}
-      date={task.date}
-      isDone={task.isDone}
-      assigned={task.assigned}
-    />
-  ))
+  return (
+    <div>
+      <Link to="/dashboard">Go Back</Link>
+      <div>
+        {tasks.map(task => (
+          <TaskCard
+            id={task.id}
+            chore={task.chore}
+            date={task.date}
+            isDone={task.isDone}
+            assigned={task.assigned}
+            key={uuidv4()}
+            groupRoute={groupRoute}
+          />
+        ))}
+      </div>
+    </div>
+  )
 }
+
 export default GetTasks
