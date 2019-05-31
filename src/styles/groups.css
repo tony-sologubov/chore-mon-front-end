@@ -19,3 +19,8 @@
     width: 60%;
     height: 100%;
 }
+
+.buttomInviteButton{
+display: flex;
+justify-content: center;
+}

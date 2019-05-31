@@ -44,7 +44,7 @@ const Group = ({ match }) => {
       </div>
       <div className="rightBottomView">
 
-        <div>
+        <div className="houseText">
           <img src={HOUSEPIC} alt="Text saying House Members"></img>
         </div>
 
@@ -63,7 +63,7 @@ const Group = ({ match }) => {
             </div>
           </div>
 
-        <div>
+        <div className="buttomInviteButton">
           <span>
             <img src={INVITEPIC} alt="a pink button saying Invite Member"></img>
           </span>
