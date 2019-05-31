@@ -29,7 +29,7 @@ export default function AddTask({ history, match }) {
   async function submitTask() {
     const groupRoute = match.params.groupName
     try {
-      await firebase.dbFS
+      await firebase.firestore
         .collection(`users/${user.uid}/tasks`)
         .doc()
         .set({

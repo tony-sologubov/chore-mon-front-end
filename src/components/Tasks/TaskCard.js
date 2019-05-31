@@ -5,7 +5,7 @@ const TaskCard = ({ id, chore, assigned, date, isDone }) => {
   const { firebase, user } = useContext(FirebaseContext)
 
   async function deleteTask() {
-    await firebase.dbFS
+    await firebase.firestore
       .collection(`users/${user.uid}/tasks`)
       .doc(`${id}`)
       .delete()

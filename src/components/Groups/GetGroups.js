@@ -9,7 +9,7 @@ const GetGroups = () => {
 
   useEffect(() => {
     async function fetchGroups() {
-      const unsubscribe = await firebase.dbFS
+      const unsubscribe = await firebase.firestore
         .collection(`users/${id}/groups`)
         .onSnapshot(snapshot =>
           setGroups(
@@ -21,7 +21,7 @@ const GetGroups = () => {
       return () => unsubscribe()
     }
     fetchGroups()
-  }, [firebase.dbFS, id])
+  }, [firebase.firestore, id])
 
   return groups.map(group => <GroupCard groupName={group.groupName} />)
 }

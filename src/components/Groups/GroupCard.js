@@ -9,7 +9,7 @@ const GroupCard = ({ groupName }) => {
   const { firebase, user } = useContext(FirebaseContext)
 
   async function deleteGroup() {
-    await firebase.dbFS
+    await firebase.firestore
       .collection(`users/${user.uid}/groups`)
       .doc(`${group}`)
       .delete()
