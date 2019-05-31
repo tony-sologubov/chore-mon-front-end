@@ -9,3 +9,13 @@
 .topHeaderAndButtons{
     display: flex;
 }
+
+.groupTopButtons{
+    width: 30%;
+    height: 80%;
+}
+
+.groupHeader{
+    width: 60%;
+    height: 100%;
+}

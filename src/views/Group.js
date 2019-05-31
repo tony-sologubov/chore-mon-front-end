@@ -17,27 +17,27 @@ const Group = ({ match }) => {
     <>
     <div className="topHeaderAndButtons">
       <h1>
-        <img src={DAILYPIC} alt="text saying daily chores"></img>
+        <img src={DAILYPIC} alt="text saying daily chores" className="groupHeader"></img>
       </h1>
         <div className="imageButtons">
 
             <Link to={`/groups/${match.params.groupName}/add-task`}>
-              <img src={SCHEDULE} alt="a pink button saying new task which is where you would make a task.">              
+              <img className="groupTopButtons" src={SCHEDULE} alt="a pink button saying new task which is where you would make a task.">              
               </img>
             </Link>
 
             <Link to={`/dashboard`}>
-              <img src={SCHEDULE1} alt="a pink button saying dashboard which will send you to that page.">
+              <img className="groupTopButtons" src={SCHEDULE1} alt="a pink button saying dashboard which will send you to that page.">
               </img>
             </Link>
 
           <Link>
-            <img src={SCHEDULE2} alt="a pink button saying my chores which will send you to your chores.">
+            <img className="groupTopButtons" src={SCHEDULE2} alt="a pink button saying my chores which will send you to your chores.">
             </img>
           </Link>
         </div>
       </div>
-      
+
     <div className="bottomTableAndUsers">
       <div className="bottomLeftView">
         <GetTasks groupRoute={match.params.groupName} />
