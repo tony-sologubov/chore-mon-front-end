@@ -23,7 +23,7 @@ const GetGroups = () => {
   }, [firebase.firestore, id])
 
   return groups.map(group => (
-    <GroupCard key={uuidv4()} groupName={group.groupName} />
+    <GroupCard key={uuidv4()} groupName={group.groupName} id={group.id} />
   ))
 }
 
