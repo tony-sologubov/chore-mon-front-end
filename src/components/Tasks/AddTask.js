@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import useFormValidation from '../Auth/useFormValidation'
 import FirebaseContext from '../../firebase/context'
 
@@ -6,7 +6,7 @@ const initialState = {
   chore: '',
   assigned: '',
   date: '',
-  isDone: false
+  isDone: 'NOT COMPLETED'
 }
 
 function validateTask(values) {
@@ -27,20 +27,21 @@ export default function AddTask({ history, match }) {
   )
 
   async function submitTask() {
-    const groupRoute = match.params.groupName
+    const id = match.params.id
     try {
       await firebase.firestore
-        .collection(`users/${user.uid}/groups/${groupRoute}/tasks`)
-        .add({
+        .collection(`users/${user.uid}/groups/${id}/tasks`)
+        .doc()
+        .set({
           chore: values.chore,
           assigned: values.assigned,
           date: values.date,
-          isDone: values.isDone
+          isDone: 'NOT COMPLETED'
         })
     } catch (err) {
       console.error({ error: err.message })
     } finally {
-      history.push(`/groups/${groupRoute}`)
+      history.push(`/groups/${id}`)
     }
   }
 

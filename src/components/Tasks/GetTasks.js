@@ -4,13 +4,13 @@ import uuidv4 from 'uuid'
 import FirebaseContext from '../../firebase/context'
 import TaskCard from './TaskCard'
 
-const GetTasks = ({ groupRoute }) => {
+const GetTasks = ({ gid }) => {
   const { firebase } = useContext(FirebaseContext)
   const [tasks, setTasks] = useState([])
-  const id = JSON.parse(localStorage.getItem('user')).uid
+  const uid = JSON.parse(localStorage.getItem('user')).uid
   useEffect(() => {
     const unsubscribe = firebase.firestore
-      .collection(`users/${id}/groups/${groupRoute}/tasks`)
+      .collection(`users/${uid}/groups/${gid}/tasks`)
       .onSnapshot(snapshot =>
         setTasks(
           snapshot.docs.map(doc => {
@@ -21,7 +21,7 @@ const GetTasks = ({ groupRoute }) => {
     return () => {
       unsubscribe()
     }
-  }, [firebase.firestore, id, groupRoute])
+  }, [firebase.firestore, uid, gid])
 
   return (
     <div>
@@ -35,7 +35,7 @@ const GetTasks = ({ groupRoute }) => {
             isDone={task.isDone}
             assigned={task.assigned}
             key={uuidv4()}
-            groupRoute={groupRoute}
+            gid={gid}
           />
         ))}
       </div>
