@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import uuidv4 from 'uuid'
 import FirebaseContext from '../../firebase/context'
 import TaskCard from './TaskCard'
+import Comments from './Comments'
 
 const GetTasks = ({ gid }) => {
   const { firebase } = useContext(FirebaseContext)
@@ -28,15 +29,19 @@ const GetTasks = ({ gid }) => {
       <Link to="/dashboard">Go Back</Link>
       <div>
         {tasks.map(task => (
-          <TaskCard
-            id={task.id}
-            chore={task.chore}
-            date={task.date}
-            isDone={task.isDone}
-            assigned={task.assigned}
-            key={uuidv4()}
-            gid={gid}
-          />
+          <Fragment key={uuidv4()}>
+            <TaskCard
+              id={task.id}
+              chore={task.chore}
+              date={task.date}
+              isDone={task.isDone}
+              assigned={task.assigned}
+              gid={gid}
+            />
+            <div>
+              <Comments id={task.id} gid={gid} />
+            </div>
+          </Fragment>
         ))}
       </div>
     </div>

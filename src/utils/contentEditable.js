@@ -1,88 +1,78 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import FirebaseContext from '../firebase/context'
 
 function contentEditable(WrappedComponent) {
-  return class extends React.Component {
-    state = {
-      editing: false
-    }
+  return function(props) {
+    const { firebase, user } = useContext(FirebaseContext)
+    const [editing, setEditing] = useState(false)
 
-    toggleEdit = e => {
+    const toggleEdit = e => {
       e.stopPropagation()
-      if (this.state.editing) {
-        this.cancel()
+      if (editing) {
+        cancel()
       } else {
-        this.edit()
+        edit()
       }
     }
 
-    edit = () => {
-      this.setState(
-        {
-          editing: true
-        },
-        () => {
-          this.domElm.focus()
-        }
-      )
+    const edit = () => {
+      setEditing(true)
+      return () => {
+        domElm.focus()
+      }
     }
 
-    save = () => {
-      this.setState(
-        {
-          editing: false
-        },
-        () => {
-          if (this.props.onSave && this.isValueChanged()) {
-            console.log('Value is changed', this.domElm.textContent)
-          }
-        }
-      )
+    const save = () => {
+      setEditing(false)
     }
 
-    cancel = () => {
-      this.setState({
-        editing: false
-      })
+    const cancel = () => setEditing(false)
+
+    const isValueChanged = () => {
+      if (props.value !== domElm.textContent) {
+        save()
+        const docRef = firebase.firestore
+          .collection(`users/${user.uid}/groups/${props.gid}/tasks`)
+          .doc(props.id)
+        docRef.update({ comments: firebase.arr.arrayUnion(domElm.textContent) })
+        docRef.update({ comments: firebase.arr.arrayRemove(props.comment) })
+      }
     }
 
-    isValueChanged = () => {
-      return this.props.value !== this.domElm.textContent
-    }
-
-    handleKeyDown = e => {
+    const handleKeyDown = e => {
       const { key } = e
       switch (key) {
         case 'Enter':
+          isValueChanged()
+          break
         case 'Escape':
-          this.save()
+          save()
           break
         default:
           break
       }
     }
 
-    render() {
-      let editOnClick = true
-      const { editing } = this.state
-      if (this.props.editOnClick !== undefined) {
-        editOnClick = this.props.editOnClick
-      }
-      return (
-        <WrappedComponent
-          className={editing ? 'editing' : ''}
-          onClick={editOnClick ? this.toggleEdit : undefined}
-          contentEditable={editing}
-          ref={domNode => {
-            this.domElm = domNode
-          }}
-          onBlur={this.save}
-          onKeyDown={this.handleKeyDown}
-          {...this.props}
-        >
-          {this.props.value}
-        </WrappedComponent>
-      )
+    let editOnClick = true
+    let domElm = null
+    if (props.editOnClick !== undefined) {
+      editOnClick = props.editOnClick
     }
+    return (
+      <WrappedComponent
+        className={editing ? 'editing' : ''}
+        onClick={editOnClick ? toggleEdit : undefined}
+        contentEditable={editing}
+        ref={domNode => {
+          domElm = domNode
+        }}
+        onBlur={save}
+        onKeyDown={handleKeyDown}
+        {...props}
+      >
+        {props.value}
+      </WrappedComponent>
+    )
   }
 }
 

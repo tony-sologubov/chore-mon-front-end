@@ -36,7 +36,8 @@ export default function AddTask({ history, match }) {
           chore: values.chore,
           assigned: values.assigned,
           date: values.date,
-          isDone: 'NOT COMPLETED'
+          isDone: 'NOT COMPLETED',
+          comments: []
         })
     } catch (err) {
       console.error({ error: err.message })
