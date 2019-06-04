@@ -1,5 +1,6 @@
 .Dashboard {
-  height: 100vh;
+  height: 100%;
+  max-height: 100%;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -19,9 +20,39 @@
   margin: 1rem;
 }
 
+.sidebar {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  padding: 1rem;
+}
+
+.sidebar button {
+  background: #e91e63;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  vertical-align: center;
+  text-align: center;
+  margin: 1rem;
+  color: white;
+  border-style: none;
+  cursor: pointer;
+}
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+}
+.group-card button {
+  border-radius: 1rem;
+  overflow: hidden;
+  margin: 1rem;
+}
 .dash-header div {
   order: 1;
-
   margin: 1rem;
 }
 
@@ -37,4 +68,13 @@
 
 .di {
   margin: 0.5rem;
+}
+.di .circle,
+circle {
+  fill: rgb(130, 3, 168);
+}
+
+.section-ctr {
+  display: flex;
+  width: 100%;
 }

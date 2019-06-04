@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import FirebaseContext from '../../firebase/context'
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import contentEditable from "../../utils/contentEditable";
+import FirebaseContext from "../../firebase/context";
 
-const GroupCard = ({ groupName, id }) => {
-  const { firebase, user } = useContext(FirebaseContext)
-  const [editedName, setEditedName] = useState('')
-  const [editing, setEditing] = useState(false)
+import ComplexButton from "../ComplexButton";
+
+const GroupCard = ({ groupName }) => {
+  let Span = contentEditable("span");
+  const group = groupName.split(" ").join("");
+  const { firebase, user } = useContext(FirebaseContext);
 
   const group = firebase.firestore.collection('groups').doc(id)
 
@@ -14,6 +17,10 @@ const GroupCard = ({ groupName, id }) => {
     console.log(id)
     firebase.firestore
       .collection(`users/${user.uid}/groups`)
+<<<<<<< HEAD
+      .doc(`${group}`)
+      .delete();
+=======
       .doc(`${group.id}`)
       .update({ groupName: editedName })
   }
@@ -31,10 +38,19 @@ const GroupCard = ({ groupName, id }) => {
 
   function toggleEdit() {
     setEditing(true)
+>>>>>>> master
   }
 
   return !editing ? (
     <div className="group-card">
+<<<<<<< HEAD
+      <Link to={`groups/${group}`}>
+        <ComplexButton groupName={groupName} />
+      </Link>
+    </div>
+  );
+};
+=======
       <Link to={`groups/${group.id}`}>
         <div className="row">
           <div className="col s12 m6">
@@ -61,5 +77,6 @@ const GroupCard = ({ groupName, id }) => {
     </form>
   )
 }
+>>>>>>> master
 
-export default GroupCard
+export default GroupCard;
