@@ -3,6 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: "Poppins, sans-serif"
+  }
+});
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
@@ -89,34 +97,36 @@ const ComplexButton = props => {
   };
   return (
     <div className={classes.root}>
-      <ButtonBase
-        focusRipple
-        key={image.title}
-        className={classes.image}
-        focusVisibleClassName={classes.focusVisible}
-        style={{
-          width: image.width
-        }}
-      >
-        <span
-          className={classes.imageSrc}
+      <MuiThemeProvider theme={theme}>
+        <ButtonBase
+          focusRipple
+          key={image.title}
+          className={classes.image}
+          focusVisibleClassName={classes.focusVisible}
           style={{
-            backgroundImage: `url(${image.url})`
+            width: image.width
           }}
-        />
-        <span className={classes.imageBackdrop} />
-        <span className={classes.imageButton}>
-          <Typography
-            component="span"
-            variant="subtitle1"
-            color="inherit"
-            className={classes.imageTitle}
-          >
-            {image.title}
-            <span className={classes.imageMarked} />
-          </Typography>
-        </span>
-      </ButtonBase>
+        >
+          <span
+            className={classes.imageSrc}
+            style={{
+              backgroundImage: `url(${image.url})`
+            }}
+          />
+          <span className={classes.imageBackdrop} />
+          <span className={classes.imageButton}>
+            <Typography
+              component="span"
+              variant="subtitle1"
+              color="inherit"
+              className={classes.imageTitle}
+            >
+              {image.title}
+              <span className={classes.imageMarked} />
+            </Typography>
+          </span>
+        </ButtonBase>
+      </MuiThemeProvider>
     </div>
   );
 };

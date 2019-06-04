@@ -18,7 +18,10 @@ function Dashboard({ history }) {
         <DashPhoto />
         <h1>
           Welcome Back,
-          {JSON.parse(localStorage.getItem("user")).displayName}
+          {" " +
+            JSON.parse(localStorage.getItem("user")).displayName.match(
+              /[^\s,.'"!?]+/
+            )[0]}
         </h1>
       </div>
 
@@ -30,42 +33,107 @@ function Dashboard({ history }) {
       </div>
 
       <div className="dash-buttons">
-        <ContactsIcon
-          className="di  hvr-push"
-          onClick={() => {
-            history.push("/404");
-          }}
-        />
-        <ProfileIcon
-          className="di hvr-push  "
-          onClick={() => {
-            history.push("/404");
-          }}
-        />
-        <HomeIcon
-          className="di hvr-push  "
-          onClick={() => {
-            history.push("/add-group");
-          }}
-        />
-        <ListIcon
-          className="di hvr-push  "
-          onClick={() => {
-            history.push(`/404`);
-          }}
-        />
-        <CalendarIcon
-          className="di hvr-push  "
-          onClick={() => {
-            history.push("/add-group");
-          }}
-        />
-        <SettingsIcon
-          className="di hvr-push  "
-          onClick={() => {
-            history.push("/settings");
-          }}
-        />
+        <div className="icon-div">
+          <ContactsIcon
+            className="di  hvr-push"
+            onClick={() => {
+              history.push("/404");
+            }}
+          />
+          <p
+            className="  hvr-push"
+            onClick={() => {
+              history.push("/404");
+            }}
+          >
+            CONTACTS
+          </p>
+        </div>
+
+        <div className="icon-div">
+          <ProfileIcon
+            className="di hvr-push  "
+            onClick={() => {
+              history.push("/404");
+            }}
+          />
+          <p
+            className=" hvr-push  "
+            onClick={() => {
+              history.push("/404");
+            }}
+          >
+            PROFILE
+          </p>
+        </div>
+
+        <div className="icon-div">
+          <HomeIcon
+            className="di hvr-push  "
+            onClick={() => {
+              history.push("/add-group");
+            }}
+          />
+          <p
+            className=" hvr-push  "
+            onClick={() => {
+              history.push("/add-group");
+            }}
+          >
+            HOME
+          </p>
+        </div>
+
+        <div className="icon-div">
+          <ListIcon
+            className="di hvr-push  "
+            onClick={() => {
+              history.push(`/404`);
+            }}
+          />
+          <p
+            className=" hvr-push  "
+            onClick={() => {
+              history.push(`/404`);
+            }}
+          >
+            MY TASKS
+          </p>
+        </div>
+
+        <div className="icon-div">
+          <CalendarIcon
+            className="di hvr-push  "
+            onClick={() => {
+              history.push("/add-group");
+            }}
+          />
+          <p
+            className=" hvr-push  "
+            onClick={() => {
+              history.push("/add-group");
+            }}
+          >
+            CALENDAR
+          </p>
+        </div>
+
+        <div className="icon-div">
+          <SettingsIcon
+            className="di hvr-push  "
+            onClick={() => {
+              history.push("/settings");
+            }}
+          />
+          <p
+            className=" hvr-push  "
+            onClick={() => {
+              history.push("/settings");
+            }}
+          >
+            SETTINGS
+          </p>
+        </div>
       </div>
     </div>
   );

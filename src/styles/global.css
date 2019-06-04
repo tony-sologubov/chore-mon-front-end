@@ -3,14 +3,34 @@ svg {
 }
 body * {
   max-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  line-height: 2;
 }
-
+.MuiTypography,
+.MuiTypography-root,
+.makeStyles-root-6,
+.MuiTypography-subtitle1,
+.makeStyles-imageTitle-12 {
+  font-family: "Poppins", sans-serif;
+}
 .root {
   max-height: 100vh;
 }
 
 .site-container {
   max-height: 100vh;
+}
+
+/* Headings */
+h1 {
+  font-family: "Permanent Marker", cursive;
+  font-size: 3rem;
+}
+
+h2 {
+  font-family: "Permanent Marker", cursive;
+  font-size: 2rem;
 }
 
 /* Hover Animations */
