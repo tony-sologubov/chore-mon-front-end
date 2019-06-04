@@ -9,19 +9,18 @@ const GetTasks = ({ groupRoute }) => {
   const [tasks, setTasks] = useState([])
   const id = JSON.parse(localStorage.getItem('user')).uid
   useEffect(() => {
-    async function fetchTasks() {
-      const unsubscribe = await firebase.firestore
-        .collection(`users/${id}/groups/${groupRoute}/tasks`)
-        .onSnapshot(snapshot =>
-          setTasks(
-            snapshot.docs.map(doc => {
-              return { id: doc.id, ...doc.data() }
-            })
-          )
+    const unsubscribe = firebase.firestore
+      .collection(`users/${id}/groups/${groupRoute}/tasks`)
+      .onSnapshot(snapshot =>
+        setTasks(
+          snapshot.docs.map(doc => {
+            return { id: doc.id, ...doc.data() }
+          })
         )
-      return () => unsubscribe()
+      )
+    return () => {
+      unsubscribe()
     }
-    fetchTasks()
   }, [firebase.firestore, id, groupRoute])
 
   return (
