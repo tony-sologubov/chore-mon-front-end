@@ -2,6 +2,7 @@ import React from 'react'
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios'
 
+
 const URL = 'http://localhost:9000/api/charge'
 
 const successPayment = data => {
@@ -20,8 +21,9 @@ export default class BillingPage extends React.Component {
     
     render() {
       return (
-        <div>
-          <h1>Premium option 1</h1>
+        <div className='billingContainer'>
+        <div className='billingCard'>
+          <h2>Premium option 1</h2>
         <StripeCheckout
         stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
         token={this.onToken}
@@ -31,7 +33,9 @@ export default class BillingPage extends React.Component {
         currency="USD"
         name="ChoreMonkey"
         />
-         <h1>Premium option 2</h1>
+        </div>
+        <div className='billingCard'>
+         <h2>Premium option 2</h2>
         <StripeCheckout
         stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
         token={this.onToken}
@@ -41,7 +45,9 @@ export default class BillingPage extends React.Component {
         currency="USD"
         name="ChoreMonkey"
         />
-         <h1>Premium option 3</h1>
+        </div>
+        <div className='billingCard'>
+         <h2>Premium option 3</h2>
         <StripeCheckout
         stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
         token={this.onToken}
@@ -51,6 +57,7 @@ export default class BillingPage extends React.Component {
         currency="USD"
         name="ChoreMonkey"
         />
+        </div>
         </div>
         )
     }
