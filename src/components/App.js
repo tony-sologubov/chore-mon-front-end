@@ -1,27 +1,28 @@
-import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import posed, { PoseGroup } from 'react-pose'
-import LandingPage from '../views/Landing'
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import posed, { PoseGroup } from "react-pose";
+import LandingPage from "../views/Landing";
+import NavBar from "../views/NavBar";
+import Dashboard from "../views/Dashboard/Dashboard";
+import BillingPage from "../components/Billing/BillingPage";
+import firebase, { FirebaseContext } from "../firebase";
+import useAuth from "../components/Auth/useAuth";
+import AddGroup from "../components/Groups/AddGroup";
+import InProgress from "../views/InProgress";
 
-import Dashboard from '../views/Dashboard'
-import BillingPage from '../components/Billing/BillingPage'
-import firebase, { FirebaseContext } from '../firebase'
-import useAuth from '../components/Auth/useAuth'
-import AddGroup from '../components/Groups/AddGroup'
-
-import '../styles/index.css'
-import Login from './Auth/Login'
-import ForgotPassword from './Auth/ForgotPassword'
-import Group from '../views/Group'
-import AddTask from './Tasks/AddTask'
+import "../styles/index.css";
+import Login from "./Auth/Login";
+import ForgotPassword from "./Auth/ForgotPassword";
+import Group from "../views/Group";
+import AddTask from "./Tasks/AddTask";
 
 const RouteContainer = posed.div({
   enter: { opacity: 1, delay: 300 },
   exit: { opacity: 0 }
-})
+});
 
 const App = () => {
-  const user = useAuth()
+  const user = useAuth();
   return (
     <BrowserRouter>
       <FirebaseContext.Provider value={{ user, firebase }}>
@@ -37,6 +38,7 @@ const App = () => {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/add-group" component={AddGroup} />
                     <Route path="/billing" component={BillingPage} />
+                    <Route path="/404" component={InProgress} />
                     <Route exact path="/groups/:groupName" component={Group} />
                     <Route
                       exact
@@ -51,6 +53,6 @@ const App = () => {
         />
       </FirebaseContext.Provider>
     </BrowserRouter>
-  )
-}
-export default App
+  );
+};
+export default App;
