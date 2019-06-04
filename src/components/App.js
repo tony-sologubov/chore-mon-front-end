@@ -42,7 +42,7 @@ const App = () => {
                     <Route exact path="/groups/:groupName" component={Group} />
                     <Route
                       exact
-                      path="/groups/:groupName/add-task"
+                      path="/groups/:id/add-task"
                       component={AddTask}
                     />
                   </Switch>

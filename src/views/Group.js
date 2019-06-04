@@ -5,8 +5,8 @@ import GetTasks from '../components/Tasks/GetTasks'
 const Group = ({ match }) => {
   return (
     <>
-      <Link to={`/groups/${match.params.groupName}/add-task`}>Add Task</Link>
-      <GetTasks groupRoute={match.params.groupName} />
+      <Link to={`/groups/${match.params.id}/add-task`}>Add Task</Link>
+      <GetTasks gid={match.params.id} />
     </>
   )
 }

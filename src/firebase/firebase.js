@@ -10,6 +10,7 @@ class Firebase {
     this.auth = app.auth()
     this.db = app.database()
     this.firestore = app.firestore()
+    this.arr = app.firestore.FieldValue
     this.googleProvider = new app.auth.GoogleAuthProvider()
     this.facebookProvider = new app.auth.FacebookAuthProvider()
     this.twitterProvider = new app.auth.TwitterAuthProvider()

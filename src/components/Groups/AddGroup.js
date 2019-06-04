@@ -34,10 +34,10 @@ export default function AddGroup({ history }) {
 
   async function submitGroup() {
     try {
-      await firebase.firestore
+      const docRef = firebase.firestore
         .collection(`users/${user.uid}/groups`)
-        .doc(`${values.groupName.split(' ').join('')}`)
-        .set({ groupName: values.groupName })
+        .doc()
+      await docRef.set({ groupName: values.groupName, id: docRef.id })
     } catch (err) {
       console.error({ error: err.message })
     } finally {
