@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-const url = "http://chore-monkey.herokuapp.com"
+// const url = "http://chore-monkey.herokuapp.com"
+const url = "http://chore-monkey.firebaseapp.com"
 
 
 class InviteGenerator extends Component {

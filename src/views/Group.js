@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import GetTasks from '../components/Tasks/GetTasks'
+import InviteGenerator from '../components/Invites/InviteGenerator'
 import SCHEDULE from '../assets/group-page/png/SCHEDULE.png'
 import SCHEDULE1 from '../assets/group-page/png/SCHEDULE-1.png'
 import SCHEDULE2 from '../assets/group-page/png/SCHEDULE-2.png'
-import DAILYPIC from '../assets/group-page/png/Component 31 – 2.png'
-import HOUSEPIC from '../assets/group-page/png/Component 25 – 7.png'
-import INVITEPIC from '../assets/group-page/png/GET STARTED.png'
+// import DAILYPIC from '../assets/group-page/png/Component 31 – 2.png'
+// import HOUSEPIC from '../assets/group-page/png/Component 25 – 7.png'
+// import INVITEPIC from '../assets/group-page/png/GET STARTED.png'
 import IMAGE1 from '../assets/group-page/png/IMAGE.png'
 import IMAGE2 from '../assets/group-page/png/IMAGE-1.png'
 import IMAGE3 from '../assets/group-page/png/IMAGE-2.png'
@@ -67,7 +68,9 @@ const Group = ({ match }) => {
 
         <div className="buttomInviteButton">
           <span>
-            <img src={INVITEPIC} alt="a pink button saying Invite Member"></img>
+            {/* <img src={INVITEPIC} alt="a pink button saying Invite Member"></img>
+            <InviteGenerator /> */}
+            <button className="waves-effect waves-light btn-large red darken-1">Invite Member</button>
           </span>
         </div>
 
