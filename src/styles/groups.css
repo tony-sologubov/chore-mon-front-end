@@ -23,4 +23,13 @@ padding-left: 2%;
 .buttomInviteButton{
 display: flex;
 justify-content: center;
+/* margin: 1% 1% 1% 1%; */
 }
+
+.imageButtons{
+    display: flex;
+    justify-content: space-evenly;
+    width: 40%;
+    margin: 1% 1% 1% 1%;
+}
+
