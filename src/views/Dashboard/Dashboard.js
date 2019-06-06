@@ -1,25 +1,23 @@
-import React, { useContext } from "react";
-import { FirebaseContext } from "../../firebase/index";
-import GetGroups from "../../components/Groups/GetGroups.js";
-import DashPhoto from "../../components/Avatar.js";
-import Sidebar from "./Sidebar";
-import { ReactComponent as ContactsIcon } from "../../assets/dashboard/icons/contacts-icon.svg";
-import { ReactComponent as ProfileIcon } from "../../assets/dashboard/icons/profile.svg";
-import { ReactComponent as HomeIcon } from "../../assets/dashboard/icons/home.svg";
-import { ReactComponent as ListIcon } from "../../assets/dashboard/icons/list.svg";
-import { ReactComponent as CalendarIcon } from "../../assets/dashboard/icons/calendar.svg";
-import { ReactComponent as SettingsIcon } from "../../assets/dashboard/icons/settings.svg";
+import React from 'react'
+import GetGroups from '../../components/Groups/GetGroups.js'
+import Sidebar from './Sidebar'
+import { DashPhoto } from '../../components/Common'
+import { ReactComponent as ContactsIcon } from '../../assets/dashboard/icons/contacts-icon.svg'
+import { ReactComponent as ProfileIcon } from '../../assets/dashboard/icons/profile.svg'
+import { ReactComponent as HomeIcon } from '../../assets/dashboard/icons/home.svg'
+import { ReactComponent as ListIcon } from '../../assets/dashboard/icons/list.svg'
+import { ReactComponent as CalendarIcon } from '../../assets/dashboard/icons/calendar.svg'
+import { ReactComponent as SettingsIcon } from '../../assets/dashboard/icons/settings.svg'
 
 function Dashboard({ history }) {
-  const { user } = useContext(FirebaseContext);
   return (
     <div className="Dashboard">
       <div className="dash-header ">
         <DashPhoto />
         <h1>
           Welcome Back,
-          {" " +
-            JSON.parse(localStorage.getItem("user")).displayName.match(
+          {' ' +
+            JSON.parse(localStorage.getItem('user')).displayName.match(
               /[^\s,.'"!?]+/
             )[0]}
         </h1>
@@ -37,13 +35,13 @@ function Dashboard({ history }) {
           <ContactsIcon
             className="di  hvr-push"
             onClick={() => {
-              history.push("/404");
+              history.push('/404')
             }}
           />
           <p
             className="  hvr-push"
             onClick={() => {
-              history.push("/404");
+              history.push('/404')
             }}
           >
             CONTACTS
@@ -54,13 +52,13 @@ function Dashboard({ history }) {
           <ProfileIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push("/404");
+              history.push('/404')
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push("/404");
+              history.push('/404')
             }}
           >
             PROFILE
@@ -71,13 +69,13 @@ function Dashboard({ history }) {
           <HomeIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push("/add-group");
+              history.push('/add-group')
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push("/add-group");
+              history.push('/add-group')
             }}
           >
             HOME
@@ -88,13 +86,13 @@ function Dashboard({ history }) {
           <ListIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push(`/404`);
+              history.push(`/404`)
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push(`/404`);
+              history.push(`/404`)
             }}
           >
             MY TASKS
@@ -105,13 +103,13 @@ function Dashboard({ history }) {
           <CalendarIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push("/add-group");
+              history.push('/add-group')
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push("/add-group");
+              history.push('/add-group')
             }}
           >
             CALENDAR
@@ -122,13 +120,13 @@ function Dashboard({ history }) {
           <SettingsIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push("/settings");
+              history.push('/settings')
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push("/settings");
+              history.push('/settings')
             }}
           >
             SETTINGS
@@ -136,7 +134,7 @@ function Dashboard({ history }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard
