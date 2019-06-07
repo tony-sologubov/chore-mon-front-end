@@ -1,0 +1,56 @@
+:root {
+  --bgcolor: #f2bd1d;
+  --btncolor: #f2f2f2;
+  --accentcolor: #f27127;
+}
+
+/* Color Theme Swatches in Hex */
+.sklep1 {
+  color: #f2bd1d;
+}
+.sklep2 {
+  color: #f2a81d;
+}
+.sklep3 {
+  color: #f28627;
+}
+.sklep4 {
+  color: #f27127;
+}
+.sklep5 {
+  color: #f2f2f2;
+}
+
+/* Color Theme Swatches in RGBA */
+.Sklep-1-rgba {
+  color: rgba(242, 188, 29, 1);
+}
+.Sklep-2-rgba {
+  color: rgba(242, 167, 29, 1);
+}
+.Sklep-3-rgba {
+  color: rgba(242, 133, 38, 1);
+}
+.Sklep-4-rgba {
+  color: rgba(242, 113, 38, 1);
+}
+.Sklep-5-rgba {
+  color: rgba(242, 242, 242, 1);
+}
+
+/* Color Theme Swatches in HSLA */
+.Sklep-1-hsla {
+  color: hsla(45, 89, 53, 1);
+}
+.Sklep-2-hsla {
+  color: hsla(39, 89, 53, 1);
+}
+.Sklep-3-hsla {
+  color: hsla(28, 88, 55, 1);
+}
+.Sklep-4-hsla {
+  color: hsla(22, 88, 55, 1);
+}
+.Sklep-5-hsla {
+  color: hsla(0, 0, 95, 1);
+}
