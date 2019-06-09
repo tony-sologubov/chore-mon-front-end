@@ -38,10 +38,10 @@ const App = () => {
                     <Route path="/add-group" component={AddGroup} />
                     <Route path="/billing" component={BillingPage} />
                     <Route path="/404" component={InProgress} />
-                    <Route exact path="/groups/:groupName" component={Group} />
+                    <Route exact path="/groups/:groupId" component={Group} />
                     <Route
                       exact
-                      path="/groups/:id/add-task"
+                      path="/groups/:groupId/add-task"
                       component={AddTask}
                     />
                   </Switch>

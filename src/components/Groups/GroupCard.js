@@ -12,10 +12,9 @@ const GroupCard = ({ groupName, id }) => {
 
   async function handleEditedNameSubmit(e) {
     e.preventDefault()
-    console.log(id)
     firebase.firestore
       .collection(`users/${user.uid}/groups`)
-      .doc(`${group.id}`)
+      .doc(group.id)
       .update({ groupName: editedName })
   }
 
@@ -23,7 +22,7 @@ const GroupCard = ({ groupName, id }) => {
     try {
       await firebase.firestore
         .collection(`users/${user.uid}/groups`)
-        .doc(`${group.id}`)
+        .doc(group.id)
         .delete()
     } catch (err) {
       console.log({ message: err.message, code: err.code })

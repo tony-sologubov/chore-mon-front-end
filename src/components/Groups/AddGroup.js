@@ -37,7 +37,7 @@ export default function AddGroup({ history }) {
       const docRef = firebase.firestore
         .collection(`users/${user.uid}/groups`)
         .doc()
-      await docRef.set({ groupName: values.groupName, id: docRef.id })
+      await docRef.set({ groupName: values.groupName, groupId: docRef.id })
     } catch (err) {
       console.error({ error: err.message })
     } finally {
