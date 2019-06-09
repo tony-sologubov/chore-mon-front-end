@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import FirebaseContext from '../firebase/context'
+import FirebaseContext from '../../firebase/context'
 
 function contentEditable(WrappedComponent) {
   return function(props) {
@@ -32,8 +32,8 @@ function contentEditable(WrappedComponent) {
       if (props.value !== domElm.textContent) {
         save()
         const docRef = firebase.firestore
-          .collection(`users/${user.uid}/groups/${props.gid}/tasks`)
-          .doc(props.id)
+          .collection(`users/${user.uid}/groups/${props.groupId}/tasks`)
+          .doc(props.taskId)
         docRef.update({ comments: firebase.arr.arrayUnion(domElm.textContent) })
         docRef.update({ comments: firebase.arr.arrayRemove(props.comment) })
       }
