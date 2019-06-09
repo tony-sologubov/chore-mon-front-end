@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import useFormValidation from './useFormValidation'
-import validateLogin from './validateLogin'
-import firebase from '../../firebase'
-import SocialLogins from './SocialLogins'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import useFormValidation from "./useFormValidation";
+import validateLogin from "./validateLogin";
+import firebase from "../../firebase";
+import SocialLogins from "./SocialLogins";
 
 const INITIAL_STATE = {
-  name: '',
-  email: '',
-  password: ''
-}
+  name: "",
+  email: "",
+  password: ""
+};
 
 function Login({ history }) {
   const {
@@ -19,26 +19,26 @@ function Login({ history }) {
     values,
     errors,
     isSubmitting
-  } = useFormValidation(INITIAL_STATE, validateLogin, authenticateUser)
-  const [login, setLogin] = useState(true)
-  const [authError, setAuthError] = useState(null)
+  } = useFormValidation(INITIAL_STATE, validateLogin, authenticateUser);
+  const [login, setLogin] = useState(true);
+  const [authError, setAuthError] = useState(null);
 
   async function authenticateUser() {
-    const { name, email, password } = values
+    const { name, email, password } = values;
     try {
       login
         ? await firebase.login(email, password)
-        : await firebase.register(name, email, password)
-      history.push('/')
+        : await firebase.register(name, email, password);
+      history.push("/");
     } catch (err) {
-      console.error('Authentication Error', err)
-      setAuthError(err.message)
+      console.error("Authentication Error", err);
+      setAuthError(err.message);
     }
   }
 
   return (
     <div>
-      <h2 className="mv3">{login ? 'Login' : 'Create Account'}</h2>
+      <h2 className="mv3">{login ? "Login" : "Create Account"}</h2>
       <form onSubmit={handleSubmit} className="flex flex-column">
         {!login && (
           <input
@@ -56,7 +56,7 @@ function Login({ history }) {
           value={values.email}
           name="email"
           type="email"
-          className={errors.email && 'error-input'}
+          className={errors.email && "error-input"}
           placeholder="Your email"
           autoComplete="off"
         />
@@ -65,7 +65,7 @@ function Login({ history }) {
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.password}
-          className={errors.password && 'error-input'}
+          className={errors.password && "error-input"}
           name="password"
           type="password"
           placeholder="Choose a secure password"
@@ -86,7 +86,7 @@ function Login({ history }) {
             className="pointer button"
             onClick={() => setLogin(prevLogin => !prevLogin)}
           >
-            {login ? 'need to create an account?' : 'already have an account?'}
+            {login ? "need to create an account?" : "already have an account?"}
           </button>
         </div>
       </form>
@@ -95,7 +95,7 @@ function Login({ history }) {
         <Link to="/forgot">Forgot Password?</Link>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

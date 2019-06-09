@@ -1,0 +1,8 @@
+.login-bg {
+  background: url("../assets/login-page/login-wallpaper.jpg");
+  background-color: var(--bgcolor);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
