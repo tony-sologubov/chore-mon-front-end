@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import FirebaseContext from '../../firebase/context'
 
-const TaskCard = ({ id, chore, assigned, date, isDone, gid }) => {
+const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   const { firebase, user } = useContext(FirebaseContext)
   const [editing, setEditing] = useState(false)
   const [editedChore, setEditedChore] = useState(chore)
@@ -11,16 +11,16 @@ const TaskCard = ({ id, chore, assigned, date, isDone, gid }) => {
 
   async function deleteTask() {
     await firebase.firestore
-      .collection(`users/${user.uid}/groups/${gid}/tasks`)
-      .doc(`${id}`)
+      .collection(`users/${user.uid}/groups/${groupId}/tasks`)
+      .doc(taskId)
       .delete()
   }
 
   async function handleEdits(e) {
     e.preventDefault()
     await firebase.firestore
-      .collection(`users/${user.uid}/groups/${gid}/tasks`)
-      .doc(`${id}`)
+      .collection(`users/${user.uid}/groups/${groupId}/tasks`)
+      .doc(taskId)
       .update({
         chore: editedChore,
         assigned: editedAssigned,

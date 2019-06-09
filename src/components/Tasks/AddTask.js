@@ -27,10 +27,9 @@ export default function AddTask({ history, match }) {
   )
 
   async function submitTask() {
-    const id = match.params.id
     try {
       await firebase.firestore
-        .collection(`users/${user.uid}/groups/${id}/tasks`)
+        .collection(`users/${user.uid}/groups/${match.params.groupId}/tasks`)
         .doc()
         .set({
           chore: values.chore,
@@ -42,7 +41,7 @@ export default function AddTask({ history, match }) {
     } catch (err) {
       console.error({ error: err.message })
     } finally {
-      history.push(`/groups/${id}`)
+      history.push(`/groups/${match.params.groupId}`)
     }
   }
 
