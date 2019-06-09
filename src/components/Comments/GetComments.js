@@ -9,13 +9,16 @@ export default function GetComments({ groupId, taskId }) {
   const [comments, setComments] = useState([])
 
   useEffect(() => {
-    logic.fetch(user, groupId, setComments, taskId)
+    const unsubscribe = logic.fetch(user, groupId, setComments, taskId)
+    return () => {
+      unsubscribe()
+    }
   }, [firebase.firestore, groupId, user, taskId])
 
   return (
     <>
       {comments.map(comment => (
-        <div key={uuidv4()} class="comment-card">
+        <div key={uuidv4()}>
           <CommentCard
             comment={comment}
             commentId={comment.uid}

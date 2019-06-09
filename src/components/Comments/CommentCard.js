@@ -1,15 +1,15 @@
 import React from 'react'
 import contentEditable from './contentEditable'
 
-const CommentCard = ({ comment, groupId, taskId, displayName }) => {
+const CommentCard = ({ comment, displayName, taskId, groupId }) => {
   const Editable = contentEditable('div')
   return (
     <>
       <Editable
         value={comment}
-        groupId={groupId}
-        taskId={taskId}
         comment={comment}
+        taskId={taskId}
+        groupId={groupId}
       />
       <div>{displayName}</div>
     </>
