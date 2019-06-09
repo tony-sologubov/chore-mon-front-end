@@ -1,5 +1,8 @@
+@import "./reset.css";
 @import "./global.css";
 @import "./landing.css";
 @import "./navbar.css";
 @import "./dashboard.css";
 @import "./billing.css"
+@import "./colors.css";
+

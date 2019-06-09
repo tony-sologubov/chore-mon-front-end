@@ -2,12 +2,12 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import posed, { PoseGroup } from 'react-pose'
 import LandingPage from '../views/Landing'
-
-import Dashboard from '../views/Dashboard'
+import Dashboard from '../views/Dashboard/Dashboard'
 import BillingPage from '../components/Billing/BillingPage'
 import firebase, { FirebaseContext } from '../firebase'
 import useAuth from '../components/Auth/useAuth'
 import AddGroup from '../components/Groups/AddGroup'
+import InProgress from '../views/InProgress'
 
 import '../styles/index.css'
 import Login from './Auth/Login'
@@ -37,10 +37,11 @@ const App = () => {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/add-group" component={AddGroup} />
                     <Route path="/billing" component={BillingPage} />
-                    <Route exact path="/groups/:id" component={Group} />
+                    <Route path="/404" component={InProgress} />
+                    <Route exact path="/groups/:groupId" component={Group} />
                     <Route
                       exact
-                      path="/groups/:id/add-task"
+                      path="/groups/:groupId/add-task"
                       component={AddTask}
                     />
                   </Switch>
