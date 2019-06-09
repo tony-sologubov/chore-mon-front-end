@@ -1,10 +1,10 @@
 # Choremonkey
 
-You can find the deployed project at (https://chore-monkey-app.web.app/)[Choremonkey].
+You can find the deployed project at [https://chore-monkey-app.web.app/](Choremonkey)
 
-## 4️⃣ Contributors
+## Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
+
 
 |                                                      [Sabrina Gear](https://github.com/)                                                       |                                                       [Ryan Boris](https://github.com/ryanboris)                                                        |                                                      [Phil Hart](https://github.com/)                                                       |                                                       [Michael Trevino](https://github.com/)                                                        |                                                      [Luisan Suarez](https://github.com/)                                                       |
 | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
@@ -66,7 +66,7 @@ Dependencies:
 One way to disseminate this information is to use an example.env file.  One has been included in the repository.
 
 
-# 4️⃣ Installation Instructions
+# Installation Instructions
 Clone the repo and using the package manager of your choice, install dependencies in the root of the directory, then run the start script using the relevant commmand for your package manager.
 
 ## Other Scripts
