@@ -1,34 +1,21 @@
-import React, { useContext } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import { FirebaseContext } from '../firebase/index'
+import React, { useContext } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { FirebaseContext } from "../firebase/index";
 
 const NavBar = () => {
-  const { firebase, user } = useContext(FirebaseContext)
+  const { firebase, user } = useContext(FirebaseContext);
   return (
-    <nav className="nav-wrapper black">
-      <ul>
-        <li className={user ? '' : 'toggle-link'}>
+    <header>
+      <ul className="site-menu">
+        <li className={user ? "" : "toggle-link"}>
           <Link to="/dashboard">Dashboard</Link>
-        </li>
-
-        <li>
-          <Link to="/billing">Go Premium</Link>
-        </li>
-
-        <li>
-          <Link
-            className="waves-effect waves-light pink-text lighten-5 btn transparent"
-            to="/"
-          >
-            Home
-          </Link>
         </li>
 
         {!user ? (
           <li>
             <Link
               to="/login"
-              className="waves-effect waves-light pink-text lighten-5 btn transparent"
+              className="waves-effect waves-light dash-btn hoverable"
             >
               Login
             </Link>
@@ -36,8 +23,8 @@ const NavBar = () => {
         ) : (
           <li
             onClick={() => {
-              localStorage.clear()
-              firebase.logout()
+              localStorage.clear();
+              firebase.logout();
             }}
           >
             <Link
@@ -49,8 +36,8 @@ const NavBar = () => {
           </li>
         )}
       </ul>
-    </nav>
-  )
-}
+    </header>
+  );
+};
 
-export default withRouter(NavBar)
+export default withRouter(NavBar);
