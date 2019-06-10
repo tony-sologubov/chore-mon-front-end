@@ -13,21 +13,27 @@ const TaskCard = ({ id, chore, assigned, date, isDone }) => {
 
   return (
         <tr>
+          <th className="switch" >
+            <label>
+              <input type="checkbox"></input>
+              <span className="checked"></span>          
+            </label>
+          </th>
           <th >{chore}</th>
           <th>{assigned}</th>
           <th>{date}</th>
-          <th className="switch" >
-            <label>
-              off
-              <input type="checkbox"></input>
-              <span className="lever"></span>
-              on
-            </label>
-          </th>
           <th>
-            <button className="btn-floating waves-effect waves-light btn blue darken-1">B</button>
-            <button className="btn-floating waves-effect waves-light btn green darken-1">G</button>
-            <button className="btn-floating waves-effect waves-light btn red darken-1" onClick={deleteTask}>X</button>
+            <button className="tableActionButtons btn-floating waves-effect waves-light btn blue lighten-1">
+              <i className="material-icons">person_add</i>
+            </button>
+              
+            <button className="tableActionButtons btn-floating waves-effect waves-light btn  green lighten-1">
+              <i className="material-icons">edit</i>
+            </button>
+
+            <button className="tableActionButtons btn-floating waves-effect waves-light btn red darken-1" onClick={deleteTask}>
+              <i className="material-icons">delete</i>
+            </button>
           </th>
         </tr>
   )

@@ -10,7 +10,9 @@
     display: flex;
     justify-content: space-between;
 }
-
+.rightBottomView{
+    margin-right: 8%;
+}
 .groupTopButtons{
     width: 30%;
     height: 80%;
@@ -30,6 +32,14 @@ justify-content: center;
     display: flex;
     justify-content: space-evenly;
     width: 40%;
-    margin: 1% 1% 1% 1%;
+    margin: 1%;
 }
 
+.threeButtonsOne{
+    height: 100%;
+}
+
+.iconLinks{
+    display: flex;
+    justify-content: center;
+}

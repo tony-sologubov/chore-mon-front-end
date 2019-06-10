@@ -18,32 +18,29 @@ const Group = ({ match }) => {
     <>
     <div className="topHeaderAndButtons">
       <h1 className="groupsHeader">
-        {/* <img src={DAILYPIC} alt="text saying daily chores" className="groupHeader"></img> */}
         Daily Chores
       </h1>
         <div className="imageButtons">
 
             <Link to={`/groups/${match.params.groupName}/add-task`}>
-              {/* <img className="groupTopButtons" src={SCHEDULE} alt="a pink button saying new task which is where you would make a task.">              
-              </img> */}
-              <button className="threeButtons waves-effect waves-light btn-large">
-                New Task
+              <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 ">
+                <span className="material-icons iconLinks iconOne">access_time</span>
+                <span>NewTask</span>
               </button>
             </Link>
 
             <Link to={`/dashboard`}>
-              {/* <img className="groupTopButtons" src={SCHEDULE1} alt="a pink button saying dashboard which will send you to that page.">
-              </img> */}
-              <button className="threeButtons waves-effect waves-light btn-large">
-                Dashboard
+              <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3">
+                <span className="material-icons iconLinks iconOne">dashboard</span>
+                <span className="iconLinks">Dashboard</span>
               </button>
             </Link>
 
           <Link>
-            {/* <img className="groupTopButtons" src={SCHEDULE2} alt="a pink button saying my chores which will send you to your chores.">
-            </img> */}
-            <button className="threeButtons waves-effect waves-light btn-large">
-              My Chores
+          {/* <div className="material-icons">format_list_bulleted</div> */}
+            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3">
+              <span className="material-icons iconLinks iconOne">format_list_bulleted</span>
+              <span className="iconLinks">My Chores</span>
             </button>
           </Link>
         </div>
@@ -56,7 +53,6 @@ const Group = ({ match }) => {
       <div className="rightBottomView">
 
         <div className="houseText">
-          {/* <img src={HOUSEPIC} alt="Text saying House Members" className="houseText"></img> */}
           <h3>House Members</h3>
         </div>
 
@@ -77,9 +73,7 @@ const Group = ({ match }) => {
 
         <div className="buttomInviteButton">
           <span>
-            {/* <img src={INVITEPIC} alt="a pink button saying Invite Member"></img>
-            <InviteGenerator /> */}
-            <button className="waves-effect waves-light btn-large red darken-1">Invite Member</button>
+            <button className="waves-effect waves-light btn-large pink accent-3">Invite Member</button>
           </span>
         </div>
 

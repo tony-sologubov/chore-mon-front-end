@@ -28,10 +28,10 @@ const GetTasks = ({ groupRoute }) => {
   <table className="highlight"> 
     <thead>
           <tr>
+            <th>Done</th>
             <th>Chore</th>
             <th>Assigned</th>
             <th>Date</th>
-            <th>Done</th>
             <th>Actions</th>
           </tr>
     
