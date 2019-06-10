@@ -1,3 +1,26 @@
 .toggle-link {
   display: none;
 }
+
+.site-menu {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.dash-btn {
+  padding: 0.5rem;
+  background: transparent;
+  color: black;
+  border: 1px solid black;
+  border-radius: 2rem;
+  margin: 1rem;
+  width: 8rem;
+  text-align: center;
+}
+
+.dash-btn:hover {
+  padding: 0.5rem;
+  background: var(--btncolor);
+  color: black;
+}

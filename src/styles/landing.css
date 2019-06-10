@@ -7,5 +7,51 @@
 }
 
 .landing h1 {
-  margin: 0;
+  font-size: 2.8rem;
+}
+
+.cta {
+  padding-left: 5%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cta h1 {
+  line-height: 1;
+}
+.store-logos {
+  width: 30%;
+}
+
+.store-logos img {
+  height: auto;
+  width: 45%;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.google {
+  width: 55%;
+  cursor: pointer;
+}
+.apple {
+  cursor: pointer;
+}
+.arrow {
+  position: absolute;
+  bottom: 12%;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.asvg g path {
+  fill: rgba(0, 0, 0, 0.144);
+  stroke: black;
+}
+
+.asvg g path:hover {
+  fill: rgb(0, 0, 0);
+  stroke: black;
 }
