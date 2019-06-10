@@ -41,7 +41,7 @@ function Login({ history }) {
       <div className="login-button-container">
         {/* <h2 className="mv3">{login ? "Login" : "Create Account"}</h2> */}
         <div className="logo"></div>
-        <form onSubmit={handleSubmit} className="flex flex-column">
+        {/* <form onSubmit={handleSubmit} className="flex flex-column">
           {!login && (
             <input
               onChange={handleChange}
@@ -91,11 +91,11 @@ function Login({ history }) {
               {login ? "need to create an account?" : "already have an account?"}
             </button>
           </div>
-        </form>
+        </form> */}
         <SocialLogins />
-        <div className="forgot-password">
+        {/* <div className="forgot-password">
           <Link to="/forgot">Forgot Password?</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
