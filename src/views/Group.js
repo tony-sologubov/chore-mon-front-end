@@ -37,7 +37,6 @@ const Group = ({ match }) => {
             </Link>
 
           <Link>
-          {/* <div className="material-icons">format_list_bulleted</div> */}
             <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3">
               <span className="material-icons iconLinks iconOne">format_list_bulleted</span>
               <span className="iconLinks">My Chores</span>
