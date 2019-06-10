@@ -16,31 +16,31 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
       .delete()
   }
 
-  return (
-        <tr>
-          <th className="switch" >
-            <label>
-              <input type="checkbox"></input>
-              <span className="checked"></span>          
-            </label>
-          </th>
-          <th >{chore}</th>
-          <th>{assigned}</th>
-          <th>{date}</th>
-          <th>
-            <button className="tableActionButtons btn-floating waves-effect waves-light btn blue lighten-1">
-              <i className="material-icons">person_add</i>
-            </button>
+  // return (
+  //       <tr>
+  //         <th className="switch" >
+  //           <label>
+  //             <input type="checkbox"></input>
+  //             <span className="checked"></span>          
+  //           </label>
+  //         </th>
+  //         <th >{chore}</th>
+  //         <th>{assigned}</th>
+  //         <th>{date}</th>
+  //         <th>
+  //           <button className="tableActionButtons btn-floating waves-effect waves-light btn blue lighten-1">
+  //             <i className="material-icons">person_add</i>
+  //           </button>
               
-            <button className="tableActionButtons btn-floating waves-effect waves-light btn  green lighten-1">
-              <i className="material-icons">edit</i>
-            </button>
+  //           <button className="tableActionButtons btn-floating waves-effect waves-light btn  green lighten-1">
+  //             <i className="material-icons">edit</i>
+  //           </button>
 
-            <button className="tableActionButtons btn-floating waves-effect waves-light btn red darken-1" onClick={deleteTask}>
-              <i className="material-icons">delete</i>
-            </button>
-          </th>
-        </tr>
+  //           <button className="tableActionButtons btn-floating waves-effect waves-light btn red darken-1" onClick={deleteTask}>
+  //             <i className="material-icons">delete</i>
+  //           </button>
+  //         </th>
+  //       </tr>
   async function handleEdits(e) {
     e.preventDefault()
     await firebase.firestore
