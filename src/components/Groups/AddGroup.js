@@ -24,20 +24,20 @@ export default function AddGroup({ history }) {
 
   useEffect(() => {
     async function setUser() {
-      await firebase.dbFS
+      await firebase.firestore
         .collection('users')
         .doc(`${user.uid}`)
         .set({ id: user.uid })
     }
     setUser()
-  }, [firebase.dbFS, user.uid])
+  }, [firebase.firestore, user.uid])
 
   async function submitGroup() {
     try {
-      await firebase.dbFS
+      const docRef = firebase.firestore
         .collection(`users/${user.uid}/groups`)
-        .doc(`${values.groupName.split(' ').join('')}`)
-        .set({ groupName: values.groupName })
+        .doc()
+      await docRef.set({ groupName: values.groupName, groupId: docRef.id })
     } catch (err) {
       console.error({ error: err.message })
     } finally {

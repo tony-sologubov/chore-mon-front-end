@@ -6,7 +6,7 @@ const initialState = {
   chore: '',
   assigned: '',
   date: '',
-  isDone: false
+  isDone: 'NOT COMPLETED'
 }
 
 function validateTask(values) {
@@ -27,23 +27,24 @@ export default function AddTask({ history, match }) {
   )
 
   async function submitTask() {
-    const groupRoute = match.params.groupName
     try {
-      await firebase.dbFS
-        .collection(`users/${user.uid}/tasks`)
+      await firebase.firestore
+        .collection(`users/${user.uid}/groups/${match.params.groupId}/tasks`)
         .doc()
         .set({
           chore: values.chore,
           assigned: values.assigned,
           date: values.date,
-          isDone: values.isDone
+          isDone: 'NOT COMPLETED',
+          comments: []
         })
     } catch (err) {
       console.error({ error: err.message })
     } finally {
-      history.push(`/groups/${groupRoute}`)
+      history.push(`/groups/${match.params.groupId}`)
     }
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <input

@@ -1,6 +1,10 @@
+@import "./reset.css";
 @import "./global.css";
+@import "./colors.css";
 @import "./landing.css";
 @import "./navbar.css";
 @import "./dashboard.css";
 @import "./taskList.css";
 @import "./groups.css";
+@import "./billing.css";
+@import "./login.css";
