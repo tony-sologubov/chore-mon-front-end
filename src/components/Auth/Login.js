@@ -37,62 +37,65 @@ function Login({ history }) {
   }
 
   return (
-    <div>
-      <h2 className="mv3">{login ? "Login" : "Create Account"}</h2>
-      <form onSubmit={handleSubmit} className="flex flex-column">
-        {!login && (
+    <div className="login-bg">
+      <div className="login-button-container">
+        {/* <h2 className="mv3">{login ? "Login" : "Create Account"}</h2> */}
+        <div className="logo"></div>
+        <form onSubmit={handleSubmit} className="flex flex-column">
+          {!login && (
+            <input
+              onChange={handleChange}
+              value={values.name}
+              name="name"
+              type="text"
+              placeholder="Your name"
+              autoComplete="off"
+            />
+          )}
           <input
             onChange={handleChange}
-            value={values.name}
-            name="name"
-            type="text"
-            placeholder="Your name"
+            onBlur={handleBlur}
+            value={values.email}
+            name="email"
+            type="email"
+            className={errors.email && "error-input"}
+            placeholder="Your email"
             autoComplete="off"
           />
-        )}
-        <input
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-          name="email"
-          type="email"
-          className={errors.email && "error-input"}
-          placeholder="Your email"
-          autoComplete="off"
-        />
-        {errors.email && <p className="error-text">{errors.email}</p>}
-        <input
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.password}
-          className={errors.password && "error-input"}
-          name="password"
-          type="password"
-          placeholder="Choose a secure password"
-          autoComplete="off"
-        />
-        {errors.password && <p className="error-text">{errors.password}</p>}
-        {authError && <p className="error-text">{authError}</p>}
-        <div className="flex mt3">
-          <button
-            type="submit"
-            className="button pointer mr2"
-            disabled={isSubmitting}
-          >
-            Submit
-          </button>
-          <button
-            type="button"
-            className="pointer button"
-            onClick={() => setLogin(prevLogin => !prevLogin)}
-          >
-            {login ? "need to create an account?" : "already have an account?"}
-          </button>
+          {errors.email && <p className="error-text">{errors.email}</p>}
+          <input
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.password}
+            className={errors.password && "error-input"}
+            name="password"
+            type="password"
+            placeholder="Choose a secure password"
+            autoComplete="off"
+          />
+          {errors.password && <p className="error-text">{errors.password}</p>}
+          {authError && <p className="error-text">{authError}</p>}
+          <div className="flex mt3">
+            <button
+              type="submit"
+              className="button pointer mr2"
+              disabled={isSubmitting}
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              className="pointer button"
+              onClick={() => setLogin(prevLogin => !prevLogin)}
+            >
+              {login ? "need to create an account?" : "already have an account?"}
+            </button>
+          </div>
+        </form>
+        <SocialLogins />
+        <div className="forgot-password">
+          <Link to="/forgot">Forgot Password?</Link>
         </div>
-      </form>
-      <SocialLogins />
-      <div className="forgot-password">
-        <Link to="/forgot">Forgot Password?</Link>
       </div>
     </div>
   );
