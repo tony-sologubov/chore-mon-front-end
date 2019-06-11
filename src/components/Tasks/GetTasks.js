@@ -25,54 +25,58 @@ const GetTasks = ({ groupId }) => {
   }, [firebase.firestore, uid, groupId])
 
 //   console.log(tasks)
-//   return (
-// <div className="groupTableList">
-//   <table className="highlight"> 
-//     <thead>
-//           <tr>
-//             <th>Done</th>
-//             <th>Chore</th>
-//             <th>Assigned</th>
-//             <th>Date</th>
-//             <th>Actions</th>
-//           </tr>
-    
-//   { tasks.map(task => (
-    
-//             <TaskCard
-//               id={task.id}
-//               chore={task.chore}
-//               date={task.date}
-//               isDone={task.isDone}
-//               assigned={task.assigned}
-//             />
-//       ))}
-  
-//     </thead>
-//   </table>
-// </div>
-//   )
-// } 
   return (
-    <div>
-      {tasks.map(task => (
-        <Fragment key={uuidv4()}>
-          <TaskCard
-            taskId={task.id}
-            chore={task.chore}
-            date={task.date}
-            isDone={task.isDone}
-            assigned={task.assigned}
-            groupId={groupId}
-          />
-          <div>
-            <AddComment taskId={task.id} groupId={groupId} />
-            <GetComments taskId={task.id} groupId={groupId} />
-          </div>
-        </Fragment>
+<div className="groupTableList">
+  <table className="highlight"> 
+    <thead>
+          <tr>
+            <th>Done</th>
+            <th>Chore</th>
+            <th>Assigned</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+    
+  { tasks.map(task => (
+    
+            <TaskCard
+              taskId={task.id}
+              chore={task.chore}
+              date={task.date}
+              isDone={task.isDone}
+              assigned={task.assigned}
+              groupId={groupId}
+            />
       ))}
-    </div>
+  
+    </thead>
+  </table>
+</div>
   )
-}
+} 
+
+/*This is Ryans Work */
+
+//   return (
+//     <div>
+//       {tasks.map(task => (
+//         <Fragment key={uuidv4()}>
+//           <TaskCard
+//             taskId={task.id}
+//             chore={task.chore}
+//             date={task.date}
+//             isDone={task.isDone}
+//             assigned={task.assigned}
+//             groupId={groupId}
+//           />
+//           <div>
+//             <AddComment taskId={task.id} groupId={groupId} />
+//             <GetComments taskId={task.id} groupId={groupId} />
+//           </div>
+//         </Fragment>
+//       ))}
+//     </div>
+//   )
+// }
 
 export default GetTasks

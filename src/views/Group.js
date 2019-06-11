@@ -33,7 +33,7 @@ const Group = ({ match }) => {
       </h1>
         <div className="imageButtons">
 
-            <Link to={`/groups/${match.params.groupName}/add-task`}>
+            <Link to={`/groups/${match.params.groupId}/add-task`}>
               <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 ">
                 <span className="material-icons iconLinks iconOne">access_time</span>
                 <span>NewTask</span>
@@ -58,7 +58,8 @@ const Group = ({ match }) => {
 
     <div className="bottomTableAndUsers">
       <div className="bottomLeftView">
-        <GetTasks groupRoute={match.params.groupName} />
+        {/* <GetTasks groupRoute={match.params.groupName} /> */}
+        <GetTasks groupId={match.params.groupId} groupName={groupName} />
       </div>
       <div className="rightBottomView">
 
@@ -90,14 +91,14 @@ const Group = ({ match }) => {
       </div>
 
     </div>
-      <h1>{groupName}</h1>
+      {/* <h1>{groupName}</h1>
       <Link to={`/groups/${match.params.groupId}/add-task`}>
         <p>Add Task</p>
       </Link>
       <Link to="/dashboard">
         <p>Go Back</p>
       </Link>
-      <GetTasks groupId={match.params.groupId} groupName={groupName} />
+      <GetTasks groupId={match.params.groupId} groupName={groupName} /> */}
     </>
   )
 }

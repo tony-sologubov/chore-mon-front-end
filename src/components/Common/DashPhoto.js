@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-// import Grid from "@material-ui/core/Grid";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   avatar: {
@@ -14,16 +14,16 @@ const useStyles = makeStyles({
   }
 });
 
-// function DashPhoto() {
-//   const classes = useStyles();
+function DashPhoto() {
+  const classes = useStyles();
 
-//   return (
-//     <Avatar
-//       alt="photo of user"
-//       src={JSON.parse(localStorage.getItem("user")).photoURL}
-//       className={classes.bigAvatar}
-//     />
-//   );
-// }
+  return (
+    <Avatar
+      alt="photo of user"
+      src={JSON.parse(localStorage.getItem("user")).photoURL}
+      className={classes.bigAvatar}
+    />
+  );
+}
 
-// export default DashPhoto;
+export default DashPhoto;
