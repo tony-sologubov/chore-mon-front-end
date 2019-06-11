@@ -1,0 +1,50 @@
+.profileContainer {
+  margin: 0 auto;
+  width: 100%;
+}
+.profileBtn {
+  display: flex;
+  justify-content: center;
+}
+.connectBtn {
+  background: black;
+  color: white;
+  padding: 20px 80px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-top: 25px;
+}
+
+h3 {
+  color: grey;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+img {
+  margin: 0 auto;
+  display: block;
+  width: 350px;
+  height: auto;
+  margin-top: 70px;
+  bottom: 25;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.profileHeader {
+  width: 100%;
+  margin-top: 0;
+  height: 325px;
+}
+
+.bannerImg {
+  height: 75px;
+}
