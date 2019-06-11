@@ -61,37 +61,38 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
           </th>
         </tr>
   ) : (
-    <div onSubmit={handleEdits}>
-      <input
-        type="text"
-        placeholder={chore}
-        value={editedChore}
-        onChange={e => setEditedChore(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder={assigned}
-        value={editedAssigned}
-        onChange={e => setEditedAssigned(e.target.value)}
-      />
-      <input
-        type="date"
-        placeholder={date}
-        value={editedDate}
-        onChange={e => setEditedDate(e.target.value)}
-      />
-      {/* <input
-        type="text"
-        placeholder="NOT COMPLETED"
-        value={editedIsDone}
-        onChange={e => setEditedIsDone(e.target.value)}
-      /> */}
-      <input type="submit" value="submit" />
-      
-      {/* <button onClick={() => setEditing(true)}>submit</button> */}
-      <button onClick={() => setEditing(false)}>CANCEL</button>
+    <div>
+      <form onSubmit={handleEdits}>
+        <input
+          type="text"
+          placeholder={chore}
+          value={editedChore}
+          onChange={e => setEditedChore(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder={assigned}
+          value={editedAssigned}
+          onChange={e => setEditedAssigned(e.target.value)}
+        />
+        <input
+          type="date"
+          placeholder={date}
+          value={editedDate}
+          onChange={e => setEditedDate(e.target.value)}
+        />
+        {/* <input
+          type="text"
+          placeholder="NOT COMPLETED"
+          value={editedIsDone}
+          onChange={e => setEditedIsDone(e.target.value)}
+        /> */}
+        <input type="submit" value="submit" />
+        
+        {/* <button onClick={() => setEditing(true)}>submit</button> */}
+        <button onClick={() => setEditing(false)}>CANCEL</button>
+      </form>
     </div>
-
   )
 
   /* This is Ryans work */
