@@ -35,7 +35,9 @@ img {
 
 .socialLinks {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  width: 30%;
   margin-top: 25px;
 }
 
