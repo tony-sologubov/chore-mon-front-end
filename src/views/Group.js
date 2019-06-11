@@ -5,9 +5,6 @@ import InviteGenerator from '../components/Invites/InviteGenerator'
 import SCHEDULE from '../assets/group-page/png/SCHEDULE.png'
 import SCHEDULE1 from '../assets/group-page/png/SCHEDULE-1.png'
 import SCHEDULE2 from '../assets/group-page/png/SCHEDULE-2.png'
-// import DAILYPIC from '../assets/group-page/png/Component 31 – 2.png'
-// import HOUSEPIC from '../assets/group-page/png/Component 25 – 7.png'
-// import INVITEPIC from '../assets/group-page/png/GET STARTED.png'
 import IMAGE1 from '../assets/group-page/png/IMAGE.png'
 import IMAGE2 from '../assets/group-page/png/IMAGE-1.png'
 import IMAGE3 from '../assets/group-page/png/IMAGE-2.png'
@@ -36,7 +33,7 @@ const Group = ({ match }) => {
             <Link to={`/groups/${match.params.groupId}/add-task`}>
               <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 ">
                 <span className="material-icons iconLinks iconOne">access_time</span>
-                <span>NewTask</span>
+                <span className='iconLinks'>NewTask</span>
               </button>
             </Link>
 

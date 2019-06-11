@@ -38,15 +38,16 @@ const GetTasks = ({ groupId }) => {
           </tr>
     
   { tasks.map(task => (
-    
-            <TaskCard
-              taskId={task.id}
-              chore={task.chore}
-              date={task.date}
-              isDone={task.isDone}
-              assigned={task.assigned}
-              groupId={groupId}
-            />
+      <Fragment key={uuidv4()}>
+        <TaskCard
+            taskId={task.id}
+            chore={task.chore}
+            date={task.date}
+            isDone={task.isDone}
+            assigned={task.assigned}
+            groupId={groupId}
+          />
+      </Fragment>
       ))}
   
     </thead>

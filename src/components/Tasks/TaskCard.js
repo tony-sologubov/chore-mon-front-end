@@ -32,7 +32,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   function toggleEdit() {
     setEditing(true)
   }
-
+    console.log(setEditing,'this is firing')
   return !editing ? (
         <tr>
           <th className="switch" >
@@ -60,7 +60,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
           </th>
         </tr>
   ) : (
-        <div onSubmit={handleEdits}>
+    <div onSubmit={handleEdits}>
       <input
         type="text"
         placeholder={chore}
@@ -79,13 +79,15 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
         value={editedDate}
         onChange={e => setEditedDate(e.target.value)}
       />
-      {/* <input
+      <input
         type="text"
-        placeholder="NOT"
+        placeholder="NOT COMPLETED"
         value={editedIsDone}
         onChange={e => setEditedIsDone(e.target.value)}
-      /> */}
+      />
       <input type="submit" value="submit" />
+      
+      {/* <button onClick={() => setEditing(true)}>submit</button> */}
       <button onClick={() => setEditing(false)}>CANCEL</button>
     </div>
 
