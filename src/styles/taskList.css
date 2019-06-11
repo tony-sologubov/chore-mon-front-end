@@ -1,0 +1,16 @@
+.groupTableList{
+    width: 150%;
+    padding-left: 5%;
+}
+.membersCardsView{
+    display: flex;
+    justify-content: center;
+}
+
+.tableActionButtons{
+    margin: 1%;
+}
+
+/* .boldTable{
+    font-weight: bolder;
+} */
