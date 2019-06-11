@@ -30,11 +30,11 @@ const GetTasks = ({ groupId }) => {
   <table className="highlight"> 
     <thead>
           <tr>
-            <th>Done</th>
-            <th>Chore</th>
-            <th>Assigned</th>
-            <th>Date</th>
-            <th>Actions</th>
+            <th className='boldTable'>Done</th>
+            <th className='boldTable'>Chore</th>
+            <th className='boldTable'>Assigned</th>
+            <th className='boldTable'>Date</th>
+            <th className='boldTable'>Actions</th>
           </tr>
     
   { tasks.map(task => (

@@ -43,3 +43,7 @@ justify-content: center;
     display: flex;
     justify-content: center;
 }
+
+.houseText{
+    text-align: center;
+}

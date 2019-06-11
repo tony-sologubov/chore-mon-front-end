@@ -60,8 +60,8 @@ const Group = ({ match }) => {
       </div>
       <div className="rightBottomView">
 
-        <div className="houseText">
-          <h3>House Members</h3>
+        <div>
+          <h2 className="houseText">House Members</h2>
         </div>
 
           <div className="membersCardsView">
