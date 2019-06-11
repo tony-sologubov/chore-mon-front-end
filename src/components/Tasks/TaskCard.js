@@ -35,6 +35,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
     setEditing(true)
   }
     // console.log(setEditing,'this is firing')
+  //Need to fix the CSS on this page and add avatars
 
   return !editing ? (
         <tr>
