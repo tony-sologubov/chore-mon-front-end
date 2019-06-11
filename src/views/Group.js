@@ -78,7 +78,7 @@ const Group = ({ match }) => {
 
         <div className="buttomInviteButton">
           <span>
-            {/* <button className="waves-effect waves-light btn-large pink accent-3">Invite Member</button> */}
+            {/* <button>Invite Member</button> */}
             <InviteGenerator />
           </span>
         </div>

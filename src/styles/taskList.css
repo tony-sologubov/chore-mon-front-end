@@ -10,6 +10,19 @@
 .tableActionButtons{
     margin: 1%;
 }
+/* 
+#textV {
+    border: 1px solid #ccc;
+    display: none;
+    font-size: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    text-transform: uppercase;
+}
+
+#someDiv:hover #textV{
+    display: block;
+} */
 
 /* .boldTable{
     font-weight: bolder;
