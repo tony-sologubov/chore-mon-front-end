@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-// const url = "http://chore-monkey.herokuapp.com"
-const url = "http://chore-monkey.firebaseapp.com"
+const url = "https://chore-monkey-app.firebaseio.com"
+// const url = "http://chore-monkey.firebaseapp.com"
 
 
 class InviteGenerator extends Component {
@@ -44,7 +44,7 @@ class InviteGenerator extends Component {
         if (!this.state.inivteLink) {
             return (
                 <React.Fragment>
-                    <button onClick={this.generateLink}> Inivite </button>
+                    <button className="waves-effect waves-light btn-large pink accent-3" onClick={this.generateLink}> Inivite </button>
                 </React.Fragment>
             );
         } else {

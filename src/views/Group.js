@@ -2,9 +2,6 @@ import React, { useState, useContext } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import GetTasks from '../components/Tasks/GetTasks'
 import InviteGenerator from '../components/Invites/InviteGenerator'
-import SCHEDULE from '../assets/group-page/png/SCHEDULE.png'
-import SCHEDULE1 from '../assets/group-page/png/SCHEDULE-1.png'
-import SCHEDULE2 from '../assets/group-page/png/SCHEDULE-2.png'
 import IMAGE1 from '../assets/group-page/png/IMAGE.png'
 import IMAGE2 from '../assets/group-page/png/IMAGE-1.png'
 import IMAGE3 from '../assets/group-page/png/IMAGE-2.png'
@@ -81,7 +78,8 @@ const Group = ({ match }) => {
 
         <div className="buttomInviteButton">
           <span>
-            <button className="waves-effect waves-light btn-large pink accent-3">Invite Member</button>
+            {/* <button className="waves-effect waves-light btn-large pink accent-3">Invite Member</button> */}
+            <InviteGenerator />
           </span>
         </div>
 
