@@ -32,15 +32,16 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   function toggleEdit() {
     setEditing(true)
   }
-    console.log(setEditing,'this is firing')
+    // console.log(setEditing,'this is firing')
+
   return !editing ? (
         <tr>
-          <th className="switch" >
-            {isDone}
+          <th className="switch" >       
             <label>
               <input type="checkbox"></input>
               <span className="checked"></span>          
             </label>
+                    
           </th>
           <th >{chore}</th>
           <th>{assigned}</th>
@@ -79,12 +80,12 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
         value={editedDate}
         onChange={e => setEditedDate(e.target.value)}
       />
-      <input
+      {/* <input
         type="text"
         placeholder="NOT COMPLETED"
         value={editedIsDone}
         onChange={e => setEditedIsDone(e.target.value)}
-      />
+      /> */}
       <input type="submit" value="submit" />
       
       {/* <button onClick={() => setEditing(true)}>submit</button> */}
