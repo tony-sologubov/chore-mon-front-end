@@ -10,6 +10,10 @@ export const uiConfig = {
       firebase.googleProvider.providerId,
       firebase.facebookProvider.providerId,
       firebase.twitterProvider.providerId,
-      // firebase.auth.FacebookAuthProvider.PROVIDER_ID
+      firebase.githubProvider.providerId,
+      firebase.emailProvider.providerId,
+      firebase.phoneProvider.providerId,
+      firebase.microsoftProvider.providerId,
+      // firebase.guestProvider.providerId
     ]
   };
