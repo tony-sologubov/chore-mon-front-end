@@ -8,6 +8,7 @@ import IMAGE3 from '../assets/group-page/png/IMAGE-2.png'
 import IMAGE4 from '../assets/group-page/png/IMAGE-3.png'
 import { FirebaseContext } from '../firebase'
 
+
 const Group = ({ match }) => {
   const user = JSON.parse(localStorage.getItem('user'))
   const { firebase } = useContext(FirebaseContext)
@@ -41,18 +42,12 @@ const Group = ({ match }) => {
               </button>
             </Link>
 
-          <Link>
-            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3">
-              <span className="material-icons iconLinks iconOne">format_list_bulleted</span>
-              <span className="iconLinks">My Chores</span>
-            </button>
-          </Link>
+        </div>       
+            
         </div>
-      </div>
 
     <div className="bottomTableAndUsers">
       <div className="bottomLeftView">
-        {/* <GetTasks groupRoute={match.params.groupName} /> */}
         <GetTasks groupId={match.params.groupId} groupName={groupName} />
       </div>
       <div className="rightBottomView">
@@ -60,7 +55,7 @@ const Group = ({ match }) => {
         <div>
           <h2 className="houseText">House Members</h2>
         </div>
-
+{/* Work on this for the Avatars, need to map the members */}
           <div className="membersCardsView">
             <div>
               <div className="invitedMembers"><img src={IMAGE1} alt="a users profile">
@@ -78,7 +73,6 @@ const Group = ({ match }) => {
 
         <div className="buttomInviteButton">
           <span>
-            {/* <button>Invite Member</button> */}
             <InviteGenerator />
           </span>
         </div>
@@ -86,14 +80,6 @@ const Group = ({ match }) => {
       </div>
 
     </div>
-      {/* <h1>{groupName}</h1>
-      <Link to={`/groups/${match.params.groupId}/add-task`}>
-        <p>Add Task</p>
-      </Link>
-      <Link to="/dashboard">
-        <p>Go Back</p>
-      </Link>
-      <GetTasks groupId={match.params.groupId} groupName={groupName} /> */}
     </>
   )
 }

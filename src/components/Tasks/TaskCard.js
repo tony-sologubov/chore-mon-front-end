@@ -1,15 +1,17 @@
 import React, { useContext, useState } from 'react'
 import FirebaseContext from '../../firebase/context'
 import Tooltip from "@material-ui/core/Tooltip"
+import TaskModal from './TaskModal'
+
 
 
 const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   const { firebase, user } = useContext(FirebaseContext)
-  const [editing, setEditing] = useState(false)
-  const [editedChore, setEditedChore] = useState(chore)
-  const [editedAssigned, setEditedAssigned] = useState(assigned)
-  const [editedDate, setEditedDate] = useState(date)
-  const [editedIsDone, setEditedIsDone] = useState(isDone)
+  // const [editing, setEditing] = useState(false)
+  // const [editedChore, setEditedChore] = useState(chore)
+  // const [editedAssigned, setEditedAssigned] = useState(assigned)
+  // const [editedDate, setEditedDate] = useState(date)
+  // const [editedIsDone, setEditedIsDone] = useState(isDone)
 
   async function deleteTask() {
     await firebase.firestore
@@ -18,26 +20,26 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
       .delete()
   }
 
-  async function handleEdits(e) {
-    e.preventDefault()
-    await firebase.firestore
-      .collection(`users/${user.uid}/groups/${groupId}/tasks`)
-      .doc(taskId)
-      .update({
-        chore: editedChore,
-        assigned: editedAssigned,
-        date: editedDate,
-        isDone: editedIsDone
-      })
-  }
+  // async function handleEdits(e) {
+  //   e.preventDefault()
+  //   await firebase.firestore
+  //     .collection(`users/${user.uid}/groups/${groupId}/tasks`)
+  //     .doc(taskId)
+  //     .update({
+  //       chore: editedChore,
+  //       assigned: editedAssigned,
+  //       date: editedDate,
+  //       isDone: editedIsDone
+  //     })
+  // }
 
-  function toggleEdit() {
-    setEditing(true)
-  }
+  // function toggleEdit() {
+  //   setEditing(true)
+  // }
     // console.log(setEditing,'this is firing')
   //Need to fix the CSS on this page and add avatars
 
-  return !editing ? (
+  return  (
         <tr>
           <th className="switch" >       
             <label>
@@ -46,7 +48,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
             </label>
                     
           </th>
-          <th >{chore}</th>
+          <th>{chore}</th>
           <th>{assigned}</th>
           <th>{date}</th>
           <th>
@@ -57,9 +59,9 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
             </Tooltip>
 
             <Tooltip title="Edit"> 
-              <button className="tableActionButtons btn-floating waves-effect waves-light btn  green lighten-1" onClick={toggleEdit}>
-                <i className="material-icons">edit</i>
-              </button>
+              <span>
+                <TaskModal/>
+              </span>
             </Tooltip>  
 
             <Tooltip title="Delete">
@@ -70,40 +72,46 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
             </Tooltip> 
           </th>
         </tr>
-  ) : (
-    <div>
-      <form onSubmit={handleEdits}>
-        <input
-          type="text"
-          placeholder={chore}
-          value={editedChore}
-          onChange={e => setEditedChore(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder={assigned}
-          value={editedAssigned}
-          onChange={e => setEditedAssigned(e.target.value)}
-        />
-        <input
-          type="date"
-          placeholder={date}
-          value={editedDate}
-          onChange={e => setEditedDate(e.target.value)}
-        />
-        {/* <input
-          type="text"
-          placeholder="NOT COMPLETED"
-          value={editedIsDone}
-          onChange={e => setEditedIsDone(e.target.value)}
-        /> */}
-        <input type="submit" value="submit" />
+  ) 
+  // : (
+  //   <div>
+  //   <form onSubmit={handleEdits}>
+
+  //     <th><input
+  //         type="text"
+  //         placeholder={chore}
+  //         value={editedChore}
+  //         onChange={e => setEditedChore(e.target.value)}
+  //       /></th>
+
+  //     <th><input
+  //         type="text"
+  //         placeholder={assigned}
+  //         value={editedAssigned}
+  //         onChange={e => setEditedAssigned(e.target.value)}
+  //       /></th>
+
+  //     <th><input
+  //         type="date"
+  //         placeholder={date}
+  //         value={editedDate}
+  //         onChange={e => setEditedDate(e.target.value)}
+  //       /></th>
+
+  //       {/* <input
+  //         type="text"
+  //         placeholder="NOT COMPLETED"
+  //         value={editedIsDone}
+  //         onChange={e => setEditedIsDone(e.target.value)}
+  //       /> */}
+
+  //       <input type="submit" value="SUBMIT" />
         
-        {/* <button onClick={() => setEditing(true)}>submit</button> */}
-        <button onClick={() => setEditing(false)}>CANCEL</button>
-      </form>
-    </div>
-  )
+  //       <button onClick={() => setEditing(false)}>CANCEL</button>
+  //   </form>
+     
+  //   </div>
+  // )
 
   /* This is Ryans work */
 

@@ -10,6 +10,13 @@
 .tableActionButtons{
     margin: 1%;
 }
+.editTaskModal{
+    background-color: white;
+    width: 50%;
+    position: absolute;
+    right: 25%;
+    top:25%;
+}
 /* 
 #textV {
     border: 1px solid #ccc;
