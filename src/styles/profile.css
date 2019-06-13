@@ -9,13 +9,14 @@
 .connectBtn {
   background: black;
   color: white;
-  padding: 20px 80px;
+  padding: 15px 70px;
   font-weight: bold;
   font-size: 1.4rem;
   margin-top: 25px;
+  border-radius: 2rem;
 }
 
-h3 {
+.profileLocation {
   color: grey;
   text-align: center;
 }
@@ -24,20 +25,23 @@ h1 {
   text-align: center;
 }
 
-img {
+.profilePhoto {
   margin: 0 auto;
   display: block;
   width: 350px;
   height: auto;
   margin-top: 70px;
   bottom: 25;
+  border-radius: 10px;
+  filter: drop-shadow(10px 10px 30px #333);
+
 }
 
 .socialLinks {
   display: flex;
   justify-content: space-evenly;
   margin: 0 auto;
-  width: 30%;
+  width: 26%;
   margin-top: 25px;
 }
 

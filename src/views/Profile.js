@@ -16,18 +16,18 @@ class Profile extends React.Component {
           <img
             className="profileHeader"
             src={
-              "https://images.unsplash.com/photo-1414919823178-e9d9d0afd0ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2892&q=80"
+              "https://source.unsplash.com/random"
             }
           />
         </div>
-        <img src={JSON.parse(localStorage.getItem("user")).photoURL} />
+        <img className='profilePhoto' src={JSON.parse(localStorage.getItem("user")).photoURL} />
         <h1>
           {" " +
             JSON.parse(localStorage.getItem("user")).displayName.match(
               /^[a-z ,.'-]+$/i
             )[0]}
         </h1>
-        <h3>DENVER, CO</h3>
+        <h3 className='profileLocation'>DENVER, CO</h3>
         <div className="socialLinks">
           <PhoneIcon />
           <ThumbIcon />
