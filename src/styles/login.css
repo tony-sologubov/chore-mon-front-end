@@ -10,12 +10,11 @@
 
 .login-button-container {
   background-color: white;
-  /* height: 50%; */
   width: 40%;
   min-width: 365px;
   border-radius: 21px;
   margin: 0 auto;
-  padding: 45px 0 15px;
+  padding: 65px 0px;
 }
 
 .logo {

@@ -27,7 +27,7 @@ const App = () => {
       <FirebaseContext.Provider value={{ user, firebase }}>
         <Route
           render={({ location }) => (
-            <div id="site-container" style={{maxHeight: 'none'}}>
+            <div id="site-container">
               <PoseGroup>
                 <RouteContainer key={location.pathname}>
                   <Switch>

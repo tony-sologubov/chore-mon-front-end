@@ -36,9 +36,11 @@
     <title>Chore Monkey</title>
   </head>
 
-  <body style="max-height: none">
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root" style="max-height: none"></div>
+    <div id="root"></div>
+    <style> div * { max-height: none; } </style> <!-- hacky override of materialize max-height settings -->
+
 
     <!--   Core JS Files   -->
     <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
