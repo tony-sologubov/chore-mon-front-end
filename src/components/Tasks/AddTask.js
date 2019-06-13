@@ -44,7 +44,7 @@ export default function AddTask({ history, match }) {
           chore: values.chore,
           assigned: values.assigned,
           date: values.date,
-          isDone: 'NOT COMPLETED',
+          isDone: false,
           comments: []
         })
     } catch (err) {
