@@ -9,7 +9,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   const [editedChore, setEditedChore] = useState(chore)
   const [editedAssigned, setEditedAssigned] = useState(assigned)
   const [editedDate, setEditedDate] = useState(date)
-  const [editedIsDone, setEditedIsDone] = useState(isDone)
+  const [editedIsDone] = useState(isDone)
 
   async function deleteTask() {
     await firebase.firestore
@@ -34,7 +34,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   function toggleEdit() {
     setEditing(true)
   }
-    // console.log(setEditing,'this is firing')
+  // console.log(setEditing,'this is firing')
 
   return !editing ? (
         <tr>
@@ -97,7 +97,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
           onChange={e => setEditedIsDone(e.target.value)}
         /> */}
         <input type="submit" value="submit" />
-        
+
         {/* <button onClick={() => setEditing(true)}>submit</button> */}
         <button onClick={() => setEditing(false)}>CANCEL</button>
       </form>
@@ -106,47 +106,45 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
 
   /* This is Ryans work */
 
-
-//   return !editing ? (
-//     <div className="TaskCard">
-//       <p>{chore}</p>
-//       <p>{assigned}</p>
-//       <p>{date}</p>
-//       <p>{isDone}</p>
-//       <button onClick={deleteTask}>DELETE</button>
-//       <button onClick={toggleEdit}>EDIT</button>
-//     </div>
-//   ) : (
-//     <form onSubmit={handleEdits}>
-//       <input
-//         type="text"
-//         placeholder={chore}
-//         value={editedChore}
-//         onChange={e => setEditedChore(e.target.value)}
-//       />
-//       <input
-//         type="text"
-//         placeholder={assigned}
-//         value={editedAssigned}
-//         onChange={e => setEditedAssigned(e.target.value)}
-//       />
-//       <input
-//         type="date"
-//         placeholder={date}
-//         value={editedDate}
-//         onChange={e => setEditedDate(e.target.value)}
-//       />
-//       <input
-//         type="text"
-//         placeholder="NOT COMPLETED"
-//         value={editedIsDone}
-//         onChange={e => setEditedIsDone(e.target.value)}
-//       />
-//       <input type="submit" value="submit" />
-//       <button onClick={() => setEditing(false)}>CANCEL</button>
-//     </form>
-// )
-
+  //   return !editing ? (
+  //     <div className="TaskCard">
+  //       <p>{chore}</p>
+  //       <p>{assigned}</p>
+  //       <p>{date}</p>
+  //       <p>{isDone}</p>
+  //       <button onClick={deleteTask}>DELETE</button>
+  //       <button onClick={toggleEdit}>EDIT</button>
+  //     </div>
+  //   ) : (
+  //     <form onSubmit={handleEdits}>
+  //       <input
+  //         type="text"
+  //         placeholder={chore}
+  //         value={editedChore}
+  //         onChange={e => setEditedChore(e.target.value)}
+  //       />
+  //       <input
+  //         type="text"
+  //         placeholder={assigned}
+  //         value={editedAssigned}
+  //         onChange={e => setEditedAssigned(e.target.value)}
+  //       />
+  //       <input
+  //         type="date"
+  //         placeholder={date}
+  //         value={editedDate}
+  //         onChange={e => setEditedDate(e.target.value)}
+  //       />
+  //       <input
+  //         type="text"
+  //         placeholder="NOT COMPLETED"
+  //         value={editedIsDone}
+  //         onChange={e => setEditedIsDone(e.target.value)}
+  //       />
+  //       <input type="submit" value="submit" />
+  //       <button onClick={() => setEditing(false)}>CANCEL</button>
+  //     </form>
+  // )
 }
 
 export default TaskCard

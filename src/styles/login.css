@@ -5,4 +5,25 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 46px 0 0;
+}
+
+.login-button-container {
+  background-color: white;
+  height: 1000px;
+  width: 679px;
+  border-radius: 21px;
+  margin: 0 auto;
+  padding: 65px 0 0;
+}
+
+.logo {
+  height: 193px;
+  width: 193px;
+  background: url("../assets/landing-page/png/logo.png");
+  /* background: url("../assets/login-page/logo.png"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
 }

@@ -2,8 +2,6 @@ import React, { useContext, useState, useEffect, Fragment } from 'react'
 import uuidv4 from 'uuid'
 import FirebaseContext from '../../firebase/context'
 import TaskCard from './TaskCard'
-import GetComments from '../Comments/GetComments'
-import AddComment from '../Comments/AddComment'
 
 const GetTasks = ({ groupId }) => {
   const { firebase } = useContext(FirebaseContext)
@@ -24,37 +22,36 @@ const GetTasks = ({ groupId }) => {
     }
   }, [firebase.firestore, uid, groupId])
 
-//   console.log(tasks)
+  //   console.log(tasks)
   return (
-<div className="groupTableList">
-  <table className="highlight"> 
-    <thead>
+    <div className="groupTableList">
+      <table className="highlight">
+        <thead>
           <tr>
-            <th className='boldTable'>Done</th>
-            <th className='boldTable'>Chore</th>
-            <th className='boldTable'>Assigned</th>
-            <th className='boldTable'>Date</th>
-            <th className='boldTable'>Actions</th>
+            <th className="boldTable">Done</th>
+            <th className="boldTable">Chore</th>
+            <th className="boldTable">Assigned</th>
+            <th className="boldTable">Date</th>
+            <th className="boldTable">Actions</th>
           </tr>
-    
-  { tasks.map(task => (
-      <Fragment key={uuidv4()}>
-        <TaskCard
-            taskId={task.id}
-            chore={task.chore}
-            date={task.date}
-            isDone={task.isDone}
-            assigned={task.assigned}
-            groupId={groupId}
-          />
-      </Fragment>
-      ))}
-  
-    </thead>
-  </table>
-</div>
+
+          {tasks.map(task => (
+            <Fragment key={uuidv4()}>
+              <TaskCard
+                taskId={task.id}
+                chore={task.chore}
+                date={task.date}
+                isDone={task.isDone}
+                assigned={task.assigned}
+                groupId={groupId}
+              />
+            </Fragment>
+          ))}
+        </thead>
+      </table>
+    </div>
   )
-} 
+}
 
 /*This is Ryans Work */
 

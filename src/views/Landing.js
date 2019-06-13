@@ -1,8 +1,8 @@
-import React from "react";
-import NavBar from "./NavBar";
-import { Link, withRouter } from "react-router-dom";
-import ScrollableAnchor from "react-scrollable-anchor";
-import { ReactComponent as Arrow } from "../assets/landing-page/svg/down.svg";
+import React from 'react'
+import NavBar from './NavBar'
+import { Link } from 'react-router-dom'
+import ScrollableAnchor from 'react-scrollable-anchor'
+import { ReactComponent as Arrow } from '../assets/landing-page/svg/down.svg'
 
 const Landing = () => {
   return (
@@ -17,12 +17,12 @@ const Landing = () => {
           <div className="store-logos">
             <img
               className="apple hoverable "
-              src={require("../assets/landing-page/png/apple-cta.png")}
+              src={require('../assets/landing-page/png/apple-cta.png')}
               alt="apple"
             />
             <img
               className="google hoverable"
-              src={require("../assets/landing-page/png/google-play-badge.png")}
+              src={require('../assets/landing-page/png/google-play-badge.png')}
               alt="google"
             />
           </div>
@@ -34,7 +34,7 @@ const Landing = () => {
         </div>
       </div>
 
-      <ScrollableAnchor id={"section2"}>
+      <ScrollableAnchor id={'section2'}>
         <div className="section-2">
           <h1> How are you world?</h1>
 
@@ -46,11 +46,11 @@ const Landing = () => {
         </div>
       </ScrollableAnchor>
 
-      <ScrollableAnchor id={"section3"}>
+      <ScrollableAnchor id={'section3'}>
         <div className="section-3"> How are you world? </div>
       </ScrollableAnchor>
     </div>
-  );
-};
+  )
+}
 
-export default Landing;
+export default Landing
