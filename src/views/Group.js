@@ -14,6 +14,8 @@ const Group = ({ match }) => {
   const { firebase } = useContext(FirebaseContext)
   const [groupName, setGroupName] = useState('')
 
+// console.log(firebase)
+
   const groupRef = firebase.firestore
     .collection(`users/${user.uid}/groups`)
     .doc(match.params.groupId)
