@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { FirebaseContext } from '../../firebase/index'
 
-export default function InviteGenerator() {
+export default function InviteGenerator({ groupId, userId, history }) {
   const [email, setEmail] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [error, setError] = useState(null)
@@ -17,8 +17,9 @@ export default function InviteGenerator() {
   const sendInvite = async e => {
     e.preventDefault()
     try {
-      await firebase.sendEmailInvite(email)
+      await firebase.sendEmailInvite(email, groupId, userId)
       setSuccess('The invite has been sent.')
+      window.localStorage.setItem('emailForSignIn', JSON.stringify(email))
     } catch (err) {
       setError('Please enter a valid email address.')
       console.log({ code: err.code, msg: err.message })
