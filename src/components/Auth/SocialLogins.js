@@ -1,6 +1,9 @@
 import React, { useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import FirebaseContext from '../../firebase/context'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { uiConfig } from '../../firebase/uiconfig'
+
 
 function SocialLogins({ history }) {
   const { firebase } = useContext(FirebaseContext)
@@ -37,9 +40,10 @@ function SocialLogins({ history }) {
 
   return (
     <div>
-      <button onClick={LoginWithGoogle}>Google</button>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth}/>
+      {/* <button onClick={LoginWithGoogle}>Google</button>
       <button onClick={LoginWithFacebook}>Facebook</button>
-      <button onClick={LoginWithTwitter}>Twitter</button>
+      <button onClick={LoginWithTwitter}>Twitter</button> */}
     </div>
   )
 }
