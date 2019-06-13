@@ -29,30 +29,32 @@ function Login({ history }) {
       login
         ? await firebase.login(email, password)
         : await firebase.register(name, email, password);
-      history.push("/");
-    } catch (err) {
-      console.error("Authentication Error", err);
-      setAuthError(err.message);
+        history.push("/");
+      } catch (err) {
+        console.error("Authentication Error", err);
+        setAuthError(err.message);
+      }
     }
-  }
-
-  return (
-    <div className="login-bg">
-      <div className="login-button-container">
-        {/* <h2 className="mv3">{login ? "Login" : "Create Account"}</h2> */}
-        <div className="logo"></div>
+    
+    return (
+      <div className="login-bg">
+        <div className="login-button-container">
+          {/* <h2 className="mv3">{login ? "Login" : "Create Account"}</h2> */}
+          <div className="logo"></div>
+          <SocialLogins />
+        </div>
         {/* <form onSubmit={handleSubmit} className="flex flex-column">
           {!login && (
             <input
-              onChange={handleChange}
-              value={values.name}
-              name="name"
-              type="text"
-              placeholder="Your name"
-              autoComplete="off"
+            onChange={handleChange}
+            value={values.name}
+            name="name"
+            type="text"
+            placeholder="Your name"
+            autoComplete="off"
             />
-          )}
-          <input
+            )}
+            <input
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
@@ -61,9 +63,9 @@ function Login({ history }) {
             className={errors.email && "error-input"}
             placeholder="Your email"
             autoComplete="off"
-          />
-          {errors.email && <p className="error-text">{errors.email}</p>}
-          <input
+            />
+            {errors.email && <p className="error-text">{errors.email}</p>}
+            <input
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
@@ -72,32 +74,30 @@ function Login({ history }) {
             type="password"
             placeholder="Choose a secure password"
             autoComplete="off"
-          />
-          {errors.password && <p className="error-text">{errors.password}</p>}
-          {authError && <p className="error-text">{authError}</p>}
-          <div className="flex mt3">
+            />
+            {errors.password && <p className="error-text">{errors.password}</p>}
+            {authError && <p className="error-text">{authError}</p>}
+            <div className="flex mt3">
             <button
-              type="submit"
-              className="button pointer mr2"
-              disabled={isSubmitting}
+            type="submit"
+            className="button pointer mr2"
+            disabled={isSubmitting}
             >
-              Submit
+            Submit
             </button>
             <button
-              type="button"
-              className="pointer button"
-              onClick={() => setLogin(prevLogin => !prevLogin)}
+            type="button"
+            className="pointer button"
+            onClick={() => setLogin(prevLogin => !prevLogin)}
             >
-              {login ? "need to create an account?" : "already have an account?"}
+            {login ? "need to create an account?" : "already have an account?"}
             </button>
-          </div>
-        </form> */}
-        <SocialLogins />
+            </div>
+          </form> */}
         {/* <div className="forgot-password">
           <Link to="/forgot">Forgot Password?</Link>
         </div> */}
       </div>
-    </div>
   );
 }
 
