@@ -21,7 +21,7 @@ class Profile extends React.Component {
           />
         </div>
         <img className='profilePhoto' src={JSON.parse(localStorage.getItem("user")).photoURL} />
-        <h1>
+        <h1 className='profileName'>
           {" " +
             JSON.parse(localStorage.getItem("user")).displayName.match(
               /^[a-z ,.'-]+$/i
