@@ -14,7 +14,6 @@ import Login from './Auth/Login'
 import ForgotPassword from './Auth/ForgotPassword'
 import Group from '../views/Group'
 import AddTask from './Tasks/AddTask'
-import Profile from '../views/Profile'
 
 const RouteContainer = posed.div({
   enter: { opacity: 1, delay: 300 },
@@ -28,7 +27,7 @@ const App = () => {
       <FirebaseContext.Provider value={{ user, firebase }}>
         <Route
           render={({ location }) => (
-            <div id="site-container">
+            <div id="site-container" style={{maxHeight: 'none'}}>
               <PoseGroup>
                 <RouteContainer key={location.pathname}>
                   <Switch>
@@ -40,7 +39,6 @@ const App = () => {
                     <Route path="/billing" component={BillingPage} />
                     <Route path="/404" component={InProgress} />
                     <Route exact path="/groups/:groupId" component={Group} />
-                    <Route path="/profile" component={Profile} />
                     <Route
                       exact
                       path="/groups/:groupId/add-task"

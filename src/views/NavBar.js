@@ -13,12 +13,17 @@ const NavBar = () => {
 
         {!user ? (
           <li>
-            <Link
+            <a
+            className="waves-effect waves-light dash-btn hoverable"
+             href="http://localhost:3000/login">
+               Login
+            </a>
+            {/* <Link
               to="/login"
               className="waves-effect waves-light dash-btn hoverable"
             >
               Login
-            </Link>
+            </Link> */}
           </li>
         ) : (
           <li

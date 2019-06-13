@@ -13,7 +13,7 @@ export const uiConfig = {
       firebase.githubProvider.providerId,
       firebase.emailProvider.providerId,
       firebase.phoneProvider.providerId,
-      firebase.microsoftProvider.providerId,
+      // firebase.microsoftProvider.providerId,
       // firebase.guestProvider.providerId
     ]
   };
