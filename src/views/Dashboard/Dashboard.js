@@ -9,6 +9,7 @@ import { ReactComponent as ListIcon } from '../../assets/dashboard/icons/list.sv
 import { ReactComponent as CalendarIcon } from '../../assets/dashboard/icons/calendar.svg'
 import { ReactComponent as SettingsIcon } from '../../assets/dashboard/icons/settings.svg'
 
+
 function Dashboard({ history }) {
   return (
     <div className="Dashboard">
@@ -86,13 +87,13 @@ function Dashboard({ history }) {
           <ListIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push(`/404`)
+              history.push(`/mytasks/${JSON.parse(localStorage.getItem("user")).uid}`)
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push(`/404`)
+              history.push(`/mytasks/${JSON.parse(localStorage.getItem("user")).uid}`)
             }}
           >
             MY TASKS
