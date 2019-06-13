@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import FirebaseContext from '../../firebase/context'
+// import Date from '../Tasks/Date'
 
 // import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
@@ -87,19 +88,22 @@ const handleOpen = () => {
     <ul className="collapsible">
         <li>
             <div className="collapsible-header">Due Date</div>
-                <div className="collapsible-body">
+                <div className="collapsible-body"> */}
                     <span>
                         <input
-                            type="date"
+                            type="text"
+                            className="datepicker"
                             placeholder={date}
                             value={editedDate}
                             onChange={e => setEditedDate(e.target.value)}
                             />
-                    </span>
+                            {/* <Date/> */}
+                    </span> */}
             </div>
         </li>
     </ul>
-    </div>
+ </div>
+
          {/* <div>
             <AddComment taskId={task.id} groupId={groupId} />
             <GetComments taskId={task.id} groupId={groupId} />
