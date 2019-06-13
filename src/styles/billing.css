@@ -3,12 +3,12 @@
     justify-content: space-evenly;
     align-items: baseline;
     margin-top: 65px;
-    
+
 }
 
 .billingCard {
     height: 650px;
-    background: orange;
+    background: #F9B25A;
     border: 1px solid black;
     
 }

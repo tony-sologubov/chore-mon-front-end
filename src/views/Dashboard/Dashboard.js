@@ -52,7 +52,7 @@ function Dashboard({ history }) {
           <ProfileIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push('/404')
+              history.push('/profile')
             }}
           />
           <p
