@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import FirebaseContext from '../../firebase/context'
+
 // import { makeStyles } from '@material-ui/core/styles';
 // import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
@@ -11,6 +12,7 @@ import Modal from '@material-ui/core/Modal';
     const [editedChore, setEditedChore] = useState(chore)
     const [editedAssigned, setEditedAssigned] = useState(assigned)
     const [editedDate, setEditedDate] = useState(date)
+    
     // const [editedIsDone, setEditedIsDone] = useState(isDone)
     const [open, setOpen] = React.useState(false);
 
@@ -35,7 +37,6 @@ const handleOpen = () => {
   }
 
 
-
   function toggleEdit() {
     setEditing(true)
   }
@@ -55,41 +56,62 @@ const handleOpen = () => {
         onClose={handleClose}
       >
         <div className="editTaskModal">
-                <h1>Chore</h1>
+               
 
-            <form onSubmit={handleEdits}>
-
-
-    
+        <form className="modalEditForm" onSubmit={handleEdits}>
+            <h1 className="modalEditHeader">Edit Task</h1>
+            <div>Task Name</div>
             <input
                 type="text"
-                placeholder={chore}
+                // placeholder={chore}
+                placeholder="What Specifics?"
                 value={editedChore}
                 onChange={e => setEditedChore(e.target.value)}
                 />
-
-            <input
-                type="text"
-                placeholder={assigned}
-                value={editedAssigned}
-                onChange={e => setEditedAssigned(e.target.value)}
-                />
-
-           <input
-                type="date"
-                placeholder={date}
-                value={editedDate}
-                onChange={e => setEditedDate(e.target.value)}
-                />
-
-{/* Here is where the comments are going to into */}
-
+    <div className="middleEditModal">
+        <ul className="collapsible">
+            <li>
+                <div className="collapsible-header">
+                    Assigned To
+                </div>
+                <div className="collapsible-body">
+                    <input
+                        type="text"
+                        placeholder={assigned}
+                        value={editedAssigned}
+                        onChange={e => setEditedAssigned(e.target.value)}
+                        />
+                </div>
+            </li>
+        </ul>
+    <ul className="collapsible">
+        <li>
+            <div className="collapsible-header">Due Date</div>
+                <div className="collapsible-body">
+                    <span>
+                        <input
+                            type="date"
+                            placeholder={date}
+                            value={editedDate}
+                            onChange={e => setEditedDate(e.target.value)}
+                            />
+                    </span>
+            </div>
+        </li>
+    </ul>
+    </div>
+         {/* <div>
+            <AddComment taskId={task.id} groupId={groupId} />
+            <GetComments taskId={task.id} groupId={groupId} />
+           </div> */}
+            <span className="bottomModalButtons">
                 <input type="submit" value="SUBMIT" />
                 
                 <button onClick={() => setEditing(false)}>
                     <span onClick={handleClose}>CANCEL</span>
                 </button>
-            </form>
+            </span>
+        </form>
 
         </div>
       </Modal>
@@ -102,5 +124,9 @@ placeholder="NOT COMPLETED"
 value={editedIsDone}
 onChange={e => setEditedIsDone(e.target.value)}
 /> */
+//           <div>
+//             <AddComment taskId={task.id} groupId={groupId} />
+//             <GetComments taskId={task.id} groupId={groupId} />
+//           </div>
 
 export default TaskModal;

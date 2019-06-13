@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import useFormValidation from '../Auth/useFormValidation'
 import FirebaseContext from '../../firebase/context'
-import Modal from '@material-ui/core/Modal';
+// import Modal from '@material-ui/core/Modal';
 
 const initialState = {
   chore: '',
@@ -20,20 +20,20 @@ function validateTask(values) {
 }
 
 export default function AddTask({ history, match }) {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const { firebase, user } = useContext(FirebaseContext)
   const { handleSubmit, handleChange, errors, values } = useFormValidation(
     initialState,
     validateTask,
     submitTask
   )
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   async function submitTask() {
     try {
@@ -55,12 +55,7 @@ export default function AddTask({ history, match }) {
   }
 
   return (
-    <Modal
-    aria-labelledby="simple-modal-title"
-    aria-describedby="simple-modal-description"
-    open={open}
-    onClose={handleClose}
-    >
+
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -90,6 +85,6 @@ export default function AddTask({ history, match }) {
       <input type="submit" value="submit" />
       {errors.values && <p>{errors.values}</p>}
     </form>
-    </Modal>
+  
   )
 }

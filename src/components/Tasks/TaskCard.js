@@ -36,7 +36,7 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   function toggleEdit() {
     setEditing(true)
   }
-  // console.log(setEditing,'this is firing')
+ 
 
   return  (
         <tr>
