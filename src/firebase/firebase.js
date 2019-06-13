@@ -37,6 +37,13 @@ class Firebase {
   async resetPassword(email) {
     await this.auth.sendPasswordResetEmail(email)
   }
+
+  async sendEmailInvite(email) {
+    await this.auth.sendSignInLinkToEmail(email, {
+      url: `http://localhost:3000/login`,
+      handleCodeInApp: true
+    })
+  }
 }
 
 const firebase = new Firebase()
