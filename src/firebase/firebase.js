@@ -14,6 +14,11 @@ class Firebase {
     this.googleProvider = new app.auth.GoogleAuthProvider()
     this.facebookProvider = new app.auth.FacebookAuthProvider()
     this.twitterProvider = new app.auth.TwitterAuthProvider()
+    this.githubProvider = new app.auth.GithubAuthProvider()
+    this.emailProvider = new app.auth.EmailAuthProvider()
+    this.phoneProvider = new app.auth.PhoneAuthProvider()
+    this.guestProvider = new app.auth.EmailAuthProvider()
+    this.microsoftProvider = new app.auth.OAuthProvider('microsoft.com')
   }
   async register(name, email, password) {
     const newUser = await this.auth.createUserWithEmailAndPassword(
