@@ -86,13 +86,13 @@ function Dashboard({ history }) {
           <ListIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push(`/404`)
+              history.push(`/mytasks/${JSON.parse(localStorage.getItem("user")).uid}`)
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push(`/404`)
+              history.push(`/mytasks/${JSON.parse(localStorage.getItem("user")).uid}`)
             }}
           >
             MY TASKS
