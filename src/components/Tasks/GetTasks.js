@@ -22,7 +22,7 @@ const GetTasks = ({ groupId }) => {
     }
   }, [firebase.firestore, uid, groupId])
 
-  //   console.log(tasks)
+    console.log(tasks)
   return (
     <div className="groupTableList">
       <table className="highlight">
