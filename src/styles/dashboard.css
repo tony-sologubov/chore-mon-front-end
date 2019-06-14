@@ -103,3 +103,8 @@ circle {
   align-items: center;
   justify-content: center;
 }
+
+.dash-button {
+  margin: 26px 26px 0px 0px;
+  border-radius: 20px;
+}
