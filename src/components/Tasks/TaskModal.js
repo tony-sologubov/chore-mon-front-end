@@ -57,6 +57,11 @@ return !editing ? (
     </span>
   ):(
   <span>
+      <button 
+            className="tableActionButtons btn-floating waves-effect waves-light btn  green lighten-1"
+            onClick={handleOpen}>
+        <i className="material-icons" onClick={toggleEdit}>edit</i>
+      </button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
