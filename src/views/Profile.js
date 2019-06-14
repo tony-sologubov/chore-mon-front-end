@@ -12,30 +12,31 @@ class Profile extends React.Component {
   render() {
     return (
       <div className="profileContainer">
-        <div className="bannerImg">
+        <div className="header">
+          <div className="coverPhoto">.</div>
           <img
-            className="profileHeader"
-            src={
-              "https://source.unsplash.com/random"
-            }
+            className="profilePhoto"
+            src={JSON.parse(localStorage.getItem("user")).photoURL}
           />
         </div>
-        <img className='profilePhoto' src={JSON.parse(localStorage.getItem("user")).photoURL} />
-        <h1 className='profileName'>
-          {" " +
-            JSON.parse(localStorage.getItem("user")).displayName.match(
-              /^[a-z ,.'-]+$/i
-            )[0]}
-        </h1>
-        <h3 className='profileLocation'>DENVER, CO</h3>
-        <div className="socialLinks">
-          <PhoneIcon />
-          <ThumbIcon />
-          <TweetIcon />
-          <InstaIcon />
-        </div>
-        <div className="profileBtn">
-          <button className="connectBtn">CONNECT</button>
+
+        <div className="lower-block">
+          <h1 className="profileName">
+            {" " +
+              JSON.parse(localStorage.getItem("user")).displayName.match(
+                /^[a-z ,.'-]+$/i
+              )[0]}
+          </h1>
+          <h3 className="profileLocation">DENVER, CO</h3>
+          <div className="socialLinks">
+            <PhoneIcon />
+            <ThumbIcon />
+            <TweetIcon />
+            <InstaIcon />
+          </div>
+          <div className="profileBtn">
+            <button className="connectBtn">CONNECT</button>
+          </div>
         </div>
       </div>
     );
