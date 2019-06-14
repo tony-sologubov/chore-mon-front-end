@@ -1,46 +1,39 @@
-// import 'date-fns';
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-// import DateFnsUtils from '@date-io/date-fns';
-// import {
-//  MuiPickersUtilsProvider,
-//  KeyboardDatePicker,
-// } from '@material-ui/core';
-import DateFnsUtils from "@date-io/date-fns"; // import
-import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
+import React, { Fragment, useState } from "react";
+import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers/DatePicker/DatePicker";
 
-const useStyles = makeStyles({
- grid: {
-   width: '60%',
- },
-});
+function InlineDatePickerDemo(props) {
+  const [selectedDate, handleDateChange] = useState(new Date());
 
-export default function Date() {
- // The first commit of Material-UI
- const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  return (
+    <Fragment>
+      <DatePicker
+        variant="inline"
+        label="Basic example"
+        value={selectedDate}
+        onChange={handleDateChange}
+      />
 
- const classes = useStyles();
+      <DatePicker
+        disableToolbar
+        variant="inline"
+        label="Only calendar"
+        helperText="No year selection"
+        value={selectedDate}
+        onChange={handleDateChange}
+      />
 
- function handleDateChange(date) {
-   setSelectedDate(date);
- }
-
- return (
-   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-     <Grid container className={classes.grid} justify="space-around">
-       <DatePicker
-         margin="normal"
-         id="mui-pickers-date"
-         label="Date picker"
-         value={selectedDate}
-         onChange={handleDateChange}
-         KeyboardButtonProps={{
-           'aria-label': 'change date',
-         }}
-       />
-
-     </Grid>
-   </MuiPickersUtilsProvider>
- );
+      <KeyboardDatePicker
+        autoOk
+        variant="inline"
+        inputVariant="outlined"
+        label="With keyboard"
+        format="MM/dd/yyyy"
+        value={selectedDate}
+        InputAdornmentProps={{ position: "start" }}
+        onChange={date => handleDateChange(date)}
+      />
+    </Fragment>
+  );
 }
+
+export default InlineDatePickerDemo;

@@ -33,11 +33,19 @@ text-align: center;
     justify-content: space-evenly;
     margin-left: 25%;
     width: 50%;
+    margin-top: 2%;
 }
 
 .middleEditModal{
     display: flex;
     justify-content: space-evenly;
+}
+
+.editModalRound{
+    border-radius: 7%;
+}
+.modalButtonText{
+    color: white;
 }
 /* 
 #textV {
