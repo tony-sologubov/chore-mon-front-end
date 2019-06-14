@@ -5,7 +5,7 @@ import TaskCard from './TaskCard'
 import GetComments from '../Comments/GetComments'
 import AddComment from '../Comments/AddComment'
 
-const GetTasks = ({ groupId }) => {
+const GetTasksForUser = ({ groupId }) => {
   const { firebase } = useContext(FirebaseContext)
   const [tasks, setTasks] = useState([])
   const uid = JSON.parse(localStorage.getItem('user')).uid
@@ -24,7 +24,6 @@ const GetTasks = ({ groupId }) => {
     }
   }, [firebase.firestore, uid, groupId])
 
-//   console.log(tasks)
   return (
 <div className="groupTableList">
   <table className="highlight"> 
@@ -36,7 +35,7 @@ const GetTasks = ({ groupId }) => {
             <th className='boldTable'></th>
             <th className='boldTable'></th>
           </tr>
-    
+
   { tasks.map(task => (
       <Fragment key={uuidv4()}>
         <TaskCard
@@ -49,35 +48,11 @@ const GetTasks = ({ groupId }) => {
           />
       </Fragment>
       ))}
-  
+
     </thead>
   </table>
 </div>
   )
-} 
+}
 
-/*This is Ryans Work */
-
-//   return (
-//     <div>
-//       {tasks.map(task => (
-//         <Fragment key={uuidv4()}>
-//           <TaskCard
-//             taskId={task.id}
-//             chore={task.chore}
-//             date={task.date}
-//             isDone={task.isDone}
-//             assigned={task.assigned}
-//             groupId={groupId}
-//           />
-//           <div>
-//             <AddComment taskId={task.id} groupId={groupId} />
-//             <GetComments taskId={task.id} groupId={groupId} />
-//           </div>
-//         </Fragment>
-//       ))}
-//     </div>
-//   )
-// }
-
-export default GetTasks
+export default GetTasksForUser

@@ -1,12 +1,7 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react'
-import uuidv4 from 'uuid'
 import FirebaseContext from '../../firebase/context'
 import GetTasksForUser from './GetTasksForUser'
-import GroupCard from '../Groups/GroupCard'
 
-import TaskCard from './TaskCard'
-import GetComments from '../Comments/GetComments'
-import AddComment from '../Comments/AddComment'
 
 const GetTasksByUser = ({ groupId }) => {
 
@@ -25,27 +20,25 @@ const GetTasksByUser = ({ groupId }) => {
         )
     }, [firebase.firestore, id])
 
-
     return (
-
-    <div>
-        <div className="groupTableList">
-            <table className="highlight"> 
-                <thead>
-                    <tr>
-                        <th className='boldTable'>Done</th>
-                        <th className='boldTable'>Chore</th>
-                        <th className='boldTable'>Assigned</th>
-                        <th className='boldTable'>Date</th>
-                        <th className='boldTable'>Actions</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-     {   groups.map(group => (
-      <GetTasksForUser groupId={group.groupId} groupName={group.groupName} />
-    ))}
-    </div>
+      <div>
+          <div className="groupTableList">
+              <table className="highlight"> 
+                  <thead>
+                      <tr>
+                          <th className='boldTable'>Done</th>
+                          <th className='boldTable'>Chore</th>
+                          <th className='boldTable'>Assigned</th>
+                          <th className='boldTable'>Date</th>
+                          <th className='boldTable'>Actions</th>
+                      </tr>
+                  </thead>
+              </table>
+          </div>
+      {   groups.map(group => (
+        <GetTasksForUser groupId={group.groupId} groupName={group.groupName} />
+      ))}
+      </div>
     )
 }
 

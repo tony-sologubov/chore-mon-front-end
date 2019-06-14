@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import GetTasksByUser from '../components/Tasks/GetTasksByUser'
-import { FirebaseContext } from '../firebase'
 
-const Group = ({ match }) => {
+const MyTasks = ({ match }) => {
   const user = JSON.parse(localStorage.getItem('user'))
 
   if (!user) {
@@ -45,4 +44,4 @@ const Group = ({ match }) => {
   }
 }
 
-export default withRouter(Group)
+export default withRouter(MyTasks)
