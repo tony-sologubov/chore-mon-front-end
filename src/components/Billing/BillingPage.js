@@ -55,7 +55,8 @@ export default class BillingPage extends React.Component {
 										amount={1000}
 										label="Choose Premium"
 										currency="USD"
-										name="ListMonkey"
+                    name="ListMonkey"
+               
 									/>
 								</div>
 								<div className="card-panel">
