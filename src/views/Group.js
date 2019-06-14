@@ -30,7 +30,7 @@ const Group = ({ match }) => {
   return (
     <>
       <div className="topHeaderAndButtons">
-        <h1 className="groupsHeader">Daily Chores</h1>
+        <h1 className="groupsHeader">{groupName}</h1>
         <div className="imageButtons">
           <Link to={`/groups/${match.params.groupId}/add-task`}>
             <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 ">
