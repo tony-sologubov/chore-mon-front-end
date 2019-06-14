@@ -103,13 +103,13 @@ function Dashboard({ history }) {
           <CalendarIcon
             className="di hvr-push  "
             onClick={() => {
-              history.push('/add-group')
+              history.push('/404')
             }}
           />
           <p
             className=" hvr-push  "
             onClick={() => {
-              history.push('/add-group')
+              history.push('/404')
             }}
           >
             CALENDAR

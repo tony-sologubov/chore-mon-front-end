@@ -21,13 +21,13 @@ const useStyles = makeStyles({
     // const id = JSON.parse(localStorage.getItem('user')).uid
   
     return (
-      <div>
+      <div className="avatar-and-name">
         <Avatar
           alt="photo of user"
           src={JSON.parse(localStorage.getItem('user')).photoURL}
           className={classes.Avatar}
         />
-          <span>
+          <span className="user-name">
            {JSON.parse(localStorage.getItem('user')).displayName.match(/[^\s,.'"!?]+/)[0]}
              {/* <input
               type="text"

@@ -7,8 +7,8 @@ const NavBar = () => {
   return (
     <header>
       <ul className="site-menu">
-        <li className={user ? "" : "toggle-link"}>
-          <Link to="/dashboard">Dashboard</Link>
+        <li className={user ? "waves-effect waves-light btn-large  pink dash-button hoverable" : "toggle-link"}>
+          <Link style={{color: "white"}}to="/dashboard">Dashboard</Link>
         </li>
 
         {!user ? (
@@ -34,7 +34,7 @@ const NavBar = () => {
           >
             <Link
               to="/"
-              className="waves-effect waves-light pink-text lighten-5 btn transparent"
+              className="waves-effect waves-light btn-large  pink dash-button"
             >
               Logout
             </Link>
