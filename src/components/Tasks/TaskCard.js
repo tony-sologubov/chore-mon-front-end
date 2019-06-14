@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import FirebaseContext from '../../firebase/context'
 import Tooltip from "@material-ui/core/Tooltip"
 import TaskModal from './TaskModal'
+import GetTasks from './GetTasks';
 
 
 
@@ -59,7 +60,14 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
 
             <Tooltip title="Edit"> 
               <span>
-                <TaskModal/>
+                <TaskModal
+                taskId={taskId}
+                chore={chore}
+                date={date}
+                isDone={isDone}
+                assigned={assigned}
+                groupId={groupId}
+                />
               </span>
             </Tooltip>  
 

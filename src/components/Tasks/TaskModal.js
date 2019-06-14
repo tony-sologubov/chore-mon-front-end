@@ -41,7 +41,9 @@ setOpen(false);
 }
 
 function toggleEdit() {
-setEditing(true)
+setEditing(true);
+// setOpen(true);
+
 }
 console.log(toggleEdit, 'its firing part 1');
 console.log(handleOpen, 'its firing part 2');
@@ -90,9 +92,7 @@ return !editing ? (
                     id="panel1a-header"
                     className="pink accent-3 editModalRound"
                     >
-                      <div className="modalButtonText">
-                        Due Date
-                      </div>
+                      <div className="modalButtonText">{date}</div>
                     </ExpansionPanelSummary>  
                           <ExpansionPanelDetails>
                             <div>
@@ -100,7 +100,7 @@ return !editing ? (
                               type="date"
                               // className="datepicker"
                               placeholder={date}
-                              value={user.uid.editedDate}
+                              value={editedDate}
                               onChange={e => setEditedDate(e.target.value)}
                               />
                         </div>
@@ -125,7 +125,7 @@ return !editing ? (
                               <input
                                 type="text"
                                 placeholder={assigned}
-                                value={user.uid.editedAssigned}
+                                value={editedAssigned}
                                 onChange={e => setEditedAssigned(e.target.value)}
                               />
                           </div>
