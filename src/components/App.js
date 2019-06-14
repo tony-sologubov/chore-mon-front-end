@@ -14,6 +14,7 @@ import Login from './Auth/Login'
 import ForgotPassword from './Auth/ForgotPassword'
 import Group from '../views/Group'
 import AddTask from './Tasks/AddTask'
+import MyTasks from '../views/MyTasks'
 import Profile from '../views/Profile'
 
 const RouteContainer = posed.div({
@@ -46,6 +47,7 @@ const App = () => {
                       path="/groups/:groupId/add-task"
                       component={AddTask}
                     />
+                    <Route path="/mytasks/:userId" component={MyTasks} />
                   </Switch>
                 </RouteContainer>
               </PoseGroup>
