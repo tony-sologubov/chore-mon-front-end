@@ -49,7 +49,7 @@ const GroupCard = ({ groupName, id }) => {
         value={editedName}
         onChange={e => setEditedName(e.target.value)}
       />
-      <input type="submit" value="submit" />
+      <input type="submit" value="Submit" />
     </form>
   )
 }

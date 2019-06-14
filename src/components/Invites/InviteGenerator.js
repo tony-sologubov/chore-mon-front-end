@@ -28,7 +28,7 @@ export default function InviteGenerator({ groupId, userId, history }) {
 
   return !showForm ? (
     <button
-      className="waves-effect waves-light btn-large pink accent-3 invite"
+      className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical invite"
       onClick={toggleForm}
     >
       Invite
@@ -41,20 +41,23 @@ export default function InviteGenerator({ groupId, userId, history }) {
         value={email}
         onChange={({ target: { value } }) => setEmail(value)}
       />
-      <button
-        className="waves-effect waves-light btn-large pink accent-3 send"
-        type="submit"
-        onClick={sendInvite}
-      >
-        Send
-      </button>
+      <div className="middleEditModal">
+        <button
+          className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical send "
+          type="submit"
+          onClick={sendInvite}
+        >
+          Send
+        </button>
 
-      <button
-        className="waves-effect waves-light btn-large pink accent-3 cancel"
-        onClick={toggleForm}
-      >
-        Cancel
-      </button>
+        <button
+          className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical cancel"
+          onClick={toggleForm}
+        >
+          Cancel
+        </button>
+        
+      </div>
       {error && <div>{error}</div>}
       {success && <div>{success}</div>}
     </form>

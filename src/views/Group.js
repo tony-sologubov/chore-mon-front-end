@@ -25,7 +25,7 @@ const Group = ({ match }) => {
   }, [groupName, groupRef])
 
   return (
-    <>
+    <div className="Dashboard">
       <div className="topHeaderAndButtons">
         <h1 className="groupsHeader">{groupName}</h1>
         <div className="imageButtons">
@@ -39,7 +39,7 @@ const Group = ({ match }) => {
           </Link>
 
           <Link to={`/dashboard`}>
-            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3">
+            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
               <span className="material-icons iconLinks iconOne">
                 dashboard
               </span>
@@ -97,7 +97,7 @@ const Group = ({ match }) => {
       </div>
 
     
-    </>
+    </div>
   )
 }
 

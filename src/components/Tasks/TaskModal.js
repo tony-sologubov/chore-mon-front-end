@@ -119,7 +119,7 @@ return !editing ? (
                       id="panel1a-header"
                       className="pink accent-3 editModalRound"
                       >
-                        <div className="modalButtonText">
+                        <div className="modalButtonText modalRoundButton">
                             DropDown
                         </div>
                       </ExpansionPanelSummary>  
@@ -143,12 +143,16 @@ return !editing ? (
                 </div>
 
                 </div>
-                  <span className="bottomModalButtons">
-                    <input type="submit" value="SUBMIT" />
-                      <button onClick={() => setEditing(false)}>
+                  <div className="bottomModalButtons">
+                    <div>
+                    <button  type="submit" value="SUBMIT" className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">submit</button>
+                    </div>
+                    <div>
+                      <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical" onClick={() => setEditing(false)}>
                         <span onClick={handleClose}>CANCEL</span>
                       </button>
-                  </span>
+                      </div>
+                  </div>
             </form>
           </div>
       </Modal>

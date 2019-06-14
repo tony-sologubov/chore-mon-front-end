@@ -9,7 +9,7 @@
 .topHeaderAndButtons{
     display: flex;
     justify-content: space-between;
-    min-height: 50%;
+    min-height: 15%;
     max-height: 50%;
 }
 
