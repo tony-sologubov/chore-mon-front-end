@@ -101,15 +101,3 @@ circle {
   align-items: center;
   justify-content: center;
 }
-
-.section-2 {
-  height: 100vh;
-  background: black;
-  color: white;
-}
-
-.section-3 {
-  height: 100vh;
-  background: white;
-  color: magenta;
-}

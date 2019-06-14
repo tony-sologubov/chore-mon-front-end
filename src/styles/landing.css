@@ -55,3 +55,14 @@
   fill: rgb(0, 0, 0);
   stroke: black;
 }
+
+.section-2 {
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+}
+
+.section-3 {
+  height: 100vh;
+  background: white;
+  color: magenta;
+}
