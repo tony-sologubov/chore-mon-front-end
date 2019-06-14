@@ -109,6 +109,7 @@ return !editing ? (
                       </ExpansionPanelDetails>
                   </ExpansionPanel>
                 </div>
+
                 <div>
                   <div>Assigned To:</div>
                   <ExpansionPanel className="grey lighten-3 editModalRound">
@@ -124,6 +125,10 @@ return !editing ? (
                       </ExpansionPanelSummary>  
                         <ExpansionPanelDetails>
                           <div>
+        {/* Here is the loop the get list of user in a group broken code Michael*/}
+                {/* {user.map(group => (
+                <ProfilePhotoTask/>
+                  ))} */}
                             <ProfilePhotoTask/>
                               <input
                                 type="text"
@@ -135,7 +140,8 @@ return !editing ? (
                           </div>
                         </ExpansionPanelDetails>
                   </ExpansionPanel>
-                  </div>
+                </div>
+
                 </div>
                   <span className="bottomModalButtons">
                     <input type="submit" value="SUBMIT" />
