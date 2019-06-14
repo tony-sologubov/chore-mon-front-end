@@ -130,7 +130,7 @@ export default function AddTask({ history, match }) {
       <button 
       type="submit" 
       value="submit" 
-      className="waves-effect waves-light btn-large pink accent-3">
+      className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
         {/* <input type="submit" value="submit" /> */}
         Submit
         </button>
