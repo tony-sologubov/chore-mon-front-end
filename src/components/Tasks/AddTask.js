@@ -67,7 +67,7 @@ export default function AddTask({ history, match }) {
   return (
     <div className="taskBackGround">
 <div className="addTaskDiv">
-    <h2>New Task</h2>
+    <h2 className="add-task-title">New Task</h2>
     <form onSubmit={handleSubmit} className="addTaskForm">
       <input
         type="text"
@@ -117,6 +117,7 @@ export default function AddTask({ history, match }) {
                   <ProfilePhotoTask/>
 
                 <input
+                style= {{marginTop: "19px"}}
                 type="text"
                 name="assigned"
                 placeholder="Assign a Person"
@@ -130,7 +131,7 @@ export default function AddTask({ history, match }) {
       <button 
       type="submit" 
       value="submit" 
-      className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
+      className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical submit-button">
         {/* <input type="submit" value="submit" /> */}
         Submit
         </button>
