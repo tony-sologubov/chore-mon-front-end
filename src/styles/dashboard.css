@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: var(--bgcolor);
+  background: white;
 }
 
 .dash-header {
@@ -31,7 +31,7 @@
 }
 
 .sidebar button {
-  background: var(--btncolor);
+  background: var(--accentpink);
   width: 100%;
   padding: 2rem;
   display: flex;
@@ -41,7 +41,7 @@
   vertical-align: center;
   text-align: center;
   margin: 1rem;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   border-style: none;
   cursor: pointer;
 }
@@ -86,7 +86,7 @@
 }
 .di .circle,
 circle {
-  fill: var(--accentcolor);
+  fill: var(--accentpink);
 }
 
 .section-ctr {
