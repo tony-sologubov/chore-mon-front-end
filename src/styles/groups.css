@@ -51,3 +51,7 @@ justify-content: center;
 .houseText{
     text-align: center;
 }
+
+.inviteButtonSpace{
+    margin:5%;
+}

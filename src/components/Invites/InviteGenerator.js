@@ -42,21 +42,23 @@ export default function InviteGenerator({ groupId, userId, history }) {
         onChange={({ target: { value } }) => setEmail(value)}
       />
       <div className="middleEditModal">
-        <button
-          className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical send "
-          type="submit"
-          onClick={sendInvite}
-        >
-          Send
-        </button>
-
-        <button
-          className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical cancel"
-          onClick={toggleForm}
-        >
-          Cancel
-        </button>
-        
+        <div className="inviteButtonSpace">
+          <button
+            className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical send "
+            type="submit"
+            onClick={sendInvite}
+          >
+            Send
+          </button>
+        </div>
+        <div className="inviteButtonSpace">
+          <button
+            className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical cancel"
+            onClick={toggleForm}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
       {error && <div>{error}</div>}
       {success && <div>{success}</div>}

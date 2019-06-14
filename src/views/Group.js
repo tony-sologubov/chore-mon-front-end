@@ -4,6 +4,10 @@ import GetTasks from '../components/Tasks/GetTasks'
 import InviteGenerator from '../components/Invites/InviteGenerator'
 import { FirebaseContext } from '../firebase'
 import ProfilePhoto from '../components/Groups/GroupAvatars'
+// import IMAGE1 from '../assets/group-page/png/IMAGE.png'
+import IMAGE2 from '../assets/group-page/png/IMAGE-1.png'
+import IMAGE3 from '../assets/group-page/png/IMAGE-2.png'
+import IMAGE4 from '../assets/group-page/png/IMAGE-3.png'
 // import Modal from '@material-ui/core/Modal';
 // import Date from '../components/Tasks/Date'
 
@@ -66,16 +70,19 @@ const Group = ({ match }) => {
               <div className="invitedMembers">
                 <ProfilePhoto/>
               </div>
-              <div className="invitedMembers">             
-                <ProfilePhoto/>
+              <div className="invitedMembers">      
+              <img src={IMAGE2} alt="a users profile" />       
+                {/* <ProfilePhoto/> */}
               </div>
             </div>
             <div>
               <div className="invitedMembers">
-                <ProfilePhoto/>               
+              <img src={IMAGE3} alt="a users profile" />
+                {/* <ProfilePhoto/>                */}
               </div>
               <div className="invitedMembers">
-                <ProfilePhoto/>               
+              <img src={IMAGE4} alt="a users profile" />
+                {/* <ProfilePhoto/>                */}
               </div>
             </div>
           </div>
