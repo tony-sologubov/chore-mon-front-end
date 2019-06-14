@@ -2,17 +2,17 @@ import React, { useContext, useState } from 'react'
 import FirebaseContext from '../../firebase/context'
 import Tooltip from "@material-ui/core/Tooltip"
 import TaskModal from './TaskModal'
-import GetTasks from './GetTasks';
+// import GetTasks from './GetTasks';
 
 
 
 const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   const { firebase, user } = useContext(FirebaseContext)
-  const [editing, setEditing] = useState(false)
-  const [editedChore, setEditedChore] = useState(chore)
-  const [editedAssigned, setEditedAssigned] = useState(assigned)
-  const [editedDate, setEditedDate] = useState(date)
-  const [editedIsDone] = useState(isDone)
+  // const [editing, setEditing] = useState(false)
+  // const [editedChore, setEditedChore] = useState(chore)
+  // const [editedAssigned, setEditedAssigned] = useState(assigned)
+  // const [editedDate, setEditedDate] = useState(date)
+  // const [editedIsDone] = useState(isDone)
 
   async function deleteTask() {
     await firebase.firestore
@@ -34,9 +34,9 @@ const TaskCard = ({ taskId, chore, assigned, date, isDone, groupId }) => {
   //     })
   // }
 
-  function toggleEdit() {
-    setEditing(true)
-  }
+  // function toggleEdit() {
+  //   setEditing(true)
+  // }
  
 
   return  (

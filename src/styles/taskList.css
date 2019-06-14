@@ -30,9 +30,9 @@ text-align: center;
 
 .bottomModalButtons{
     display: flex;
-    justify-content: space-evenly;
-    margin-left: 25%;
-    width: 50%;
+    justify-content: space-around;
+    /* margin-left: 25%; */
+    /* width: 50%; */
     margin-top: 2%;
 }
 
@@ -42,10 +42,18 @@ text-align: center;
 }
 
 .editModalRound{
-    border-radius: 7%;
+    /* border-radius: 7%; */
+    border-radius: 0.5rem;
+
 }
 .modalButtonText{
     color: white;
+    border-radius: 0.5rem;
+
+}
+
+.modalRoundButton{
+    border-radius: 0.5rem;
 }
 /* 
 #textV {

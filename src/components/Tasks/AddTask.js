@@ -1,7 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useReducer } from 'react'
 import useFormValidation from '../Auth/useFormValidation'
 import FirebaseContext from '../../firebase/context'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ProfilePhotoTask from './TaskAvatar'
 // import Modal from '@material-ui/core/Modal';
+// import Menu from '@material-ui/core/Menu';
+// import MenuItem from '@material-ui/core/MenuItem';
 
 const initialState = {
   chore: '',
@@ -27,13 +34,16 @@ export default function AddTask({ history, match }) {
     validateTask,
     submitTask
   )
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
+    // const [anchorEl, setAnchorEl] = React.useState(null);
+  
+    // function handleClick(event) {
+    //   setAnchorEl(event.currentTarget);
+    // }
+  
+    // function handleClose() {
+    //   setAnchorEl(null);
+    // }
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   async function submitTask() {
     try {
@@ -55,24 +65,19 @@ export default function AddTask({ history, match }) {
   }
 
   return (
-
-    <form onSubmit={handleSubmit}>
+    <div className="taskBackGround">
+<div className="addTaskDiv">
+    <h2 className="add-task-title">New Task</h2>
+    <form onSubmit={handleSubmit} className="addTaskForm">
       <input
         type="text"
         name="chore"
-        placeholder="add a chore"
+        placeholder="Add a Task"
         value={values.chore}
         onChange={event => handleChange(event)}
       />
 
-      <input
-        type="text"
-        name="assigned"
-        placeholder="add a assigned person"
-        value={values.assigned}
-        onChange={event => handleChange(event)}
-      />
-      <label htmlFor="date">Due Date:</label>
+      <label htmlFor="date" className="dueDateText">Due Date:</label>
       <input
         type="date"
         id="date"
@@ -82,9 +87,92 @@ export default function AddTask({ history, match }) {
         onChange={event => handleChange(event)}
       />
 
-      <input type="submit" value="submit" />
-      {errors.values && <p>{errors.values}</p>}
-    </form>
-  
+
+          {/* <input
+            type="text"
+            name="assigned"
+            placeholder="Assign a Person"
+            value={values.assigned}
+            onChange={event => handleChange(event)}
+          /> */}
+          <div>
+    <div>Assigned To:</div>
+    <ExpansionPanel className="grey lighten-3 editModalRound">
+          <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon/>}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          className="pink accent-3 editModalRound"
+          >
+              <div className="modalButtonText">
+                  People In The Group!
+              </div>
+          </ExpansionPanelSummary>  
+          <ExpansionPanelDetails>
+              <div>
+        {/* Here is the loop the get list of user in a group broken code Michael*/}
+                {/* {user.map(group => (
+                <ProfilePhotoTask/>
+                  ))} */}
+                  <ProfilePhotoTask/>
+
+                <input
+                style= {{marginTop: "19px"}}
+                type="text"
+                name="assigned"
+                placeholder="Assign a Person"
+                value={values.assigned}
+                onChange={event => handleChange(event)}
+              />
+              </div>
+          </ExpansionPanelDetails>
+    </ExpansionPanel>
+</div>
+      <button 
+      type="submit" 
+      value="submit" 
+      className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical submit-button">
+        {/* <input type="submit" value="submit" /> */}
+        Submit
+        </button>
+        {errors.values && <p>{errors.values}</p>}
+      </form>
+    </div>
+  </div>
   )
 }
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
+//  <div>
+//     <div>Assigned To:</div>
+//     <ExpansionPanel className="grey lighten-3 editModalRound">
+//           <ExpansionPanelSummary
+//           expandIcon={<ExpandMoreIcon/>}
+//           aria-controls="panel1a-content"
+//           id="panel1a-header"
+//           className="pink accent-3 editModalRound"
+//           >
+//               <div className="modalButtonText">
+//                   DropDown
+//               </div>
+//           </ExpansionPanelSummary>  
+//           <ExpansionPanelDetails>
+//               <div>
+//                 <ProfilePhotoTask/>
+//                 <input
+//                 type="text"
+//                 name="assigned"
+//                 placeholder="Assign a Person"
+//                 value={values.assigned}
+//                 onChange={event => handleChange(event)}
+//               />
+//               </div>
+//           </ExpansionPanelDetails>
+//     </ExpansionPanel>
+// </div> 

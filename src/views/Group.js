@@ -1,13 +1,14 @@
-import React, { useState, useContext, useEffect, Fragment } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import GetTasks from '../components/Tasks/GetTasks'
 import InviteGenerator from '../components/Invites/InviteGenerator'
-import IMAGE1 from '../assets/group-page/png/IMAGE.png'
+import { FirebaseContext } from '../firebase'
+import ProfilePhoto from '../components/Groups/GroupAvatars'
+// import IMAGE1 from '../assets/group-page/png/IMAGE.png'
 import IMAGE2 from '../assets/group-page/png/IMAGE-1.png'
 import IMAGE3 from '../assets/group-page/png/IMAGE-2.png'
 import IMAGE4 from '../assets/group-page/png/IMAGE-3.png'
-import { FirebaseContext } from '../firebase'
-import Modal from '@material-ui/core/Modal';
+// import Modal from '@material-ui/core/Modal';
 // import Date from '../components/Tasks/Date'
 
 
@@ -16,7 +17,7 @@ const Group = ({ match }) => {
   const user = JSON.parse(localStorage.getItem('user'))
   const { firebase } = useContext(FirebaseContext)
   const [groupName, setGroupName] = useState('')
-  const [selectedDate, handleDateChange] = useState(new Date());
+  // const [selectedDate, handleDateChange] = useState(new Date());
 // console.log(firebase)
 
   const groupRef = firebase.firestore
@@ -28,12 +29,12 @@ const Group = ({ match }) => {
   }, [groupName, groupRef])
 
   return (
-    <>
+    <div className="Dashboard">
       <div className="topHeaderAndButtons">
-        <h1 className="groupsHeader">Daily Chores</h1>
+        <h1 className="groupsHeader">{groupName}</h1>
         <div className="imageButtons">
           <Link to={`/groups/${match.params.groupId}/add-task`}>
-            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 ">
+            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
               <span className="material-icons iconLinks iconOne">
                 access_time
               </span>
@@ -42,7 +43,7 @@ const Group = ({ match }) => {
           </Link>
 
           <Link to={`/dashboard`}>
-            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3">
+            <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
               <span className="material-icons iconLinks iconOne">
                 dashboard
               </span>
@@ -67,18 +68,21 @@ const Group = ({ match }) => {
           <div className="membersCardsView">
             <div>
               <div className="invitedMembers">
-                <img src={IMAGE1} alt="a users profile" />
+                <ProfilePhoto/>
               </div>
-              <div className="invitedMembers">
-                <img src={IMAGE2} alt="a users profile" />
+              <div className="invitedMembers">      
+              <img src={IMAGE2} alt="a users profile" />       
+                {/* <ProfilePhoto/> */}
               </div>
             </div>
             <div>
               <div className="invitedMembers">
-                <img src={IMAGE3} alt="a users profile" />
+              <img src={IMAGE3} alt="a users profile" />
+                {/* <ProfilePhoto/>                */}
               </div>
               <div className="invitedMembers">
-                <img src={IMAGE4} alt="a users profile" />
+              <img src={IMAGE4} alt="a users profile" />
+                {/* <ProfilePhoto/>                */}
               </div>
             </div>
           </div>
@@ -100,7 +104,7 @@ const Group = ({ match }) => {
       </div>
 
     
-    </>
+    </div>
   )
 }
 

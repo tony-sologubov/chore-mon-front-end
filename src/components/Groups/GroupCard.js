@@ -60,11 +60,13 @@ const GroupCard = ({ groupName, id }) => {
         value={editedName}
         onChange={e => setEditedName(e.target.value)}
       />
+
       <input 
       className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical" 
       type="submit" 
       value="submit" 
       />
+
     </form>
   )
 }
