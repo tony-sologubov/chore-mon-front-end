@@ -55,12 +55,14 @@ export default function AddTask({ history, match }) {
   }
 
   return (
-
-    <form onSubmit={handleSubmit}>
+    <div className="taskBackGround">
+<div className="addTaskDiv">
+    <h2>New Task</h2>
+    <form onSubmit={handleSubmit} className="addTaskForm">
       <input
         type="text"
         name="chore"
-        placeholder="add a chore"
+        placeholder="Add a Task"
         value={values.chore}
         onChange={event => handleChange(event)}
       />
@@ -68,11 +70,11 @@ export default function AddTask({ history, match }) {
       <input
         type="text"
         name="assigned"
-        placeholder="add a assigned person"
+        placeholder="Assign a Person"
         value={values.assigned}
         onChange={event => handleChange(event)}
       />
-      <label htmlFor="date">Due Date:</label>
+      <label htmlFor="date" className="dueDateText">Due Date:</label>
       <input
         type="date"
         id="date"
@@ -81,10 +83,16 @@ export default function AddTask({ history, match }) {
         value={values.date}
         onChange={event => handleChange(event)}
       />
-
-      <input type="submit" value="submit" />
-      {errors.values && <p>{errors.values}</p>}
-    </form>
-  
+      <button 
+      type="submit" 
+      value="submit" 
+      className="waves-effect waves-light btn-large pink accent-3">
+        {/* <input type="submit" value="submit" /> */}
+        Submit
+        </button>
+        {errors.values && <p>{errors.values}</p>}
+      </form>
+    </div>
+  </div>
   )
 }

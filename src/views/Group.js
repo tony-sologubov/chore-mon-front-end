@@ -1,13 +1,10 @@
-import React, { useState, useContext, useEffect, Fragment } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import GetTasks from '../components/Tasks/GetTasks'
 import InviteGenerator from '../components/Invites/InviteGenerator'
-import IMAGE1 from '../assets/group-page/png/IMAGE.png'
-import IMAGE2 from '../assets/group-page/png/IMAGE-1.png'
-import IMAGE3 from '../assets/group-page/png/IMAGE-2.png'
-import IMAGE4 from '../assets/group-page/png/IMAGE-3.png'
 import { FirebaseContext } from '../firebase'
-import Modal from '@material-ui/core/Modal';
+import ProfilePhoto from '../components/Groups/GroupAvatars'
+// import Modal from '@material-ui/core/Modal';
 // import Date from '../components/Tasks/Date'
 
 
@@ -16,7 +13,7 @@ const Group = ({ match }) => {
   const user = JSON.parse(localStorage.getItem('user'))
   const { firebase } = useContext(FirebaseContext)
   const [groupName, setGroupName] = useState('')
-  const [selectedDate, handleDateChange] = useState(new Date());
+  // const [selectedDate, handleDateChange] = useState(new Date());
 // console.log(firebase)
 
   const groupRef = firebase.firestore
@@ -67,18 +64,18 @@ const Group = ({ match }) => {
           <div className="membersCardsView">
             <div>
               <div className="invitedMembers">
-                <img src={IMAGE1} alt="a users profile" />
+                <ProfilePhoto/>
               </div>
-              <div className="invitedMembers">
-                <img src={IMAGE2} alt="a users profile" />
+              <div className="invitedMembers">             
+                <ProfilePhoto/>
               </div>
             </div>
             <div>
               <div className="invitedMembers">
-                <img src={IMAGE3} alt="a users profile" />
+                <ProfilePhoto/>               
               </div>
               <div className="invitedMembers">
-                <img src={IMAGE4} alt="a users profile" />
+                <ProfilePhoto/>               
               </div>
             </div>
           </div>
