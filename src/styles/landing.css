@@ -55,3 +55,146 @@
   fill: rgb(0, 0, 0);
   stroke: black;
 }
+
+.section-2 {
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+}
+
+.section-3 {
+  height: 100vh;
+  background: white;
+  color: magenta;
+}
+
+.section-2 .collection,
+.section-2 .collection li {
+  border: none;
+  border-bottom: none !important;
+}
+
+.collection-item h3 {
+  line-height: 2;
+  display: flex;
+  align-items: center;
+  color: var(--accentpink);
+}
+
+.sec-2-top {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.features {
+  width: 60%;
+}
+
+.collection-header {
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.s2-bottom {
+  text-align: center;
+}
+
+.section-3 {
+  background: var(--accentpink);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  height: 100vh;
+}
+
+.section-3 h1 {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  justify-self: baseline;
+}
+
+.subsection-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 90%;
+  background: white;
+  width: 100%;
+}
+
+.panels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: white;
+  width: 100%;
+}
+
+.subsection-3 .panels div,
+.card-panel {
+  width: 25%;
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  height: 85%;
+  margin: 1rem;
+  text-align: center;
+  color: rgb(145, 145, 145);
+}
+
+.subsection-3 .panels div,
+.card-panel button {
+  border-radius: 0.5rem;
+}
+
+.subsection-3 .panels div,
+.card-panel button:hover {
+  border-radius: 0.5rem;
+}
+.subsection-3 .panels .card-panel:nth-child(2) {
+  background: url("../assets/landing-page/background-pricing.jpeg");
+
+  background-color: var(--accentpink);
+  color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.subsection-3 .panels .card-panel:nth-child(2) button {
+  color: var(--accentpink);
+}
+
+.subsection-3 .panels .card-panel:nth-child(2) button:hover {
+  color: white;
+}
+
+.subsection-3 .panels ul {
+  text-align: center;
+  border: none;
+}
+
+.subsection-3 .panels .collection-item {
+  background: transparent;
+}
+.subsection-3 .panels h3 {
+  font-size: 1.2rem;
+}
+
+#sup {
+  vertical-align: super;
+}
+
+#sub {
+  font-size: 1rem;
+}
+
+.si {
+  margin: 0.2rem;
+}
