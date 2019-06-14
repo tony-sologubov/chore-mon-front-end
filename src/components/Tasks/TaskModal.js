@@ -7,6 +7,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ProfilePhotoTask from './TaskAvatar'
 
 const  TaskModal = ({ taskId, chore, assigned, date, isDone, groupId }) => {
 const { firebase, user } = useContext(FirebaseContext)
@@ -14,9 +15,10 @@ const [editing, setEditing] = useState(false)
 const [editedChore, setEditedChore] = useState(chore)
 const [editedAssigned, setEditedAssigned] = useState(assigned)
 const [editedDate, setEditedDate] = useState(date)
+// const [userName, setUserName] = useState(user)
 // const [editedIsDone, setEditedIsDone] = useState(isDone)
 const [open, setOpen] = React.useState(false);
-
+// const user = JSON.parse(localStorage.getItem('user')).displayName.match(/[^\s,.'"!?]+/)[0];
 
 const handleOpen = () => {
 setOpen(true);
@@ -107,6 +109,7 @@ return !editing ? (
                       </ExpansionPanelDetails>
                   </ExpansionPanel>
                 </div>
+
                 <div>
                   <div>Assigned To:</div>
                   <ExpansionPanel className="grey lighten-3 editModalRound">
@@ -122,16 +125,23 @@ return !editing ? (
                       </ExpansionPanelSummary>  
                         <ExpansionPanelDetails>
                           <div>
+        {/* Here is the loop the get list of user in a group broken code Michael*/}
+                {/* {user.map(group => (
+                <ProfilePhotoTask/>
+                  ))} */}
+                            <ProfilePhotoTask/>
                               <input
                                 type="text"
                                 placeholder={assigned}
                                 value={editedAssigned}
                                 onChange={e => setEditedAssigned(e.target.value)}
+                                
                               />
                           </div>
                         </ExpansionPanelDetails>
                   </ExpansionPanel>
-                  </div>
+                </div>
+
                 </div>
                   <span className="bottomModalButtons">
                     <input type="submit" value="SUBMIT" />
