@@ -6,7 +6,7 @@ const InProgress = () => {
     <div style={{ textAlign: "center" }}>
       <h1 style={{ color: "pink" }}>We're Actually Not Sorry</h1>
 
-      <img src={logo} alt="monkey" />
+      <img src={logo} alt="monkey" style={{ maxHeight: "75vh"}} />
       <h3>
         One of our developers needs a nap and the other one crashed our program.
         We will get around to this page when we have time. If you don't like it,
