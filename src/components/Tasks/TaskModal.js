@@ -129,7 +129,7 @@ return !editing ? (
                 {/* {user.map(group => (
                 <ProfilePhotoTask/>
                   ))} */}
-                            <ProfilePhotoTask/>
+                            {/* <ProfilePhotoTask/> */}
                               <input
                                 type="text"
                                 placeholder={assigned}
