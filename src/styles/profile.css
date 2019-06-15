@@ -1,19 +1,24 @@
 .profileContainer {
   margin: 0 auto;
   width: 100%;
+  height: 100vh;
+
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%23f2a81d' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  color: rgb(31, 31, 31);
 }
 .profileBtn {
   display: flex;
   justify-content: center;
 }
 .connectBtn {
-  background: black;
+  background: rgb(31, 31, 31);
   color: white;
-  padding: 15px 70px;
-  font-weight: bold;
-  font-size: 1.4rem;
-  margin-top: 25px;
-  border-radius: 2rem;
+  padding: 1rem 2rem;
+
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
 }
 
 .profileLocation {
@@ -23,34 +28,60 @@
 
 .profileName {
   text-align: center;
+  font-size: 3rem;
 }
 
 .profilePhoto {
   margin: 0 auto;
   display: block;
-  width: 350px;
+  width: 20%;
   height: auto;
-  margin-top: 70px;
-  bottom: 25;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 50%;
   border-radius: 10px;
   filter: drop-shadow(10px 10px 30px #333);
-
+  z-index: 1;
 }
 
 .socialLinks {
   display: flex;
-  justify-content: space-evenly;
-  margin: 0 auto;
-  width: 26%;
+  justify-content: center;
+  margin: 1rem auto;
+  width: 80%;
   margin-top: 25px;
+}
+
+.socialLinks svg {
+  margin: 0.5rem;
+  font-size: 3rem;
 }
 
 .profileHeader {
   width: 100%;
   margin-top: 0;
-  height: 325px;
+  height: 30vh;
 }
 
-.bannerImg {
-  height: 75px;
+.coverPhoto {
+  background: url("https://source.unsplash.com/random");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.lower-block {
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 55%;
+}
+
+.header {
+  height: 40vh;
 }

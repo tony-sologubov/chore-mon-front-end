@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import useFormValidation from '../Auth/useFormValidation'
 import FirebaseContext from '../../firebase/context'
+import '../../styles/addgroups.css'
 
 const initialState = {
   groupName: ''
@@ -45,16 +46,25 @@ export default function AddGroup({ history }) {
     }
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="groupBackGround">
+<div className="addGroupDiv">
+    <h2>New Group</h2>
+    <form onSubmit={handleSubmit} className="addGroupForm">
       <input
         type="text"
         name="groupName"
-        placeholder="add a group name"
+        placeholder="Add a Group"
         value={values.groupName}
         onChange={event => handleChange(event)}
       />
-      <button type="submit">Submit</button>
+      <button type="submit" 
+      value="submit" 
+      className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
+      Submit
+      </button>
       {errors.groupName && <p>{errors.groupName}</p>}
     </form>
+    </div>
+    </div>
   )
 }

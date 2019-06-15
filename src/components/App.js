@@ -16,6 +16,7 @@ import Group from '../views/Group'
 import AddTask from './Tasks/AddTask'
 import MyTasks from '../views/MyTasks'
 import Profile from '../views/Profile'
+import Settings from '../views/Settings'
 
 const RouteContainer = posed.div({
   enter: { opacity: 1, delay: 300 },
@@ -42,6 +43,7 @@ const App = () => {
                     <Route path="/404" component={InProgress} />
                     <Route exact path="/groups/:groupId" component={Group} />
                     <Route path="/profile" component={Profile} />
+                    <Route path="/settings" component={Settings} />
                     <Route
                       exact
                       path="/groups/:groupId/add-task"

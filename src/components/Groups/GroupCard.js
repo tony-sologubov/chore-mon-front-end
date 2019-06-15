@@ -38,18 +38,24 @@ const GroupCard = ({ groupName, id }) => {
       <Link to={`groups/${group.id}`}>
         <ComplexButton groupName={groupName} />
       </Link>
-      <button onClick={deleteGroup}>DELETE</button>
-      <button onClick={toggleEdit}>EDIT</button>
+     
     </div>
   ) : (
     <form onSubmit={handleEditedNameSubmit}>
       <input
+      
         type="text"
         placeholder={groupName}
         value={editedName}
         onChange={e => setEditedName(e.target.value)}
       />
-      <input type="submit" value="submit" />
+
+      <input 
+      className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical" 
+      type="submit" 
+      value="submit" 
+      />
+
     </form>
   )
 }

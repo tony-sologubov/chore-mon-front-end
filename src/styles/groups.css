@@ -9,7 +9,10 @@
 .topHeaderAndButtons{
     display: flex;
     justify-content: space-between;
+    min-height: 15%;
+    max-height: 50%;
 }
+
 .rightBottomView{
     margin-right: 8%;
 }
@@ -37,6 +40,7 @@ justify-content: center;
 
 .threeButtonsOne{
     height: 100%;
+    border-radius: 0.5rem;
 }
 
 .iconLinks{
@@ -46,4 +50,8 @@ justify-content: center;
 
 .houseText{
     text-align: center;
+}
+
+.inviteButtonSpace{
+    margin:5%;
 }
