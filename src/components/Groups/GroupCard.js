@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom'
 import { ComplexButton } from '../Common'
 import FirebaseContext from '../../firebase/context'
 
-const GroupCard = ({ groupName, id }) => {
+const GroupCard = ({ group }) => {
   const { firebase, user } = useContext(FirebaseContext)
   const [editedName, setEditedName] = useState('')
   const [editing, setEditing] = useState(false)
 
-  const group = firebase.firestore.collection('groups').doc(id)
+  // const group = firebase.firestore.collection('groups').doc(id)
+
+  console.log(group)
 
   async function handleEditedNameSubmit(e) {
     e.preventDefault()
     firebase.firestore
       .collection(`users/${user.uid}/groups`)
       .doc(group.id)
-      .update({ groupName: editedName })
+      .update({ groupName: editedName})
   }
 
   async function deleteGroup() {
@@ -36,7 +38,7 @@ const GroupCard = ({ groupName, id }) => {
   return !editing ? (
     <div className="group-card">
       <Link to={`groups/${group.id}`}>
-        <ComplexButton groupName={groupName} />
+        <ComplexButton groupName={group.name} />
       </Link>
      
     </div>
@@ -45,7 +47,7 @@ const GroupCard = ({ groupName, id }) => {
       <input
       
         type="text"
-        placeholder={groupName}
+        placeholder={group.name}
         value={editedName}
         onChange={e => setEditedName(e.target.value)}
       />
