@@ -33,7 +33,7 @@ const GroupCard = ({ group }) => {
 
   function toggleEdit() {
     setEditing(true)
-  }
+  } 
 
   return !editing ? (
     <div className="group-card">
