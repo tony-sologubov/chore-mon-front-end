@@ -8,9 +8,6 @@ const GroupCard = ({ group }) => {
   const [editedName, setEditedName] = useState('')
   const [editing, setEditing] = useState(false)
 
-  // const group = firebase.firestore.collection('groups').doc(id)
-
-  console.log(group)
 
   async function handleEditedNameSubmit(e) {
     e.preventDefault()
@@ -33,29 +30,29 @@ const GroupCard = ({ group }) => {
 
   function toggleEdit() {
     setEditing(true)
-  } 
+  }
 
   return !editing ? (
     <div className="group-card">
       <Link to={`groups/${group.id}`}>
-        <ComplexButton groupName={group.name} />
+        <ComplexButton group={group} />
       </Link>
-     
+
     </div>
   ) : (
     <form onSubmit={handleEditedNameSubmit}>
       <input
-      
+
         type="text"
         placeholder={group.name}
         value={editedName}
         onChange={e => setEditedName(e.target.value)}
       />
 
-      <input 
+      <input
       className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical" 
-      type="submit" 
-      value="submit" 
+      type="submit"
+      value="submit"
       />
 
     </form>
