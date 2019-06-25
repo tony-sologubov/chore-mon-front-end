@@ -9,6 +9,7 @@ const GroupCard = ({ group }) => {
   const [editing, setEditing] = useState(false)
 
 
+
   async function handleEditedNameSubmit(e) {
     e.preventDefault()
     firebase.firestore
@@ -34,15 +35,16 @@ const GroupCard = ({ group }) => {
 
   return !editing ? (
     <div className="group-card">
-      <Link to={`groups/${group.id}`}>
+      <Link 
+      to={{pathname: `groups/${group.id}`,
+      state: { group: {group} }
+      }}>
         <ComplexButton group={group} />
       </Link>
-
     </div>
   ) : (
     <form onSubmit={handleEditedNameSubmit}>
       <input
-
         type="text"
         placeholder={group.name}
         value={editedName}

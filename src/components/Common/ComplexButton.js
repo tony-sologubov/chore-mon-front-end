@@ -89,7 +89,6 @@ const useStyles = makeStyles(theme => ({
 const ComplexButton = ({ group }) => {
   const classes = useStyles()
 
-  console.log("Complex group:", group)
   const image = {
     url: `https://source.unsplash.com/random/1600x900/?${group.name.match(
       /[^\s,.'"!?&\d]+/

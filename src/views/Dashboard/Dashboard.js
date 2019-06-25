@@ -25,7 +25,6 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.fetchGroups();
-
   }
 
   fetchGroups = () => {
@@ -39,6 +38,7 @@ class Dashboard extends Component {
         })
       ))
   }
+
 
   render () {
     const { history }= this.props;
@@ -59,7 +59,7 @@ class Dashboard extends Component {
       <div className="section-ctr">
         <Sidebar className="sidebar" />
         <div className="cards">
-          <GetGroups groups={this.state.groups} className="cards" />
+          <GetGroups groups={this.state.groups} fetchUsers={this.fetchUsers} className="cards" />
         </div>
       </div>
 
