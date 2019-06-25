@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import GetGroups from '../../components/Groups/GetGroups.js'
 import Sidebar from './Sidebar'
 import { DashPhoto } from '../../components/Common'
@@ -8,10 +8,43 @@ import { ReactComponent as HomeIcon } from '../../assets/dashboard/icons/home.sv
 import { ReactComponent as ListIcon } from '../../assets/dashboard/icons/list.svg'
 import { ReactComponent as CalendarIcon } from '../../assets/dashboard/icons/calendar.svg'
 import { ReactComponent as SettingsIcon } from '../../assets/dashboard/icons/settings.svg'
+import axios from 'axios'
 
-function Dashboard({ history }) {
-  return (
-    <div className="Dashboard">
+const groupUrl = "http://localhost:9000/api/group/"
+const groupMembersUrl = "http://localhost:9000/api/groupmembers/"
+
+class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      groups: [],
+      tasks: [],
+      members: []
+    };
+  }
+
+  componentDidMount() {
+    this.fetchGroups();
+  }
+
+  fetchGroups = () => {
+      axios
+      .get(`${groupMembersUrl}/user/4`)
+      .then(memberships => memberships.data.data.forEach(groupMembership =>
+        axios
+        .get(`${groupUrl}/${groupMembership.groupId}`)
+        .then(group => {
+          this.setState({ groups: [...this.state.groups, group.data.data[0]]})
+        })
+      ))
+  }
+
+
+  render () {
+    const { history }= this.props;
+
+    return (
+      <div className="Dashboard">
       <div className="dash-header ">
         <DashPhoto />
         <h1>
@@ -26,7 +59,7 @@ function Dashboard({ history }) {
       <div className="section-ctr">
         <Sidebar className="sidebar" />
         <div className="cards">
-          <GetGroups className="cards" />
+          <GetGroups groups={this.state.groups} fetchUsers={this.fetchUsers} className="cards" />
         </div>
       </div>
 
@@ -60,7 +93,7 @@ function Dashboard({ history }) {
             onClick={() => {
               history.push('/404')
             }}
-          >
+            >
             PROFILE
           </p>
         </div>
@@ -71,13 +104,13 @@ function Dashboard({ history }) {
             onClick={() => {
               history.push('/')
             }}
-          />
+            />
           <p
             className=" hvr-push  "
             onClick={() => {
               history.push('/')
             }}
-          >
+            >
             HOME
           </p>
         </div>
@@ -88,7 +121,7 @@ function Dashboard({ history }) {
             onClick={() => {
               history.push(`/mytasks/${JSON.parse(localStorage.getItem("user")).uid}`)
             }}
-          />
+            />
           <p
             className=" hvr-push  "
             onClick={() => {
@@ -122,19 +155,20 @@ function Dashboard({ history }) {
             onClick={() => {
               history.push('/settings')
             }}
-          />
+            />
           <p
             className=" hvr-push  "
             onClick={() => {
               history.push('/settings')
             }}
-          >
+            >
             SETTINGS
           </p>
         </div>
       </div>
     </div>
   )
+}
 }
 
 export default Dashboard
