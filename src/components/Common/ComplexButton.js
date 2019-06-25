@@ -86,14 +86,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ComplexButton = props => {
+const ComplexButton = ({ group }) => {
   const classes = useStyles()
 
   const image = {
-    url: `https://source.unsplash.com/random/1600x900/?${props.groupName.match(
+    url: `https://source.unsplash.com/random/1600x900/?${group.name.match(
       /[^\s,.'"!?&\d]+/
     )}`,
-    title: props.groupName,
+    title: group.name,
     width: '100%'
   }
   return (

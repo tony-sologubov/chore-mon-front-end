@@ -13,18 +13,17 @@ const useStyles = makeStyles({
       margin: '1.3rem'
     }
   })
-  
-  function ProfilePhoto() {
+
+  function ProfilePhoto({profilePicture}) {
     const classes = useStyles()
-  
+
     return (
       <Avatar
         alt="photo of user"
-        src={JSON.parse(localStorage.getItem('user')).photoURL}
+        src={profilePicture}
         className={classes.bigAvatar}
       />
     )
   }
-  
+
   export default ProfilePhoto
-  
