@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { uiConfig } from '../../firebase/uiconfig';
+import sendToDB from './sendToDB';
 
 class SocialLogins extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class SocialLogins extends Component {
         </div>
       );
     }
+    sendToDB();
     return <div>{this.props.history.push('/dashboard')}</div>;
   }
 }
