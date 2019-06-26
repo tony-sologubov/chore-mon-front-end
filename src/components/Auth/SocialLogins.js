@@ -1,47 +1,37 @@
-import React, { useContext } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import FirebaseContext from '../../firebase/context';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase';
+import { uiConfig } from '../../firebase/uiconfig';
 
-function SocialLogins({ history }) {
-  const { firebase } = useContext(FirebaseContext);
-
-  async function LoginWithGoogle() {
-    try {
-      await firebase.auth.signInWithPopup(firebase.googleProvider);
-    } catch (err) {
-      console.error({ message: err.message });
-    } finally {
-      history.push('/dashboard');
-    }
+class SocialLogins extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSignedIn: false
+    };
   }
 
-  async function LoginWithFacebook() {
-    try {
-      await firebase.auth.signInWithPopup(firebase.facebookProvider);
-    } catch (err) {
-      console.error({ message: err.message });
-    } finally {
-      history.push('/dashboard');
-    }
+  componentDidMount() {
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isSignedIn: !!user });
+    });
   }
 
-  async function LoginWithTwitter() {
-    try {
-      await firebase.auth.signInWithPopup(firebase.twitterProvider);
-    } catch (err) {
-      console.error({ message: err.message });
-    } finally {
-      history.push('/dashboard');
-    }
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
   }
 
-  return (
-    <div>
-      <button onClick={LoginWithGoogle}>Google</button>
-      <button onClick={LoginWithFacebook}>Facebook</button>
-      <button onClick={LoginWithTwitter}>Twitter</button>{' '}
-    </div>
-  );
+  render() {
+    if (!this.state.isSignedIn) {
+      return (
+        <div>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        </div>
+      );
+    }
+    return <div>{this.props.history.push('/dashboard')}</div>;
+  }
 }
 
 export default withRouter(SocialLogins);
