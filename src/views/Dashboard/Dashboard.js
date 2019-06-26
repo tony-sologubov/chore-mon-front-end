@@ -12,6 +12,9 @@ import axios from 'axios';
 
 const groupUrl = 'http://localhost:9000/api/group/';
 const groupMembersUrl = 'http://localhost:9000/api/groupmembers/';
+const fbUser = JSON.parse(localStorage.getItem('user'))
+// firebaseui::rememberedAccounts
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -19,16 +22,37 @@ class Dashboard extends Component {
     this.state = {
       groups: [],
       tasks: [],
-      members: []
+      members: [],
+      user: ""
     };
   }
 
+
   componentDidMount() {
-    this.fetchGroups();
+    console.log("firing")
+    this.setHerokuUser()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.user != prevState.user) {
+      this.fetchGroups()
+    }
+  }
+
+  setHerokuUser() {
+    axios.get('http://localhost:9000/api/users/').then(members => { 
+      members.data.forEach(member => {
+        console.log(member)
+        console.log(fbUser)
+        if (member.uid == fbUser.uid) {
+          this.setState({ user: member })
+        }
+      })
+    })
+  };
+
   fetchGroups = () => {
-    axios.get(`${groupMembersUrl}/user/4`).then(memberships =>
+    axios.get(`${groupMembersUrl}user/${this.state.user.id}`).then(memberships =>
       memberships.data.data.forEach(groupMembership =>
         axios.get(`${groupUrl}/${groupMembership.groupId}`).then(group => {
           this.setState({ groups: [...this.state.groups, group.data.data[0]] });
