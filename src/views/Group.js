@@ -27,7 +27,7 @@ class Group extends Component  {
       isModalOpen: false
     };
   }
-
+  
   componentDidMount() {
     this.fetchMembers();
     console.log(this.props) 
@@ -38,30 +38,45 @@ class Group extends Component  {
     // console.log(this.props.state.groups)
     // console.log(this.props.state.groups.groups)
   }
-//   const user = JSON.parse(localStorage.getItem('user'))
-//   const { firebase } = useContext(FirebaseContext)
-//   const [groupName, setGroupName] = useState('')
-//   const [editedName, setEditedName] = useState('')
-//   const [editing, setEditing] = useState(false)
+  //   const user = JSON.parse(localStorage.getItem('user'))
+  //   const { firebase } = useContext(FirebaseContext)
+  //   const [groupName, setGroupName] = useState('')
+  //   const [editedName, setEditedName] = useState('')
+  //   const [editing, setEditing] = useState(false)
   // const [isModalOpen, toggleModal] = useState(false);
-//   // const [selectedDate, handleDateChange] = useState(new Date());
-// // console.log(firebase)
-
-// console.log( props.location.state )
-// console.log( props.location.state.group )
-// console.log( props.location.state.group.group )
-
-fetchMembers = () => {
-  console.log(group)
-  console.log("RUNNING")
-  axios
-  .get(`${groupMembersUrl}/group/${group.id}`)
-  .then(groupMems => groupMems.data.forEach(data =>
+  //   // const [selectedDate, handleDateChange] = useState(new Date());
+  // // console.log(firebase)
+  
+  // console.log( props.location.state )
+  // console.log( props.location.state.group )
+  // console.log( props.location.state.group.group )
+  
+  fetchMembers = () => {
+    console.log(group)
+    console.log("RUNNING")
     axios
-    .get(`${usersUrl}/${data.userId}`)
-    .then(user => this.setState({ members: [...this.state.members, user.data.data[0]]}))
-    // console.log(data)
-    ))
+    .get(`${groupMembersUrl}/group/${group.id}`)
+    .then(groupMems => groupMems.data.forEach(data =>
+      axios
+      .get(`${usersUrl}/${data.userId}`)
+      .then(user => this.setState({ members: [...this.state.members, user.data.data[0]]}))
+      // console.log(data)
+      ))
+    }
+
+
+    deleteGroup = () => {
+      const id = this.props.match.params.id
+      console.log('DELETING')
+      axios
+      .delete(`http://localhost:9000/api/group/${group.id}`)
+      .then(response => {
+        console.log('DELETE RESPONSE: ', response)
+        this.setState({ group: response.data })
+      })
+      .catch(err => {console.log(err)})
+  
+  
   }
   
   toggleModal = () => {
@@ -139,8 +154,8 @@ fetchMembers = () => {
           <Link to={`/dashboard`}>
             <button 
             className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical" 
-            // onClick={deleteGroup}>
-            >
+             onClick={this.deleteGroup}>
+            DELETE
               <span className="iconLinks">Delete List</span>
             </button>
           </Link>
