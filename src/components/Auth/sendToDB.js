@@ -1,13 +1,14 @@
 import firebase from '../../firebase/firebase.js';
 import axios from 'axios';
-export const sendToDB = async () => {
+
+const sendToDB = async () => {
   const currentUser = await firebase.auth.currentUser.toJSON();
   const { displayName, email, uid, photoURL, phoneNumber } = currentUser;
   const user = {
     name: displayName,
     email,
     uid,
-    profilePhoto: photoURL,
+    profilePicture: photoURL,
     phone: phoneNumber
   };
 
@@ -18,3 +19,5 @@ export const sendToDB = async () => {
 
   return await axios.post(url, user);
 };
+
+export default sendToDB;
