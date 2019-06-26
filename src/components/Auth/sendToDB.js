@@ -18,7 +18,7 @@ const sendToDB = async () => {
   const production = 'https://chore-monkey.herokuapp.com/api/users';
   process.env.NODE_ENV ? (url = development) : (url = production);
 
-  deleteUserFromDB();
+  // deleteUserFromDB();
 
   return await axios.post(url, user);
 };
