@@ -69,7 +69,7 @@ class Group extends Component  {
       const id = this.props.match.params.id
       console.log('DELETING')
       axios
-      .delete(`http://localhost:9000/api/group/${group.id}`)
+      .delete(`http://localhost:9000/api/group/${group.id}`, id)
       .then(response => {
         console.log('DELETE RESPONSE: ', response)
         this.setState({ group: response.data })
