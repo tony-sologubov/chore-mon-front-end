@@ -26,13 +26,16 @@ class Group extends Component  {
     this.state = {
       members: [],
       isModalOpen: false,
-      group: ''
+      group: '',
+      groupId: this.props.match.params.groupId
     };
   }
 
   componentDidMount() {
     console.log("Did Mount Firing");
+
     const {groupId} = this.props.match.params
+    console.log("GroupId:", groupId)
     this.fetchMembers(groupId);
     this.fetchGroup(groupId)
   }
@@ -152,7 +155,7 @@ class Group extends Component  {
             </button>
           </Link>
         <div className="imageButtons">
-          <Link to={ {pathname: `/groups/${group.id}/add-task`, state: { members: this.state.members }} }>
+          <Link to={ {pathname: `/groups/${this.state.groupId}/add-task`, state: { members: this.state.members }} }>
             <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
               <span className="material-icons iconLinks iconOne">
                 access_time
@@ -176,7 +179,7 @@ class Group extends Component  {
 
     <div className="bottomTableAndUsers">
       <div className="bottomLeftView">
-        <GetTasks groupId={4} groupName={group.name} />
+        <GetTasks groupId={this.state.groupId} groupName={group.name} />
       </div>
       <div className="rightBottomView">
 
