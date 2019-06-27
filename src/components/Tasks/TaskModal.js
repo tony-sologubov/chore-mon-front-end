@@ -47,9 +47,9 @@ setEditing(true);
 // setOpen(true);
 
 }
-console.log(toggleEdit, 'its firing part 1');
-console.log(handleOpen, 'its firing part 2');
-console.log(handleClose, 'its firing part 3');
+// console.log(toggleEdit, 'its firing part 1');
+// console.log(handleOpen, 'its firing part 2');
+// console.log(handleClose, 'its firing part 3');
 
 return !editing ? (
     <span onClick={toggleEdit}>

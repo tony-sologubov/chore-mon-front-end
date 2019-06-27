@@ -20,32 +20,52 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: '',
       groups: [],
       currentGroup: 0
     };
   }
 
-  fetchGroups = () => {
-    if (fbUser) {
-      console.log("FIRED")
-      if (this.state.user === "") {
-      axios.get('http://localhost:9000/api/users/').then(users => { 
-        users.data.forEach(user => {
-          if (user.uid == fbUser.uid) {
-            this.setState({ user: user })
-          }
-        })
-      })
-      }
-      axios.get(`${groupMembersUrl}/user/${this.state.user.id}`).then(memberships =>
-        memberships.data.data.forEach(groupMembership =>
-          axios.get(`${groupUrl}/${groupMembership.groupId}`).then(group => {
-            this.setState({ groups: [...this.state.groups, group.data.data[0]] });
-          })
-        )
-      );
+   componentDidMount() {
+     console.log(fbUser)
+     console.log(fbUser.uid)
+     this.fetchGroups()
+     console.log("State:\n", this.state)
+   }
+
+   fetchGroups = () => {
+     if (fbUser) {
+        axios.get(`http://localhost:9000/api/users/uidstring0`).then(user => { 
+          console.log("Fetched Groups")
+          console.log(user)
+          console.log(user.data.groups)
+          this.setState({groups: user.data.groups})
+     })
     }
-  };
+  }
+
+
+  // fetchGroups = () => {
+  //   if (fbUser) {
+  //     console.log("FIRED")
+  //     if (this.state.user === "") {
+  //     axios.get('http://localhost:9000/api/users/').then(users => { 
+  //       users.data.forEach(user => {
+  //         if (user.uid == fbUser.uid) {
+  //           this.setState({ user: user })
+  //         }
+  //       })
+  //     })
+  //     }
+  //     axios.get(`${groupMembersUrl}/user/${this.state.user.id}`).then(memberships =>
+  //       memberships.data.data.forEach(groupMembership =>
+  //         axios.get(`${groupUrl}/${groupMembership.groupId}`).then(group => {
+  //           this.setState({ groups: [...this.state.groups, group.data.data[0]] });
+  //         })
+  //       )
+  //     );
+  //   }
+  // };
 
   deleteGroup = () => {
     console.log('DELETING')
@@ -83,8 +103,8 @@ class Dashboard extends Component {
     return (
       <div className="Dashboard">
         <div className="dash-header ">
-          {JSON.parse(localStorage.getItem('user'))[0]
-            .photoUrl !== null ? (
+          {JSON.parse(localStorage.getItem('user'))
+            .photoURL !== null ? (
             <DashPhoto />
           ) : (
             <img
@@ -98,8 +118,8 @@ class Dashboard extends Component {
             Welcome Back,
             {' ' +
               JSON.parse(
-                localStorage.getItem('firebaseui::rememberedAccounts')
-              )[0].displayName.match(/[^\s,.'"!?]+/)[0]}
+                localStorage.getItem('user')
+              ).displayName.match(/[^\s,.'"!?]+/)[0]}
           </h1>
         </div>
 
@@ -107,7 +127,7 @@ class Dashboard extends Component {
           <Sidebar className="sidebar" />
           <div className="cards">
             <GetGroups
-              groups={this.props.groups}
+              groups={this.state.groups}
               fetchUsers={this.fetchUsers}
               className="cards"
             />
@@ -172,7 +192,7 @@ class Dashboard extends Component {
               onClick={() => {
                 history.push(
                   `/mytasks/${
-                    JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
+                    JSON.parse(localStorage.getItem('user'))
                       .uid
                   }`
                 );
@@ -183,7 +203,7 @@ class Dashboard extends Component {
               onClick={() => {
                 history.push(
                   `/mytasks/${
-                    JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
+                    JSON.parse(localStorage.getItem('user'))
                       .uid
                   }`
                 );

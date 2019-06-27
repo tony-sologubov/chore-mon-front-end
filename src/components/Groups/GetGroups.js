@@ -12,8 +12,7 @@ const groupMembersUrl = "http://localhost:9000/api/groupmembers/"
 
 
 const GetGroups = ({groups}) => {
-
-  if (groups[0]) {
+  if (groups) {
     return groups.map(group => (
       <GroupCard key={uuidv4()} group={group} id={group.id} />
       ))

@@ -15,24 +15,53 @@ import axios from 'axios'
 
 const usersUrl = "http://localhost:9000/api/users/"
 const groupMembersUrl = "http://localhost:9000/api/groupmembers/"
+const groupUrl = "http://localhost:9000/api/group/"
 var group = {}
+const user = JSON.parse(localStorage.getItem('user'))
+console.log("User:", user)
 
 class Group extends Component  {
   constructor(props) {
     super(props);
     this.state = {
-      isModalOpen: false
+      members: [],
+      isModalOpen: false,
+      group: ''
     };
   }
 
   componentDidMount() {
+    console.log("Did Mount Firing");
     const {groupId} = this.props.match.params
-    this.props.fetchMembers(groupId);
-    this.props.setCurrentGroup(groupId)
+    this.fetchMembers(groupId);
+    this.fetchGroup(groupId)
+  }
+
+  fetchMembers = (groupId) => {
+    let members = []
+    axios
+      .get(`${groupMembersUrl}group/${groupId}`)
+      .then(groupMems => groupMems.data.map(data =>
+        axios
+        .get(`${usersUrl}/${data.userId}`)
+        .then(user => {
+          members.push( user.data)
+          this.setState({members})
+        })
+      ))
+      .catch(error => console.log(error))
   }
 
 
-
+  fetchGroup = (groupId) => {
+       axios.get(`${groupUrl}/${groupId}`).then(group => { 
+         console.log("Fetched Groups")
+         console.log(group)
+         console.log(group.data)
+         console.log(group.data[0])
+         this.setState({groups: group.data[0]})
+    })
+ }
   // deleteGroup = () => {
   //   console.log('DELETING')
   //   axios
@@ -73,12 +102,16 @@ class Group extends Component  {
     console.log("match")
     console.log(match)
     console.log(this.props)
-    // console.log(this.props.location)
-    if (this.props.location.state.group) {
-      group = this.props.location.state.group.group || match.params.groupId
-
+    console.log(this.props.location)
+    if (this.props.location.state) {
+      console.log("1\n\n\n")
+      group = this.props.location.state.group.group
+    } else {
+      console.log("2\n\n\n")
+      group =  this.state.group
     }
-    // console.log("Group:", group)
+    console.log("State:\n", this.state)
+    // console.log("GroupId:", groupId)
     return (
       <div className="Dashboard">
       <div className="topHeaderAndButtons">
@@ -152,7 +185,7 @@ class Group extends Component  {
         </div>
 {/* Work on this for the Avatars, need to map the members */}
           <div className="membersCardsView">
-            {this.props.members.map(member =>
+            {this.state.members.map(member =>
             <div>
               <div className="invitedMembers">
                 <ProfilePhoto profilePicture={member.profilePicture}/>
