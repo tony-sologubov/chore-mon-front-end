@@ -19,8 +19,62 @@ const fbUser = JSON.parse(localStorage.getItem('user'))
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      groups: [],
+      currentGroup: 0
+    };
   }
 
+  fetchGroups = () => {
+    if (fbUser) {
+      console.log("FIRED")
+      if (this.state.user === "") {
+      axios.get('http://localhost:9000/api/users/').then(users => { 
+        users.data.forEach(user => {
+          if (user.uid == fbUser.uid) {
+            this.setState({ user: user })
+          }
+        })
+      })
+      }
+      axios.get(`${groupMembersUrl}/user/${this.state.user.id}`).then(memberships =>
+        memberships.data.data.forEach(groupMembership =>
+          axios.get(`${groupUrl}/${groupMembership.groupId}`).then(group => {
+            this.setState({ groups: [...this.state.groups, group.data.data[0]] });
+          })
+        )
+      );
+    }
+  };
+
+  deleteGroup = () => {
+    console.log('DELETING')
+    const groupId = this.state.currentGroup
+    axios
+    .delete(`http://localhost:9000/api/group/${groupId}`)
+    .then(response => {
+      this.setState({ group: response.data })
+      this.fetchGroups();
+    })
+    .catch(err => {console.log(err)})
+
+    axios
+    .get(`${groupMembersUrl}group/${groupId}`)
+    .then(groupMemberships => {
+      console.log(groupMemberships)
+      groupMemberships.data.forEach(entry => {
+        axios
+        .delete(`${groupMembersUrl}remove/${entry.id}`)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      })
+    })
+
+  }
 
 
   render() {
@@ -179,3 +233,30 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
+
+// NOTE: I'm keeping this just in case. If the backend gives us back the
+// group members like we want, this can safely be deleted
+// fetchMembers = (groupId) => {
+    
+  
+//   axios
+//     .get(`${groupMembersUrl}/group/${groupId}`)
+//     .then(groupMems => groupMems.data.forEach(data =>
+//       axios
+//       .get(`${usersUrl}/${data.userId}`)
+//       .then(user => {
+//         const arr = [1,2,3]
+//         (this.state.members.includes(user.data.data[0]))
+//         if (!this.state.members.includes(user.data.data[0])){
+//           this.setState({ members: [...this.state.members, user.data.data[0]]})
+//         }
+//       })
+//       .catch(error => console.log(error))
+//       ))
+//     .catch(error => console.log(error))
+//     }
+
+// setCurrentGroup = (id) => {
+//   console.log("Set Group Firing")
+//   this.setState({ currentGroup: id})
+// }
