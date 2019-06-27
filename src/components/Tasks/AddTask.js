@@ -21,6 +21,8 @@ class AddTask extends Component {
   
     handleSubmit = () => {
       console.log('this is submitting')
+      console.log(this.state)
+      console.log(this.state.assigned)
       axios
         .post(
           'http://localhost:9000/api/tasks/',
@@ -53,19 +55,18 @@ class AddTask extends Component {
         var index = this.state.assigned.indexOf(member)
         this.state.assigned.splice(index, 1)
         console.log("Member included: State")
-        console.log(this.state)
+        // console.log(this.state)
       } else {
         this.setState({ assigned: [...this.state.assigned, member] })
         console.log("Not Included Member: State")
-        console.log(this.state)
+        // console.log(this.state)
         }
       }
     // }
 
     render() {
-      console.log("Props")
-      console.log(this.props)
-      console.log(this.props.location.state.members)
+      console.log("State")
+      console.log(this.state)
       return(
         <div className="taskBackGround">
         <div className="addTaskDiv">
@@ -109,7 +110,7 @@ class AddTask extends Component {
                       <div className="modalButtonText">
                           People In The Group!
                       </div>
-                  </ExpansionPanelSummary>  
+                  </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
                       <div>
                 

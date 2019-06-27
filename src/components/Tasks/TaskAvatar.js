@@ -15,9 +15,8 @@ const useStyles = makeStyles({
     }
   })
   
-  function ProfilePhotoTask({ assigned , user, groupId}) {
+  function ProfilePhotoTask({ assigned , user, onClick}) {
     const classes = useStyles()
-    const [editedAssigned, setEditedAssigned] = useState(assigned)  
     // const id = JSON.parse(localStorage.getItem('user')).uid
     
     console.log("user")
@@ -25,7 +24,7 @@ const useStyles = makeStyles({
     console.log(user.profilePicture)
 
     return (
-      <div className="avatar-and-name">
+      <div className="avatar-and-name" onClick={onClick}>
         <Avatar
           alt="photo of user"
           src={user.profilePcture}
