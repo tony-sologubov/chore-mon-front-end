@@ -9,7 +9,12 @@ import { ReactComponent as ListIcon } from "../../assets/dashboard/icons/list.sv
 import { ReactComponent as CalendarIcon } from "../../assets/dashboard/icons/calendar.svg";
 import { ReactComponent as SettingsIcon } from "../../assets/dashboard/icons/settings.svg";
 import axios from "axios";
-
+const uid = JSON.parse(
+  localStorage.getItem("firebaseui::rememberedAccounts")[0].uid
+);
+const user = JSON.parse(
+  localStorage.getItem("firebaseui::rememberedAccounts")[0]
+);
 //
 const url = "https://chore-monkey.herokuapp.com/api/";
 class Dashboard extends Component {
@@ -26,7 +31,6 @@ class Dashboard extends Component {
   }
 
   fetch = () => {
-    const uid = JSON.parse(localStorage.getItem("user").uid);
     console.log(uid);
     axios
       .get(`${url}/user/${uid}`)
@@ -50,10 +54,7 @@ class Dashboard extends Component {
           <DashPhoto />
           <h1>
             Welcome Back,
-            {" " +
-              JSON.parse(localStorage.getItem("user")).displayName.match(
-                /[^\s,.'"!?]+/
-              )[0]}
+            {" " + user.displayName.match(/[^\s,.'"!?]+/)[0]}
           </h1>
         </div>
 
@@ -120,17 +121,13 @@ class Dashboard extends Component {
             <ListIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push(
-                  `/mytasks/${JSON.parse(localStorage.getItem("user")).uid}`
-                );
+                history.push(`/mytasks/${uid}`);
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push(
-                  `/mytasks/${JSON.parse(localStorage.getItem("user")).uid}`
-                );
+                history.push(`/mytasks/${uid}`);
               }}
             >
               MY TASKS
