@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from "../../firebase/firebase";
 import GroupList from "./GroupList";
 import Sidebar from "./Sidebar";
 import { DashPhoto } from "../../components/Common";
@@ -9,12 +10,17 @@ import { ReactComponent as ListIcon } from "../../assets/dashboard/icons/list.sv
 import { ReactComponent as CalendarIcon } from "../../assets/dashboard/icons/calendar.svg";
 import { ReactComponent as SettingsIcon } from "../../assets/dashboard/icons/settings.svg";
 import axios from "axios";
-const uid = JSON.parse(
-  localStorage.getItem("firebaseui::rememberedAccounts")[0].uid
-);
-const user = JSON.parse(
-  localStorage.getItem("firebaseui::rememberedAccounts")[0]
-);
+// const uid = JSON.parse(
+//   localStorage.getItem("firebaseui::rememberedAccounts")
+// )[0].uid;
+const uid = firebase.auth.currentUser.uid.toJSON();
+const user = firebase.auth.currentUser.toJSON();
+// const uid = firebase.auth.currentUser.uid();
+// const user = JSON.parse(
+//   localStorage.getItem("firebaseui::rememberedAccounts")
+// )[0];
+// const user = "hjhfjhf";
+//I hate you all.. I hope you read this, Ryan, and understand my rage lol
 //
 const url = "https://chore-monkey.herokuapp.com/api/";
 class Dashboard extends Component {
