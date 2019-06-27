@@ -1,5 +1,5 @@
 .login-bg {
-  background: url("../assets/login-page/login-wallpaper.jpg");
+  background: url('../assets/login-page/login-wallpaper.jpg');
   background-color: var(--bgcolor);
   height: 100vh;
   background-position: center;
@@ -22,10 +22,14 @@
 .logo {
   height: 30%;
   width: 30%;
-  background: url("../assets/landing-page/png/logo.png");
+  background: url('../assets/landing-page/png/logo.png');
   /* background: url("../assets/login-page/logo.png"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   margin: 0 auto;
+}
+
+.forgot-password {
+  text-align: center;
 }
