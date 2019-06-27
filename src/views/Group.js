@@ -152,7 +152,7 @@ class Group extends Component  {
             </button>
           </Link>
         <div className="imageButtons">
-          <Link to={ {pathname: `/groups/${group.id}/add-task`, state: { groupId: "group.id" }} }>
+          <Link to={ {pathname: `/groups/${group.id}/add-task`, state: { members: this.state.members }} }>
             <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
               <span className="material-icons iconLinks iconOne">
                 access_time

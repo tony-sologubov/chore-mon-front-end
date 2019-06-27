@@ -6,14 +6,16 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ProfilePhotoTask from './TaskAvatar'
 
+
 class AddTask extends Component {
   constructor(props){
     super(props);
     this.state = {
       chore:'',
-      assigned: '',
+      assigned: [],
       date: '',
       isDone: false,
+      members: this.props.location.state.members
     }
   }
   
@@ -38,13 +40,32 @@ class AddTask extends Component {
         })
       })
     }
+
     handleChange(event){
       this.setState({
         [event.target.name] : event.target.value
       })
     }
 
+    handleAssignClick(member) {
+      console.log("Handle Assign Firing")
+      if (this.state.assigned.includes(member)) {
+        var index = this.state.assigned.indexOf(member)
+        this.state.assigned.splice(index, 1)
+        console.log("Member included: State")
+        console.log(this.state)
+      } else {
+        this.setState({ assigned: [...this.state.assigned, member] })
+        console.log("Not Included Member: State")
+        console.log(this.state)
+        }
+      }
+    // }
+
     render() {
+      console.log("Props")
+      console.log(this.props)
+      console.log(this.props.location.state.members)
       return(
         <div className="taskBackGround">
         <div className="addTaskDiv">
@@ -91,11 +112,15 @@ class AddTask extends Component {
                   </ExpansionPanelSummary>  
                   <ExpansionPanelDetails>
                       <div>
-                {/* Here is the loop the get list of user in a group broken code Michael*/}
-                        {/* {user.map(group => (
-                        <ProfilePhotoTask/>
-                          ))} */}
-                          <ProfilePhotoTask/>
+                
+                      {this.state.members.map(member => (
+                        <div> 
+                          <ProfilePhotoTask 
+                            key={member.userId} 
+                            user={member}
+                            onClick={event => this.handleAssignClick(member)}/>
+                        </div>
+                        ))}
         
                         <input
                         style= {{marginTop: "19px"}}

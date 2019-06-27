@@ -19,12 +19,16 @@ const useStyles = makeStyles({
     const classes = useStyles()
     const [editedAssigned, setEditedAssigned] = useState(assigned)  
     // const id = JSON.parse(localStorage.getItem('user')).uid
-  
+    
+    console.log("user")
+    console.log(user)
+    console.log(user.profilePicture)
+
     return (
       <div className="avatar-and-name">
         <Avatar
           alt="photo of user"
-          src={JSON.parse(localStorage.getItem('user')).photoURL}
+          src={user.profilePcture}
           className={classes.Avatar}
         />
           <span className="user-name">
@@ -42,20 +46,3 @@ const useStyles = makeStyles({
   }
   
   export default ProfilePhotoTask
-//   <input
-//   type="text"
-//   name="assigned"
-//   placeholder="Assign a Person"
-//   value={values.assigned}
-//   onChange={event => handleChange(event)}
-// />
-
-//   <input
-//   type="text"
-//   placeholder={assigned}
-//   value={editedAssigned}
-//   onChange={e => setEditedAssigned(e.target.value)}
-// />
-
-// const  TaskModal = ({ assigned }) => {
-//   const [editedAssigned, setEditedAssigned] = useState(assigned)
