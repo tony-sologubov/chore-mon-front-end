@@ -25,15 +25,11 @@ class Dashboard extends Component {
 
   render() {
     const { history } = this.props;
-    console.log("State")
-    // console.log(this.state)
-    console.log("Props")
-    console.log(this.props)
 
     return (
       <div className="Dashboard">
         <div className="dash-header ">
-          {JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
+          {JSON.parse(localStorage.getItem('user'))[0]
             .photoUrl !== null ? (
             <DashPhoto />
           ) : (

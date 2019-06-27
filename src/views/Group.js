@@ -21,105 +21,64 @@ class Group extends Component  {
   constructor(props) {
     super(props);
     this.state = {
-      groups: [],
-      tasks: [],
-      members: [],
       isModalOpen: false
     };
   }
-  
+
   componentDidMount() {
-    this.fetchMembers();
-    console.log(this.props) 
-    console.log(this.props.location) 
-    console.log(this.props.location.state) 
-    console.log(this.props.location.state.group) 
-    console.log(this.props.location.state.group.group) 
-    // console.log(this.props.state.groups)
-    // console.log(this.props.state.groups.groups)
+    const {groupId} = this.props.match.params
+    this.props.fetchMembers(groupId);
+    this.props.setCurrentGroup(groupId)
   }
-  //   const user = JSON.parse(localStorage.getItem('user'))
-  //   const { firebase } = useContext(FirebaseContext)
-  //   const [groupName, setGroupName] = useState('')
-  //   const [editedName, setEditedName] = useState('')
-  //   const [editing, setEditing] = useState(false)
-  // const [isModalOpen, toggleModal] = useState(false);
-  //   // const [selectedDate, handleDateChange] = useState(new Date());
-  // // console.log(firebase)
-  
-  // console.log( props.location.state )
-  // console.log( props.location.state.group )
-  // console.log( props.location.state.group.group )
-  
-  fetchMembers = () => {
-    console.log(group)
-    console.log("RUNNING")
-    axios
-    .get(`${groupMembersUrl}/group/${group.id}`)
-    .then(groupMems => groupMems.data.forEach(data =>
-      axios
-      .get(`${usersUrl}/${data.userId}`)
-      .then(user => this.setState({ members: [...this.state.members, user.data.data[0]]}))
-      // console.log(data)
-      ))
-    }
 
 
-    deleteGroup = () => {
-      const id = this.props.match.params.id
-      console.log('DELETING')
-      axios
-      .delete(`http://localhost:9000/api/group/${group.id}`, id)
-      .then(response => {
-        console.log('DELETE RESPONSE: ', response)
-        this.setState({ group: response.data })
-      })
-      .catch(err => {console.log(err)})
-  
-  
-  }
-  
+
+  // deleteGroup = () => {
+  //   console.log('DELETING')
+  //   axios
+  //   .delete(`http://localhost:9000/api/group/${group.id}`)
+  //   .then(response => {
+  //     this.setState({ group: response.data })
+  //   })
+  //   .catch(err => {console.log(err)})
+
+  //   axios
+  //   .get(`${groupMembersUrl}group/${group.id}`)
+  //   .then(groupMemberships => {
+  //     console.log(groupMemberships)
+  //     groupMemberships.data.forEach(entry => {
+  //       axios
+  //       .delete(`${groupMembersUrl}remove/${entry.id}`)
+  //       .then(response => {
+  //         console.log(response)
+  //       })
+  //       .catch(error => {
+  //         console.log(error)
+  //       })
+
+  //     })
+  //   })
+  // }
+
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen})
   }
-// const group = firebase.firestore.collection('groups').doc(props.match.params.groupId)
-
-//   const groupRef = firebase.firestore
-//     .collection(`users/${user.uid}/groups`)
-//     .doc(props.match.params.groupId)
-
-//   useEffect(() => {
-//     groupRef.get().then(doc => setGroupName(doc.data().groupName))
-//   }, [groupName, groupRef])
-
-//   async function deleteGroup() {
-//     try {
-//       await firebase.firestore
-//         .collection(`users/${user.uid}/groups`)
-//         .doc(group.id)
-//         .delete()
-//     } catch (err) {
-//       console.log({ message: err.message, code: err.code })
-//     }
-//   }
-
-//   async function handleEditedNameSubmit(e) {
-//     firebase.firestore
-//       .collection(`users/${user.uid}/groups`)
-//       .doc(group.id)
-//       .update({ groupName: editedName })
-//   }
-
-//   function toggleEdit() {
-//     setEditing(true)
-//   }
 
 
 
   render () {
-    console.log("State:", this.state)
-    group = this.props.location.state.group.group
-    console.log("Group:", group)
+    // console.log("State:", this.state)
+    const { match } = this.props;
+
+    console.log("match")
+    console.log(match)
+    console.log(this.props)
+    // console.log(this.props.location)
+    if (this.props.location.state.group) {
+      group = this.props.location.state.group.group || match.params.groupId
+
+    }
+    // console.log("Group:", group)
     return (
       <div className="Dashboard">
       <div className="topHeaderAndButtons">
@@ -154,13 +113,13 @@ class Group extends Component  {
           <Link to={`/dashboard`}>
             <button 
             className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical" 
-             onClick={this.deleteGroup}>
+             onClick={this.props.deleteGroup}>
             DELETE
               <span className="iconLinks">Delete List</span>
             </button>
           </Link>
         <div className="imageButtons">
-          <Link to={`/groups/${4}/add-task`}>
+          <Link to={ {pathname: `/groups/${group.id}/add-task`, state: { groupId: "group.id" }} }>
             <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
               <span className="material-icons iconLinks iconOne">
                 access_time
@@ -193,7 +152,7 @@ class Group extends Component  {
         </div>
 {/* Work on this for the Avatars, need to map the members */}
           <div className="membersCardsView">
-            {this.state.members.map(member =>
+            {this.props.members.map(member =>
             <div>
               <div className="invitedMembers">
                 <ProfilePhoto profilePicture={member.profilePicture}/>
