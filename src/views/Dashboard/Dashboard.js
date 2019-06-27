@@ -19,50 +19,16 @@ const fbUser = JSON.parse(localStorage.getItem('user'))
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      groups: [],
-      tasks: [],
-      members: [],
-      user: ""
-    };
   }
 
 
-  componentDidMount() {
-    console.log("firing")
-    this.setHerokuUser()
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.user != prevState.user) {
-      this.fetchGroups()
-    }
-  }
-
-  setHerokuUser() {
-    axios.get('http://localhost:9000/api/users/').then(members => { 
-      members.data.forEach(member => {
-        console.log(member)
-        console.log(fbUser)
-        if (member.uid == fbUser.uid) {
-          this.setState({ user: member })
-        }
-      })
-    })
-  };
-
-  fetchGroups = () => {
-    axios.get(`${groupMembersUrl}user/${this.state.user.id}`).then(memberships =>
-      memberships.data.data.forEach(groupMembership =>
-        axios.get(`${groupUrl}/${groupMembership.groupId}`).then(group => {
-          this.setState({ groups: [...this.state.groups, group.data.data[0]] });
-        })
-      )
-    );
-  };
 
   render() {
     const { history } = this.props;
+    console.log("State")
+    // console.log(this.state)
+    console.log("Props")
+    console.log(this.props)
 
     return (
       <div className="Dashboard">
@@ -91,7 +57,7 @@ class Dashboard extends Component {
           <Sidebar className="sidebar" />
           <div className="cards">
             <GetGroups
-              groups={this.state.groups}
+              groups={this.props.groups}
               fetchUsers={this.fetchUsers}
               className="cards"
             />
