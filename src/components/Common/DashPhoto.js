@@ -1,6 +1,6 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Avatar from '@material-ui/core/Avatar'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles({
   avatar: {
@@ -11,18 +11,18 @@ const useStyles = makeStyles({
     width: '10vw',
     height: '10vw'
   }
-})
+});
 
 function DashPhoto() {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Avatar
       alt="photo of user"
-      src={JSON.parse(localStorage.getItem('user')).photoURL}
+      src={JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0].photoUrl}
       className={classes.bigAvatar}
     />
-  )
+  );
 }
 
-export default DashPhoto
+export default DashPhoto;
