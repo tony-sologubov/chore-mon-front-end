@@ -179,7 +179,7 @@ class Group extends Component  {
 
     <div className="bottomTableAndUsers">
       <div className="bottomLeftView">
-        <GetTasks groupId={this.state.groupId} groupName={group.name} />
+        <GetTasks groupId={this.state.groupId} groupName={group.name} members={this.state.members} />
       </div>
       <div className="rightBottomView">
 

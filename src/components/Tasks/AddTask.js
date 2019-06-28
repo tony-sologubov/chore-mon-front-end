@@ -28,7 +28,7 @@ class AddTask extends Component {
           'http://localhost:9000/api/tasks/',
             {
             title: this.state.chore,
-            assignedTo: this.state.assigned,
+            assignedTo: this.state.assigned.id,
             dueDate: this.state.date,
             groupId:1,
             listId:1
@@ -51,16 +51,8 @@ class AddTask extends Component {
 
     handleAssignClick(member) {
       console.log("Handle Assign Firing")
-      if (this.state.assigned.includes(member)) {
-        var index = this.state.assigned.indexOf(member)
-        this.state.assigned.splice(index, 1)
-        console.log("Member included: State")
-        // console.log(this.state)
-      } else {
-        this.setState({ assigned: [...this.state.assigned, member] })
+        this.setState({ assigned: member })
         console.log("Not Included Member: State")
-        // console.log(this.state)
-        }
       }
     // }
 
@@ -128,7 +120,7 @@ class AddTask extends Component {
                         type="text"
                         name="assigned"
                         placeholder="Assign a Person"
-                        value={this.state.assigned}
+                        value={this.state.assigned.name}
                         onChange={event => this.handleChange(event)}
                       />
                       </div>

@@ -17,21 +17,23 @@ const useStyles = makeStyles({
   
   function ProfilePhotoTask({ assigned , user, onClick}) {
     const classes = useStyles()
-    // const id = JSON.parse(localStorage.getItem('user')).uid
-    
-    console.log("user")
-    console.log(user)
-    console.log(user.profilePicture)
 
-    return (
-      <div className="avatar-and-name" onClick={onClick}>
+
+    // console.log("username:", user[0].name)
+    console.log(user)
+    // console.log(user[0].profilePicture)
+
+    if (user) {
+
+      return (
+        <div className="avatar-and-name" onClick={onClick}>
         <Avatar
           alt="photo of user"
           src={user.profilePcture}
           className={classes.Avatar}
-        />
+          />
           <span className="user-name">
-           {JSON.parse(localStorage.getItem('user')).displayName.match(/[^\s,.'"!?]+/)[0]}
+           {user.name.match(/[^\s,.'"!?]+/)[0]}
              {/* <input
               type="text"
               placeholder={assigned}
@@ -42,6 +44,9 @@ const useStyles = makeStyles({
         </span>
       </div>
     )
+  } else {
+    return ( <p></p> )
+  }
   }
   
   export default ProfilePhotoTask

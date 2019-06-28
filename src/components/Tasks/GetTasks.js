@@ -14,31 +14,20 @@ class GetTasks extends Component {
     };
   }
 
-
   componentDidMount() {
     this.fetchTasks();
   }
 
   fetchTasks = () => {
-      console.log("FIRED")
-        axios.get('http://localhost:9000/api/tasks/group/3')
-        .then(tasks =>{ this.setState({tasks:  tasks.data.data}) })
+    console.log("FIRED")
+    console.log(this.props)
+    axios.get(`http://localhost:9000/api/tasks/group/${this.props.groupId}`)
+    .then(tasks =>{ this.setState({tasks:  tasks.data.data}) })
   }
-    //     { 
-    //       users.data.forEach(user => {
-    //         if (user.uid == fbUser.uid) {
-    //           this.setState({ user: user })
-    //         }
-    //       })
-    //     })
-    //   }
-    // }
-
-  // let tasks = fetchTasks()
   render () {
 
-    // console.log("PRops:", this.props)
-    // console.log("Tasks:", tasks)
+    // console.log("Props:", this.props)
+    // console.log("Tasks:", this.state.tasks)
     return (
       <div className="groupTableList">
         <table className="highlight">
@@ -58,8 +47,9 @@ class GetTasks extends Component {
                   chore={task.chore}
                   date={task.date}
                   isDone={task.isDone}
-                  assigned={task.assigned}
-                  groupId={3}
+                  assigned={task.assignedTo}
+                  groupId={this.props.groupId}
+                  members={this.props.members}
                 />
               </Fragment>
             ))}
