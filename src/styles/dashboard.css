@@ -108,3 +108,11 @@ circle {
   margin: 26px 26px 0px 0px;
   border-radius: 20px;
 }
+.styles_modal__gNwvD {
+  width: 80%;
+  position: relative;
+}
+.modal {
+  width: 100%;
+  position: relative;
+}
