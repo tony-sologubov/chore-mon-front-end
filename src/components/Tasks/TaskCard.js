@@ -3,6 +3,7 @@ import FirebaseContext from '../../firebase/context'
 import Tooltip from "@material-ui/core/Tooltip"
 import TaskModal from './TaskModal'
 import ProfilePhotoTask from './TaskAvatar'
+import axios from 'axios'
 // import GetTasks from './GetTasks';
 
 
@@ -24,15 +25,15 @@ const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, mem
   // }
 
   async function deleteTask() {
-   console.log("delete here")
+   axios.delete(`http://localhost:9000/api/tasks/${taskId}`)
   }
 
   // function toggleEdit() {
   //   setEditing(true)
   // }
   console.log(members)
-  console.log(title)
-  console.log(member)
+  console.log(taskId)
+  
   // console.log(this.props.members)
 
   return  (

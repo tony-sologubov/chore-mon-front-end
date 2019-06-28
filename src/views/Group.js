@@ -1,21 +1,29 @@
 import React, { useState, useContext, useEffect, Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import GetTasks from "../components/Tasks/GetTasks";
+import Modal from "react-responsive-modal";
 // import InviteGenerator from '../components/Invites/InviteGenerator'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ProfilePhotoTask from '../components/Tasks/TaskAvatar'
 
 import ProfilePhoto from "../components/Groups/GroupAvatars";
-
-import Modal from "react-responsive-modal";
 import axios from "axios";
 
 class Group extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      group: {},
       members: [],
       tasks: [],
-      name: ""
+      name: "",
+      title: "", 
+      assignedTo: "",
+      dueDate: "",
+      groupId: 0,
+      taskModalOpen: false
     };
   }
 
@@ -27,16 +35,58 @@ class Group extends Component {
     axios.get(`http://localhost:9000/api/group/${groupId}`)
     .then(group => {
       this.setState({
-        group: group.data,
         members: group.data.members,
         tasks: group.data.tasks,
-        name: group.data.name
+        name: group.data.name,
+        title: "", 
+        assignedTo: "",
+        dueDate: "",
+        groupId: 0,
+        taskModalOpen: false
       })
     })
   };
 
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  submit = e => {
+    e.preventDefault();
+    this.addTask();
+  };
+
+  addTask = () => {
+    const newTask = {
+      title: this.state.title,
+      assignedTo: this.state.assignedTo,
+      dueDate: this.state.dueDate,
+      groupId: this.props.match.params.groupId,
+      listId:1
+    }
+    console.log("newTask:", newTask)
+    axios
+    .post(
+      'http://localhost:9000/api/tasks/', newTask
+      )
+    .then(response =>  {
+      console.log("Adding Task:", this.props.match.params)
+      this.fetchGroup(this.props.match.params.groupId) 
+    })
+    .catch(err => { console.log('task error', err) })
+    }
+
+
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
+  };
+
+  openModal = () => {
+    this.setState({ taskModalOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({ taskModalOpen: false });
   };
 
   render() {
@@ -69,20 +119,136 @@ class Group extends Component {
               />
             </form>
           </Modal>
+          
           <Link to={`/dashboard`}>
             <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
               <span className="iconLinks">Delete List</span>
             </button>
           </Link>
           <div className="imageButtons">
-            <Link to={`/groups/${4}/add-task`}>
               <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
                 <span className="material-icons iconLinks iconOne">
                   access_time
                 </span>
-                <span className="iconLinks">NewTask</span>
+                <span className="iconLinks"  onClick={this.openModal}>NewTask</span>
               </button>
-            </Link>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <Modal
+          open={this.state.taskModalOpen}
+          onClose={this.closeModal}
+          center
+          showCloseIcon={false}
+        >
+          <div className="addTaskDiv">
+            <h2 className="add-task-title">New Task</h2>
+            <form onSubmit={this.submit} className="addTaskForm">
+              <input
+                type="text"
+                name="title"
+                placeholder="Add a Task"
+                value={this.state.title}
+                onChange={event => this.handleChange(event)}
+              />
+        
+              <label htmlFor="date" className="dueDateText">Due Date:</label>
+              <input
+                type="date"
+                id="date"
+                name="dueDate"
+                placeholder="date"
+                value={this.state.dueDate}
+                onChange={event => this.handleChange(event)}
+              />
+        
+        
+                  {/* <input
+                    type="text"
+                    name="assigned"
+                    placeholder="Assign a Person"
+                    value={values.assigned}
+                    onChange={event => handleChange(event)}
+                  /> */}
+                  <div>
+            <div>Assigned To:</div>
+            <ExpansionPanel className="grey lighten-3 editModalRound">
+                  <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon/>}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  className="pink accent-3 editModalRound"
+                  >
+                      <div className="modalButtonText">
+                          People In The Group!
+                      </div>
+                  </ExpansionPanelSummary>  
+                  <ExpansionPanelDetails>
+                      <div>
+                {/* Here is the loop the get list of user in a group broken code Michael*/}
+                        {/* {user.map(group => (
+                        <ProfilePhotoTask/>
+                          ))} */}
+                          <ProfilePhotoTask/>
+        
+                        <input
+                        style= {{marginTop: "19px"}}
+                        type="text"
+                        name="assignedTo"
+                        placeholder="Assign a Person"
+                        value={this.state.assignedTo}
+                        onChange={event => this.handleChange(event)}
+                      />
+                      </div>
+                  </ExpansionPanelDetails>
+            </ExpansionPanel>
+        </div>
+              <button 
+              type="submit" 
+              value="submit" 
+              className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical submit-button"
+              onClick={this.closeModal}
+              >
+                
+                {/* <input type="submit" value="submit" /> */}
+                Submit
+                </button>
+                {/* {errors.values && <p>{errors.values}</p>} */}
+              </form>
+            </div>
+        </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <Link to={`/dashboard`}>
               <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
