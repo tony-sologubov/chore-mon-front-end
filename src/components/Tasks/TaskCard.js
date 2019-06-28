@@ -9,8 +9,7 @@ import ProfilePhotoTask from './TaskAvatar'
 
 const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, members}) => {
 
-
-  const member = members.filter(member => member.id == assignedTo)[0]
+  const member = members.filter(member => member.uid == assignedTo)[0]
   // async function handleEdits(e) {
   //   e.preventDefault()
   //   await firebase.firestore
@@ -33,6 +32,7 @@ const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, mem
   // }
   console.log(members)
   console.log(title)
+  console.log(member)
   // console.log(this.props.members)
 
   return  (

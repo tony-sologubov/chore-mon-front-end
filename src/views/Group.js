@@ -41,11 +41,11 @@ class Group extends Component {
 
   render() {
     const {groupId} = this.props.match.params
-    console.log("GroupId:", groupId)
+    console.log("Group State:\n", this.state)
     return (
       <div className="Dashboard">
         <div className="topHeaderAndButtons">
-          <h1 className="groupsHeader">{"group.name"}</h1>
+          <h1 className="groupsHeader">{this.state.name}</h1>
           <button
             className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical"
             onClick={() =>
@@ -58,7 +58,7 @@ class Group extends Component {
             <form>
               <input
                 type="text"
-                placeholder={"group.name"}
+                placeholder={this.state.name}
                 value="{editedName}"
               />
 

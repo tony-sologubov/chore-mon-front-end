@@ -28,6 +28,7 @@ class GetTasks extends Component {
 
     console.log("Props:", this.props)
     console.log("Tasks:", this.props.tasks)
+    // console.log("Title:", this.props.tasks[0].title)
     return (
       <div className="groupTableList">
         <table className="highlight">
@@ -44,7 +45,7 @@ class GetTasks extends Component {
               <Fragment key={uuidv4()}>
                 <TaskCard
                   taskId={task.id}
-                  title={"task.title"}
+                  title={task.title}
                   dueDate={task.dueDate}
                   isComplete={task.isComplete}
                   assignedTo={task.assignedTo}
