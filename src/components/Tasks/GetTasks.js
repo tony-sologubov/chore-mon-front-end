@@ -14,21 +14,10 @@ class GetTasks extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.fetchTasks();
-  // }
-
-  // fetchTasks = () => {
-  //   console.log("FIRED")
-  //   console.log(this.props)
-  //   axios.get(`http://localhost:9000/api/tasks/group/${this.props.groupId}`)
-  //   .then(tasks =>{ this.setState({tasks:  tasks.data.data}) })
-  // }
   render () {
 
     console.log("Props:", this.props)
     console.log("Tasks:", this.props.tasks)
-    // console.log("Title:", this.props.tasks[0].title)
     return (
       <div className="groupTableList">
         <table className="highlight">
@@ -51,6 +40,7 @@ class GetTasks extends Component {
                   assignedTo={task.assignedTo}
                   groupId={tasks.groupId}
                   members={this.props.members}
+                  deleteTask={this.props.deleteTask}
                 />
               </Fragment>
             ))}

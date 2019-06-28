@@ -19,11 +19,13 @@ class Group extends Component {
       members: [],
       tasks: [],
       name: "",
+      newName: "",
       title: "", 
       assignedTo: "",
       dueDate: "",
       groupId: 0,
-      taskModalOpen: false
+      taskModalOpen: false,
+      isModalOpen: false
     };
   }
 
@@ -31,6 +33,9 @@ class Group extends Component {
     const {groupId} = this.props.match.params
     this.fetchGroup(groupId);
   }
+
+
+
   fetchGroup = (groupId) => {
     axios.get(`http://localhost:9000/api/group/${groupId}`)
     .then(group => {
@@ -47,35 +52,63 @@ class Group extends Component {
     })
   };
 
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submit = e => {
+
+  submitTask = e => {
     e.preventDefault();
     this.addTask();
   };
 
+  submitNewGroupName = e => {
+    e.preventDefault();
+    this.editGroup();
+  };
+
+
   addTask = () => {
     const newTask = {
       title: this.state.title,
-      assignedTo: this.state.assignedTo,
+      assignedTo: this.state.assignedTo.uid,
       dueDate: this.state.dueDate,
       groupId: this.props.match.params.groupId,
       listId:1
     }
-    console.log("newTask:", newTask)
+
     axios
     .post(
       'http://localhost:9000/api/tasks/', newTask
       )
     .then(response =>  {
-      console.log("Adding Task:", this.props.match.params)
       this.fetchGroup(this.props.match.params.groupId) 
     })
     .catch(err => { console.log('task error', err) })
-    }
+  }
 
+  deleteTask(taskId) {
+    console.log("Delete Firing:", taskId)
+  //  axios.delete(`http://localhost:9000/api/tasks/${taskId}`)
+  }
+
+  editGroup = () => {
+    const newGroup = {
+      name: this.state.newName
+    }
+  axios
+    .put(`http://localhost:9000/api/groups/${this.props.match.params.groupId}`,
+    newGroup
+    )
+    .then(response => {
+      console.log(response.data)
+      this.fetchGroup(this.props.match.params.groupId) 
+    })
+    .catch(err => {
+      console.log('group not updating', err)
+    })
+  }
 
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
@@ -89,9 +122,16 @@ class Group extends Component {
     this.setState({ taskModalOpen: false });
   };
 
+  handleAssignClick(member) {
+    this.setState({assignedTo: member})
+    console.log("Handled Assign Click")
+    console.log(this.state)
+    console.log(this.state.assignedTo)
+    console.log(this.state.assignedTo.uid)
+  }
+
   render() {
     const {groupId} = this.props.match.params
-    console.log("Group State:\n", this.state)
     return (
       <div className="Dashboard">
         <div className="topHeaderAndButtons">
@@ -102,14 +142,17 @@ class Group extends Component {
               this.setState({ isModalOpen: !this.state.isModalOpen })
             }
           >
-            > Edit List
+             Edit List
           </button>
-          <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-            <form>
+
+          <Modal open={this.state.isModalOpen} toggle={this.toggleModal}>
+            <form onSubmit={this.submitNewGroupName}>
               <input
                 type="text"
+                name="newName"
                 placeholder={this.state.name}
-                value="{editedName}"
+                onChange={event => this.handleChange(event)}
+                value={this.state.newName}
               />
 
               <input
@@ -119,12 +162,13 @@ class Group extends Component {
               />
             </form>
           </Modal>
-          
+
           <Link to={`/dashboard`}>
             <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
               <span className="iconLinks">Delete List</span>
             </button>
           </Link>
+
           <div className="imageButtons">
               <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
                 <span className="material-icons iconLinks iconOne">
@@ -132,124 +176,74 @@ class Group extends Component {
                 </span>
                 <span className="iconLinks"  onClick={this.openModal}>NewTask</span>
               </button>
+          <Modal
+             open={this.state.taskModalOpen}
+             onClose={this.closeModal}
+             center
+             showCloseIcon={false}
+            >
+            <div className="addTaskDiv">
+              <h2 className="add-task-title">New Task</h2>
+              <form onSubmit={this.submitTask} className="addTaskForm">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Add a Task"
+                  value={this.state.title}
+                  onChange={event => this.handleChange(event)}
+                />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              <Modal
-          open={this.state.taskModalOpen}
-          onClose={this.closeModal}
-          center
-          showCloseIcon={false}
-        >
-          <div className="addTaskDiv">
-            <h2 className="add-task-title">New Task</h2>
-            <form onSubmit={this.submit} className="addTaskForm">
-              <input
-                type="text"
-                name="title"
-                placeholder="Add a Task"
-                value={this.state.title}
-                onChange={event => this.handleChange(event)}
-              />
-        
-              <label htmlFor="date" className="dueDateText">Due Date:</label>
-              <input
-                type="date"
-                id="date"
-                name="dueDate"
-                placeholder="date"
-                value={this.state.dueDate}
-                onChange={event => this.handleChange(event)}
-              />
-        
-        
-                  {/* <input
-                    type="text"
-                    name="assigned"
-                    placeholder="Assign a Person"
-                    value={values.assigned}
-                    onChange={event => handleChange(event)}
-                  /> */}
-                  <div>
-            <div>Assigned To:</div>
-            <ExpansionPanel className="grey lighten-3 editModalRound">
-                  <ExpansionPanelSummary
-                  expandIcon={<ExpandMoreIcon/>}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                  className="pink accent-3 editModalRound"
-                  >
-                      <div className="modalButtonText">
-                          People In The Group!
-                      </div>
-                  </ExpansionPanelSummary>  
+                <label htmlFor="date" className="dueDateText">Due Date:</label>
+                <input
+                  type="date"
+                  id="date"
+                  name="dueDate"
+                  placeholder="date"
+                  value={this.state.dueDate}
+                  onChange={event => this.handleChange(event)}
+                />
+                <div>
+                <div>Assigned To:</div>
+                  <ExpansionPanel className="grey lighten-3 editModalRound">
+                    <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    className="pink accent-3 editModalRound"
+                    >
+                    <div className="modalButtonText"> People In The Group! </div>
+                  </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
-                      <div>
-                {/* Here is the loop the get list of user in a group broken code Michael*/}
-                        {/* {user.map(group => (
-                        <ProfilePhotoTask/>
-                          ))} */}
-                          <ProfilePhotoTask/>
-        
-                        <input
-                        style= {{marginTop: "19px"}}
-                        type="text"
-                        name="assignedTo"
-                        placeholder="Assign a Person"
-                        value={this.state.assignedTo}
-                        onChange={event => this.handleChange(event)}
-                      />
+                  <div>
+                    {this.state.members.map(member => (
+                      <div> 
+                        <ProfilePhotoTask 
+                          key={member.userId} 
+                          user={member}
+                          onClick={event => this.handleAssignClick(member)}
+                          />
                       </div>
+                    ))}
+                    <h4 style= {{marginTop: "19px"}} >Assigned to </h4>
+                    {/* <ProfilePhotoTask user={this.state.assignedTo}/> */}
+                    <input
+                      value={this.state.assignedTo.name}
+                    />
+                  </div>
                   </ExpansionPanelDetails>
-            </ExpansionPanel>
-        </div>
-              <button 
-              type="submit" 
-              value="submit" 
-              className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical submit-button"
-              onClick={this.closeModal}
-              >
-                
-                {/* <input type="submit" value="submit" /> */}
-                Submit
+                  </ExpansionPanel>
+                </div>
+                <button
+                  type="submit"
+                  value="submit"
+                  className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical submit-button"
+                  onClick={this.closeModal}
+                >
+                  Submit
                 </button>
-                {/* {errors.values && <p>{errors.values}</p>} */}
               </form>
             </div>
-        </Modal>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          </Modal>
             <Link to={`/dashboard`}>
               <button className="threeButtonsOne waves-effect waves-light btn-large pink accent-3 hvr-shutter-out-vertical">
                 <span className="material-icons iconLinks iconOne">
@@ -268,6 +262,7 @@ class Group extends Component {
             groupName={this.state.name}
             tasks={this.state.tasks}
             members={this.state.members}
+            deleteTask={this.deleteTask}
             />
           </div>
           <div className="rightBottomView">

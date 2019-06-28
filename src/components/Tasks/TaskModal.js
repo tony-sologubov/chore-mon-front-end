@@ -8,6 +8,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ProfilePhotoTask from './TaskAvatar'
+import axios from 'axios';
 
 const  TaskModal = ({ taskId, title, assignedTo, dueDate, isComplete, groupId }) => {
 const { firebase, user } = useContext(FirebaseContext)
@@ -20,37 +21,34 @@ const [editedDate, setEditedDate] = useState(dueDate)
 const [open, setOpen] = React.useState(false);
 // const user = JSON.parse(localStorage.getItem('user')).displayName.match(/[^\s,.'"!?]+/)[0];
 
-const handleOpen = () => {
-setOpen(true);
+  const handleOpen = () => {
+  setOpen(true);
 
-};
+  };
 
-const handleClose = () => {
-setOpen(false);
-};
+  const handleClose = () => {
+  setOpen(false);
+  };
 
-    async function handleEdits(e) {
-    e.preventDefault()
-    await firebase.firestore
-    .collection(`users/${user.uid}/groups/${groupId}/tasks`)
-    .doc(taskId)
-    .update({
-    title: editedChore,
-    assignedTo: editedAssigned,
-    dueDate: editedDate,
-    // isComplete: editedisComplete
-    })
-}
+      async function handleEdits(e) {
+      e.preventDefault()
+      await firebase.firestore
+      .collection(`users/${user.uid}/groups/${groupId}/tasks`)
+      .doc(taskId)
+      .update({
+      title: editedChore,
+      assignedTo: editedAssigned,
+      dueDate: editedDate,
+      // isComplete: editedisComplete
+      })
+  }
 
-function toggleEdit() {
-setEditing(true);
-// setOpen(true);
-
-}
-// console.log(toggleEdit, 'its firing part 1');
-// console.log(handleOpen, 'its firing part 2');
-// console.log(handleClose, 'its firing part 3');
-
+  function toggleEdit() {
+    setEditing(true);
+  }
+  function handleAssignClick(member) {
+    console.log(member)
+  }
 return !editing ? (
     <span onClick={toggleEdit}>
       <button 
@@ -78,7 +76,7 @@ return !editing ? (
                 <div>Task Name</div>
                   <input
                   type="text"
-                  // placeholder={title}
+                  placeholder={title}
                   placeholder="What Specifics?"
                   value={editedChore}
                   onChange={e => setEditedChore(e.target.value)}
@@ -160,14 +158,3 @@ return !editing ? (
   )
 }
 export default TaskModal;
-
-/* <input
-type="text"
-placeholder="NOT COMPLETED"
-value={editedisComplete}
-onChange={e => setEditedisComplete(e.target.value)}
-/> */
-//           <div>
-//             <AddComment taskId={task.id} groupId={groupId} />
-//             <GetComments taskId={task.id} groupId={groupId} />
-//           </div>

@@ -8,7 +8,7 @@ import axios from 'axios'
 
 
 
-const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, members}) => {
+const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, members, deleteTask}) => {
 
   const member = members.filter(member => member.uid == assignedTo)[0]
   // async function handleEdits(e) {
@@ -24,9 +24,7 @@ const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, mem
   //     })
   // }
 
-  async function deleteTask() {
-   axios.delete(`http://localhost:9000/api/tasks/${taskId}`)
-  }
+
 
   // function toggleEdit() {
   //   setEditing(true)
@@ -38,24 +36,23 @@ const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, mem
 
   return  (
         <tr>
-          <th className="switch" >       
+          <th className="switch" >
             <label>
               <input type="checkbox"></input>
-              <span className="checked"></span>          
+              <span className="checked"></span>
             </label>
-                    
           </th>
           <th>{title}</th>
           <th>{<ProfilePhotoTask 
                             user={member}
-                            onClick={"event => this.handleAssignClick(member)"}/>}</th>
+                            onClick={() => {}}/>}</th>
           <th>{dueDate}</th>
           <th>
-            <Tooltip title="Assign Person">
+            {/* <Tooltip title="Assign Person">
               <button className="tableActionButtons btn-floating waves-effect waves-light btn blue lighten-1">
                 <i className="material-icons">person_add</i>
               </button>
-            </Tooltip>
+            </Tooltip> */}
 
             <Tooltip title="Edit"> 
               <span>
@@ -71,7 +68,7 @@ const TaskCard = ({ taskId, title, assignedTo, dueDate, isComplete, groupId, mem
             </Tooltip>  
 
             <Tooltip title="Delete">
-              <button className="tableActionButtons btn-floating waves-effect waves-light btn red darken-1" onClick={deleteTask}>
+              <button className="tableActionButtons btn-floating waves-effect waves-light btn red darken-1" onClick={() => deleteTask(taskId)}>
                 <i className="material-icons">delete</i>
                 
               </button>
