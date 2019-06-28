@@ -6,7 +6,6 @@ import Dashboard from "../views/Dashboard/Dashboard";
 import BillingPage from "../components/Billing/BillingPage";
 import firebase, { FirebaseContext } from "../firebase";
 import useAuth from "../components/Auth/useAuth";
-import AddGroup from "../components/Groups/AddGroup";
 import InProgress from "../views/InProgress";
 
 import "../styles/index.css";
@@ -38,7 +37,6 @@ const App = () => {
                     <Route path="/login" component={Login} />
                     <Route path="/forgot" component={ForgotPassword} />
                     <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/add-group" component={AddGroup} />
                     <Route path="/billing" component={BillingPage} />
                     <Route path="/404" component={InProgress} />
                     <Route exact path="/groups/:groupId" component={Group} />

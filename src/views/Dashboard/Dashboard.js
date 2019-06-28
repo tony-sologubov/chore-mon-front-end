@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import firebase from "../../firebase/firebase";
+import Modal from "react-responsive-modal";
 import GroupList from "./GroupList";
-import Sidebar from "./Sidebar";
 import { DashPhoto } from "../../components/Common";
 import { ReactComponent as ContactsIcon } from "../../assets/dashboard/icons/contacts-icon.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/dashboard/icons/profile.svg";
@@ -10,28 +9,25 @@ import { ReactComponent as ListIcon } from "../../assets/dashboard/icons/list.sv
 import { ReactComponent as CalendarIcon } from "../../assets/dashboard/icons/calendar.svg";
 import { ReactComponent as SettingsIcon } from "../../assets/dashboard/icons/settings.svg";
 import axios from "axios";
-// const uid = JSON.parse(
-//   localStorage.getItem("firebaseui::rememberedAccounts")
-// )[0].uid;
-const uid = firebase.auth.currentUser.uid.toJSON();
-const user = firebase.auth.currentUser.toJSON();
-// const uid = firebase.auth.currentUser.uid();
-// const user = JSON.parse(
-//   localStorage.getItem("firebaseui::rememberedAccounts")
-// )[0];
-// const user = "hjhfjhf";
-//I hate you all.. I hope you read this, Ryan, and understand my rage lol
-//
-const url = "https://chore-monkey.herokuapp.com/api/";
+
+const uid = JSON.parse(localStorage.getItem("uid"));
+const user = JSON.parse(localStorage.getItem("user"));
+const url = "https://chore-monkey.herokuapp.com/api";
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      name: "",
+      groups: [],
+      uid: "",
+      open: false,
+      groupName: ""
     };
   }
 
   componentDidMount() {
+    console.log("mounting");
     this.fetch();
     console.log(this.state);
   }
@@ -39,11 +35,15 @@ class Dashboard extends Component {
   fetch = () => {
     console.log(uid);
     axios
-      .get(`${url}/user/${uid}`)
+      .get(`${url}/users/${uid}`)
       .then(res => {
         console.log(res);
         this.setState({
-          user: res.data
+          name: res.data.name,
+          groups: res.data.groups,
+          uid: uid,
+          groupName: "",
+          open: false
         });
       })
       .catch(err => {
@@ -51,23 +51,60 @@ class Dashboard extends Component {
       });
   };
 
+  //Change Handler
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  submit = e => {
+    e.preventDefault();
+    this.addGroup();
+  };
+  //add group functions
+  addGroup = () => {
+    const group = {
+      creatorId: uid,
+      name: this.state.groupName
+    };
+    axios
+      .post(`${url}/group`, group)
+      .then(res => {
+        console.log(res);
+        this.fetch();
+      })
+      .catch(er => console.log(er.message));
+  };
+
+  //Opens delete modal
+  openModal = () => {
+    this.setState({ open: true });
+  };
+
+  //Closes delete modal
+  closeModal = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     const { history } = this.props;
-
+    console.log(this.state);
     return (
       <div className="Dashboard">
         <div className="dash-header ">
           <DashPhoto />
           <h1>
             Welcome Back,
-            {" " + user.displayName.match(/[^\s,.'"!?]+/)[0]}
+            {" " + user.displayName}
           </h1>
         </div>
 
         <div className="section-ctr">
-          <Sidebar className="sidebar" />
+          <div className="sidebar">
+            <button className="add-group-btn hvr-glow" onClick={this.openModal}>
+              New Group
+            </button>
+          </div>
           <div className="cards">
-            <GroupList groups={this.state.user.groups} className="cards" />
+            <GroupList groups={this.state.groups} className="cards" />
           </div>
         </div>
 
@@ -174,6 +211,30 @@ class Dashboard extends Component {
             </p>
           </div>
         </div>
+        <Modal
+          open={this.state.open}
+          onClose={this.closeModal}
+          center
+          showCloseIcon={false}
+        >
+          <div className="modal">
+            <form onSubmit={e => this.submit(e)} className="addGroupForm">
+              <input
+                type="text"
+                name="groupName"
+                placeholder="Add a Group"
+                value={this.state.groupName}
+                onChange={event => this.handleChange(event)}
+              />
+              <button
+                type="submit"
+                className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </Modal>
       </div>
     );
   }
