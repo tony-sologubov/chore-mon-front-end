@@ -13,7 +13,8 @@ const sendToDB = async () => {
     phone: phoneNumber
   };
 
-  let url = "https://chore-monkey.herokuapp.com/api/users";
+  // let url = "https://chore-monkey.herokuapp.com/api/users";
+  let url = "http://localhost:9000/api/users";
   // const development = "http://localhost:9000/api/users";
   // const production = "https://chore-monkey.herokuapp.com/api/users";
   // process.env.NODE_ENV ? (url = development) : (url = production);

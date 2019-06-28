@@ -14,20 +14,20 @@ class GetTasks extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchTasks();
-  }
+  // componentDidMount() {
+  //   this.fetchTasks();
+  // }
 
-  fetchTasks = () => {
-    console.log("FIRED")
-    console.log(this.props)
-    axios.get(`http://localhost:9000/api/tasks/group/${this.props.groupId}`)
-    .then(tasks =>{ this.setState({tasks:  tasks.data.data}) })
-  }
+  // fetchTasks = () => {
+  //   console.log("FIRED")
+  //   console.log(this.props)
+  //   axios.get(`http://localhost:9000/api/tasks/group/${this.props.groupId}`)
+  //   .then(tasks =>{ this.setState({tasks:  tasks.data.data}) })
+  // }
   render () {
 
-    // console.log("Props:", this.props)
-    // console.log("Tasks:", this.state.tasks)
+    console.log("Props:", this.props)
+    console.log("Tasks:", this.props.tasks)
     return (
       <div className="groupTableList">
         <table className="highlight">
@@ -40,15 +40,15 @@ class GetTasks extends Component {
               <th className="boldTable">Actions</th>
             </tr>
 
-            {this.state.tasks.map(task => (
+            {this.props.tasks.map(task => (
               <Fragment key={uuidv4()}>
                 <TaskCard
                   taskId={task.id}
-                  chore={task.chore}
-                  date={task.date}
-                  isDone={task.isDone}
-                  assigned={task.assignedTo}
-                  groupId={this.props.groupId}
+                  title={"task.title"}
+                  dueDate={task.dueDate}
+                  isComplete={task.isComplete}
+                  assignedTo={task.assignedTo}
+                  groupId={tasks.groupId}
                   members={this.props.members}
                 />
               </Fragment>

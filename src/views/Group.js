@@ -12,26 +12,40 @@ class Group extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
+      group: {},
       members: [],
-      open: false
+      tasks: [],
+      name: ""
     };
   }
 
   componentDidMount() {
-    this.fetchMembers();
+    const {groupId} = this.props.match.params
+    this.fetchGroup(groupId);
   }
-  fetchMembers = () => {};
+  fetchGroup = (groupId) => {
+    axios.get(`http://localhost:9000/api/group/${groupId}`)
+    .then(group => {
+      this.setState({
+        group: group.data,
+        members: group.data.members,
+        tasks: group.data.tasks,
+        name: group.data.name
+      })
+    })
+  };
 
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
 
   render() {
+    const {groupId} = this.props.match.params
+    console.log("GroupId:", groupId)
     return (
       <div className="Dashboard">
         <div className="topHeaderAndButtons">
-          <h1 className="groupsHeader">{group.name}</h1>
+          <h1 className="groupsHeader">{"group.name"}</h1>
           <button
             className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical"
             onClick={() =>
@@ -44,7 +58,7 @@ class Group extends Component {
             <form>
               <input
                 type="text"
-                placeholder={group.name}
+                placeholder={"group.name"}
                 value="{editedName}"
               />
 
@@ -83,7 +97,12 @@ class Group extends Component {
 
         <div className="bottomTableAndUsers">
           <div className="bottomLeftView">
-            <GetTasks groupId={4} groupName={group.name} />
+            <GetTasks
+            groupId={groupId}
+            groupName={this.state.name}
+            tasks={this.state.tasks}
+            members={this.state.members}
+            />
           </div>
           <div className="rightBottomView">
             <div>
