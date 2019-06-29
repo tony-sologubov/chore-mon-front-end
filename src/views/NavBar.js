@@ -7,23 +7,26 @@ const NavBar = () => {
   return (
     <header>
       <ul className="site-menu">
-        <li className={user ? "waves-effect waves-light btn-large  pink dash-button hoverable" : "toggle-link"}>
-          <Link style={{color: "white"}}to="/dashboard">Dashboard</Link>
+        <li
+          className={
+            user
+              ? "waves-effect waves-light btn-large  pink dash-button hoverable"
+              : "toggle-link"
+          }
+        >
+          <Link style={{ color: "white" }} to="/dashboard">
+            Dashboard
+          </Link>
         </li>
 
         {!user ? (
           <li>
-            <a
-            className="waves-effect waves-light dash-btn hoverable"
-             href="http://localhost:3000/login">
-               Login
-            </a>
-            {/* <Link
+            <Link
               to="/login"
               className="waves-effect waves-light dash-btn hoverable"
             >
               Login
-            </Link> */}
+            </Link>
           </li>
         ) : (
           <li
