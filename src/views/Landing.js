@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import ScrollableAnchor from "react-scrollable-anchor";
 
 import { ReactComponent as Arrow } from "../assets/landing-page/svg/down.svg";
@@ -104,11 +104,11 @@ const Landing = () => {
                   <span id="sup">$</span>0<span id="sub">/mo</span>
                 </h1>
 
-                <ul class="collection">
-                  <li class="collection-item">3 Projects</li>
-                  <li class="collection-item">5 Team Members</li>
-                  <li class="collection-item">20 Contacts</li>
-                  <li class="collection-item">1000 Messages</li>
+                <ul className="collection">
+                  <li className="collection-item">3 Projects</li>
+                  <li className="collection-item">5 Team Members</li>
+                  <li className="collection-item">20 Contacts</li>
+                  <li className="collection-item">1000 Messages</li>
                 </ul>
                 <Link to="/billing" className="waves-effect waves-light  ">
                   <button className="btn-large  pink hvr-shutter-out-vertical">
@@ -122,11 +122,11 @@ const Landing = () => {
                   <span id="sup">$</span>10<span id="sub">/mo</span>
                 </h1>
 
-                <ul class="collection">
-                  <li class="collection-item">10 Projects</li>
-                  <li class="collection-item">25 Team Members</li>
-                  <li class="collection-item">200 Contacts</li>
-                  <li class="collection-item">10000 Messages</li>
+                <ul className="collection">
+                  <li className="collection-item">10 Projects</li>
+                  <li className="collection-item">25 Team Members</li>
+                  <li className="collection-item">200 Contacts</li>
+                  <li className="collection-item">10000 Messages</li>
                 </ul>
                 <Link to="/billing" className="waves-effect waves-light  ">
                   <button className="btn-large  white  hvr-shutter-out-vertical">
@@ -139,11 +139,11 @@ const Landing = () => {
                 <h1>
                   <span id="sup">$</span>20<span id="sub">/mo</span>
                 </h1>
-                <ul class="collection">
-                  <li class="collection-item">Ultd Projects</li>
-                  <li class="collection-item">Ultd Team Members</li>
-                  <li class="collection-item">Ultd Contacts</li>
-                  <li class="collection-item">Ultd Messages</li>
+                <ul className="collection">
+                  <li className="collection-item">Ultd Projects</li>
+                  <li className="collection-item">Ultd Team Members</li>
+                  <li className="collection-item">Ultd Contacts</li>
+                  <li className="collection-item">Ultd Messages</li>
                 </ul>
                 <Link to="/billing" className="waves-effect waves-light  ">
                   <button className="btn-large pink hvr-shutter-out-vertical">
@@ -160,4 +160,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default withRouter(Landing);
