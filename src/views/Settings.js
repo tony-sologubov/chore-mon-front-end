@@ -1,6 +1,6 @@
-import React from 'react';
-import '../../src/styles/settings.css';
-import Modal from 'react-modal';
+import React from "react";
+import "../../src/styles/settings.css";
+import Modal from "react-modal";
 class Settings extends React.Component {
   constructor(props) {
     super(props);
@@ -25,17 +25,23 @@ class Settings extends React.Component {
           className="settingsPhoto"
           alt="settings"
           src={
-            JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0].photoURL
+            JSON.parse(
+              localStorage.getItem("firebaseui::rememberedAccounts")
+            )[0].photoUrl
           }
         />
         <h1 className="settingsName">
-          {' ' +
+          {" " +
             JSON.parse(
-              localStorage.getItem('firebaseui::rememberedAccounts')
+              localStorage.getItem("firebaseui::rememberedAccounts")
             )[0].displayName.match(/^[a-z ,.'-]+$/i)[0]}
         </h1>
         <p className="settingsEmail">
-          {JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0].email}
+          {
+            JSON.parse(
+              localStorage.getItem("firebaseui::rememberedAccounts")
+            )[0].email
+          }
         </p>
         <button className="updateEmailButton" onClick={this.openModal}>
           Update Info

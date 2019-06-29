@@ -1,34 +1,33 @@
-import React, { Component } from "react";
-import Modal from "react-responsive-modal";
-import GroupList from "./GroupList";
-import { DashPhoto } from "../../components/Common";
-import { ReactComponent as ContactsIcon } from "../../assets/dashboard/icons/contacts-icon.svg";
-import { ReactComponent as ProfileIcon } from "../../assets/dashboard/icons/profile.svg";
-import { ReactComponent as HomeIcon } from "../../assets/dashboard/icons/home.svg";
-import { ReactComponent as ListIcon } from "../../assets/dashboard/icons/list.svg";
-import { ReactComponent as CalendarIcon } from "../../assets/dashboard/icons/calendar.svg";
-import { ReactComponent as SettingsIcon } from "../../assets/dashboard/icons/settings.svg";
-import axios from "axios";
+import React, { Component } from 'react';
+import Modal from 'react-responsive-modal';
+import GroupList from './GroupList';
+import { DashPhoto } from '../../components/Common';
+import { ReactComponent as ContactsIcon } from '../../assets/dashboard/icons/contacts-icon.svg';
+import { ReactComponent as ProfileIcon } from '../../assets/dashboard/icons/profile.svg';
+import { ReactComponent as HomeIcon } from '../../assets/dashboard/icons/home.svg';
+import { ReactComponent as ListIcon } from '../../assets/dashboard/icons/list.svg';
+import { ReactComponent as CalendarIcon } from '../../assets/dashboard/icons/calendar.svg';
+import { ReactComponent as SettingsIcon } from '../../assets/dashboard/icons/settings.svg';
+import axios from 'axios';
 
-const uid = JSON.parse(localStorage.getItem("uid"));
-const user = JSON.parse(localStorage.getItem("user"));
-const url = "https://chore-monkey.herokuapp.com/api";
-// const url = "http://localhost:9000/api";
-
+const uid = JSON.parse(localStorage.getItem('uid'));
+const user = JSON.parse(localStorage.getItem('user'));
+const url = 'https://chore-monkey.herokuapp.com/api';
+console.log(uid);
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name: '',
       groups: [],
-      uid: "",
+      uid: uid,
       open: false,
-      groupName: ""
+      groupName: ''
     };
   }
 
   componentDidMount() {
-    console.log("mounting");
+    console.log('mounting');
     this.fetch();
     console.log(this.state);
   }
@@ -42,8 +41,7 @@ class Dashboard extends Component {
         this.setState({
           name: res.data.name,
           groups: res.data.groups,
-          uid: uid,
-          groupName: "",
+          groupName: '',
           open: false
         });
       })
@@ -63,7 +61,7 @@ class Dashboard extends Component {
   //add group functions
   addGroup = () => {
     const group = {
-      creatorId: uid,
+      creatorId: this.state.uid,
       name: this.state.groupName
     };
     axios
@@ -88,20 +86,20 @@ class Dashboard extends Component {
   render() {
     const { history } = this.props;
     console.log(this.state);
-    console.log(user)
+    console.log(user);
     return (
       <div className="Dashboard">
         <div className="dash-header ">
           <DashPhoto />
           <h1>
             Welcome Back,
-            {" " + user.displayName}
+            {' ' + user.displayName}
           </h1>
         </div>
 
         <div className="section-ctr">
           <div className="sidebar">
-            <button className="add-group-btn hvr-glow" onClick={this.openModal}>
+            <button className="btn hvr-glow" onClick={this.openModal}>
               New Group
             </button>
           </div>
@@ -115,13 +113,13 @@ class Dashboard extends Component {
             <ContactsIcon
               className="di  hvr-push"
               onClick={() => {
-                history.push("/404");
+                history.push('/404');
               }}
             />
             <p
               className="  hvr-push"
               onClick={() => {
-                history.push("/404");
+                history.push('/404');
               }}
             >
               CONTACTS
@@ -132,13 +130,13 @@ class Dashboard extends Component {
             <ProfileIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push("/profile");
+                history.push('/profile');
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push("/404");
+                history.push('/404');
               }}
             >
               PROFILE
@@ -149,13 +147,13 @@ class Dashboard extends Component {
             <HomeIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push("/");
+                history.push('/');
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push("/");
+                history.push('/');
               }}
             >
               HOME
@@ -183,13 +181,13 @@ class Dashboard extends Component {
             <CalendarIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push("/404");
+                history.push('/404');
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push("/404");
+                history.push('/404');
               }}
             >
               CALENDAR
@@ -200,13 +198,13 @@ class Dashboard extends Component {
             <SettingsIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push("/settings");
+                history.push('/settings');
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push("/settings");
+                history.push('/settings');
               }}
             >
               SETTINGS
@@ -247,8 +245,7 @@ export default Dashboard;
 // NOTE: I'm keeping this just in case. If the backend gives us back the
 // group members like we want, this can safely be deleted
 // fetchMembers = (groupId) => {
-    
-  
+
 //   axios
 //     .get(`${groupMembersUrl}/group/${groupId}`)
 //     .then(groupMems => groupMems.data.forEach(data =>
