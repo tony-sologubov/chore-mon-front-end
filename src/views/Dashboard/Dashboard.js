@@ -13,14 +13,14 @@ import axios from "axios";
 const uid = JSON.parse(localStorage.getItem("uid"));
 const user = JSON.parse(localStorage.getItem("user"));
 const url = "https://chore-monkey.herokuapp.com/api";
-
+console.log(uid);
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
       groups: [],
-      uid: "",
+      uid: uid,
       open: false,
       groupName: ""
     };
@@ -41,7 +41,6 @@ class Dashboard extends Component {
         this.setState({
           name: res.data.name,
           groups: res.data.groups,
-          uid: uid,
           groupName: "",
           open: false
         });
@@ -62,7 +61,7 @@ class Dashboard extends Component {
   //add group functions
   addGroup = () => {
     const group = {
-      creatorId: uid,
+      creatorId: this.state.uid,
       name: this.state.groupName
     };
     axios
@@ -99,7 +98,7 @@ class Dashboard extends Component {
 
         <div className="section-ctr">
           <div className="sidebar">
-            <button className="add-group-btn hvr-glow" onClick={this.openModal}>
+            <button className="btn hvr-glow" onClick={this.openModal}>
               New Group
             </button>
           </div>
