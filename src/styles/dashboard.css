@@ -34,19 +34,25 @@
 
 .sidebar button {
   background: var(--accentpink);
-  width: 100%;
-  padding: 2rem;
+  width: 80%;
+
+  line-height: 1.3rem;
+  text-align: center;
+  height: 5rem;
   display: flex;
+  border-radius: 1rem;
+  border: none;
   align-items: center;
   justify-content: center;
-  border-radius: 1rem;
-  vertical-align: center;
-  text-align: center;
-  margin: 1rem;
-  color: rgb(255, 255, 255);
-  border-style: none;
-  cursor: pointer;
+  font-size: 1.3rem;
+  flex-flow: row wrap;
 }
+
+.sidebar button:hover {
+  background: white;
+  color: var(--accentpink);
+}
+
 .cards {
   display: flex;
   flex-flow: row wrap;
@@ -107,4 +113,12 @@ circle {
 .dash-button {
   margin: 26px 26px 0px 0px;
   border-radius: 20px;
+}
+.styles_modal__gNwvD {
+  width: 80%;
+  position: relative;
+}
+.modal {
+  width: 100%;
+  position: relative;
 }

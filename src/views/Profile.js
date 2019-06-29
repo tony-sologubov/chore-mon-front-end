@@ -1,9 +1,9 @@
-import React from 'react';
-import '../../src/styles/profile.css';
-import { ReactComponent as InstaIcon } from '../assets/profile-page/Insta.svg';
-import { ReactComponent as PhoneIcon } from '../assets/profile-page/Phone.svg';
-import { ReactComponent as ThumbIcon } from '../assets/profile-page/Thumb.svg';
-import { ReactComponent as TweetIcon } from '../assets/profile-page/Tweet.svg';
+import React from "react";
+import "../../src/styles/profile.css";
+import { ReactComponent as InstaIcon } from "../assets/profile-page/Insta.svg";
+import { ReactComponent as PhoneIcon } from "../assets/profile-page/Phone.svg";
+import { ReactComponent as ThumbIcon } from "../assets/profile-page/Thumb.svg";
+import { ReactComponent as TweetIcon } from "../assets/profile-page/Tweet.svg";
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -14,14 +14,15 @@ class Profile extends React.Component {
       <div className="profileContainer">
         <div className="header">
           <div className="coverPhoto">.</div>
-          {JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
+          {JSON.parse(localStorage.getItem("firebaseui::rememberedAccounts"))[0]
             .photoUrl !== null ? (
             <img
               className="profilePhoto"
               alt="profile"
               src={
-                JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
-                  .photoUrl
+                JSON.parse(
+                  localStorage.getItem("firebaseui::rememberedAccounts")
+                )[0].photoUrl
               }
             />
           ) : (
@@ -37,20 +38,20 @@ class Profile extends React.Component {
 
         <div className="lower-block">
           <h1 className="profileName">
-            {' ' +
+            {" " +
               JSON.parse(
-                localStorage.getItem('firebaseui::rememberedAccounts')
+                localStorage.getItem("firebaseui::rememberedAccounts")
               )[0].displayName.match(/^[a-z ,.'-]+$/i)[0]}
           </h1>
           <h3 className="profileLocation">DENVER, CO</h3>
           <div className="socialLinks">
-            <PhoneIcon />
-            <ThumbIcon />
-            <TweetIcon />
-            <InstaIcon />
+            <PhoneIcon className="hvr-push" />
+            <ThumbIcon className="hvr-push" />
+            <TweetIcon className="hvr-push" />
+            <InstaIcon className="hvr-push" />
           </div>
           <div className="profileBtn">
-            <button className="connectBtn">CONNECT</button>
+            <button className="connectBtn hvr-push">CONNECT</button>
           </div>
         </div>
       </div>

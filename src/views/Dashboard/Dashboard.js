@@ -1,76 +1,109 @@
-import React, { Component } from 'react';
-import GetGroups from '../../components/Groups/GetGroups.js';
-import Sidebar from './Sidebar';
-import { DashPhoto } from '../../components/Common';
-import { ReactComponent as ContactsIcon } from '../../assets/dashboard/icons/contacts-icon.svg';
-import { ReactComponent as ProfileIcon } from '../../assets/dashboard/icons/profile.svg';
-import { ReactComponent as HomeIcon } from '../../assets/dashboard/icons/home.svg';
-import { ReactComponent as ListIcon } from '../../assets/dashboard/icons/list.svg';
-import { ReactComponent as CalendarIcon } from '../../assets/dashboard/icons/calendar.svg';
-import { ReactComponent as SettingsIcon } from '../../assets/dashboard/icons/settings.svg';
-import axios from 'axios';
+import React, { Component } from "react";
+import Modal from "react-responsive-modal";
+import GroupList from "./GroupList";
+import { DashPhoto } from "../../components/Common";
+import { ReactComponent as ContactsIcon } from "../../assets/dashboard/icons/contacts-icon.svg";
+import { ReactComponent as ProfileIcon } from "../../assets/dashboard/icons/profile.svg";
+import { ReactComponent as HomeIcon } from "../../assets/dashboard/icons/home.svg";
+import { ReactComponent as ListIcon } from "../../assets/dashboard/icons/list.svg";
+import { ReactComponent as CalendarIcon } from "../../assets/dashboard/icons/calendar.svg";
+import { ReactComponent as SettingsIcon } from "../../assets/dashboard/icons/settings.svg";
+import axios from "axios";
 
-const groupUrl = 'http://localhost:9000/api/group/';
-const groupMembersUrl = 'http://localhost:9000/api/groupmembers/';
-
+const uid = JSON.parse(localStorage.getItem("uid"));
+const user = JSON.parse(localStorage.getItem("user"));
+const url = "https://chore-monkey.herokuapp.com/api";
+console.log(uid);
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       groups: [],
-      tasks: [],
-      members: []
+      uid: uid,
+      open: false,
+      groupName: ""
     };
   }
 
   componentDidMount() {
-    this.fetchGroups();
+    console.log("mounting");
+    this.fetch();
+    console.log(this.state);
   }
 
-  fetchGroups = () => {
-    axios.get(`${groupMembersUrl}/user/4`).then(memberships =>
-      memberships.data.data.forEach(groupMembership =>
-        axios.get(`${groupUrl}/${groupMembership.groupId}`).then(group => {
-          this.setState({ groups: [...this.state.groups, group.data.data[0]] });
-        })
-      )
-    );
+  fetch = () => {
+    console.log(uid);
+    axios
+      .get(`${url}/users/${uid}`)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          name: res.data.name,
+          groups: res.data.groups,
+          groupName: "",
+          open: false
+        });
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
+
+  //Change Handler
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  submit = e => {
+    e.preventDefault();
+    this.addGroup();
+  };
+  //add group functions
+  addGroup = () => {
+    const group = {
+      creatorId: this.state.uid,
+      name: this.state.groupName
+    };
+    axios
+      .post(`${url}/group`, group)
+      .then(res => {
+        console.log(res);
+        this.fetch();
+      })
+      .catch(er => console.log(er.message));
+  };
+
+  //Opens delete modal
+  openModal = () => {
+    this.setState({ open: true });
+  };
+
+  //Closes delete modal
+  closeModal = () => {
+    this.setState({ open: false });
   };
 
   render() {
     const { history } = this.props;
-
+    console.log(this.state);
     return (
       <div className="Dashboard">
         <div className="dash-header ">
-          {JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
-            .photoUrl !== null ? (
-            <DashPhoto />
-          ) : (
-            <img
-              src="https://res.cloudinary.com/ryanboris/image/upload/v1561535196/profileplaceholder.png"
-              alt="placeholder"
-              width="75"
-              height="100"
-            />
-          )}
+          <DashPhoto />
           <h1>
             Welcome Back,
-            {' ' +
-              JSON.parse(
-                localStorage.getItem('firebaseui::rememberedAccounts')
-              )[0].displayName.match(/[^\s,.'"!?]+/)[0]}
+            {" " + user.displayName}
           </h1>
         </div>
 
         <div className="section-ctr">
-          <Sidebar className="sidebar" />
+          <div className="sidebar">
+            <button className="btn hvr-glow" onClick={this.openModal}>
+              New Group
+            </button>
+          </div>
           <div className="cards">
-            <GetGroups
-              groups={this.state.groups}
-              fetchUsers={this.fetchUsers}
-              className="cards"
-            />
+            <GroupList groups={this.state.groups} className="cards" />
           </div>
         </div>
 
@@ -79,13 +112,13 @@ class Dashboard extends Component {
             <ContactsIcon
               className="di  hvr-push"
               onClick={() => {
-                history.push('/404');
+                history.push("/404");
               }}
             />
             <p
               className="  hvr-push"
               onClick={() => {
-                history.push('/404');
+                history.push("/404");
               }}
             >
               CONTACTS
@@ -96,13 +129,13 @@ class Dashboard extends Component {
             <ProfileIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push('/profile');
+                history.push("/profile");
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push('/404');
+                history.push("/404");
               }}
             >
               PROFILE
@@ -113,13 +146,13 @@ class Dashboard extends Component {
             <HomeIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push('/');
+                history.push("/");
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push('/');
+                history.push("/");
               }}
             >
               HOME
@@ -130,23 +163,13 @@ class Dashboard extends Component {
             <ListIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push(
-                  `/mytasks/${
-                    JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
-                      .uid
-                  }`
-                );
+                history.push(`/mytasks/${uid}`);
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push(
-                  `/mytasks/${
-                    JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0]
-                      .uid
-                  }`
-                );
+                history.push(`/mytasks/${uid}`);
               }}
             >
               MY TASKS
@@ -157,13 +180,13 @@ class Dashboard extends Component {
             <CalendarIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push('/404');
+                history.push("/404");
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push('/404');
+                history.push("/404");
               }}
             >
               CALENDAR
@@ -174,19 +197,43 @@ class Dashboard extends Component {
             <SettingsIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push('/settings');
+                history.push("/settings");
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push('/settings');
+                history.push("/settings");
               }}
             >
               SETTINGS
             </p>
           </div>
         </div>
+        <Modal
+          open={this.state.open}
+          onClose={this.closeModal}
+          center
+          showCloseIcon={false}
+        >
+          <div className="modal">
+            <form onSubmit={e => this.submit(e)} className="addGroupForm">
+              <input
+                type="text"
+                name="groupName"
+                placeholder="Add a Group"
+                value={this.state.groupName}
+                onChange={event => this.handleChange(event)}
+              />
+              <button
+                type="submit"
+                className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </Modal>
       </div>
     );
   }
