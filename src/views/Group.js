@@ -12,6 +12,9 @@ import ProfilePhotoTask from '../components/Tasks/TaskAvatar'
 import ProfilePhoto from "../components/Groups/GroupAvatars";
 import axios from "axios";
 
+const url = "https://chore-monkey.herokuapp.com/api";
+// const url = "http://localhost:9000/api";
+
 class Group extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +40,7 @@ class Group extends Component {
 
 
   fetchGroup = (groupId) => {
-    axios.get(`http://localhost:9000/api/group/${groupId}`)
+    axios.get(`${url}/group/${groupId}`)
     .then(group => {
       this.setState({
         members: group.data.members,
@@ -80,7 +83,7 @@ class Group extends Component {
 
     axios
     .post(
-      'http://localhost:9000/api/tasks/', newTask
+      `${url}/tasks/`, newTask
       )
     .then(response =>  {
       this.fetchGroup(this.props.match.params.groupId) 
@@ -98,7 +101,7 @@ class Group extends Component {
       name: this.state.newName
     }
   axios
-    .put(`http://localhost:9000/api/groups/${this.props.match.params.groupId}`,
+    .put(`${url}/groups/${this.props.match.params.groupId}`,
     newGroup
     )
     .then(response => {

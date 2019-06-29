@@ -12,8 +12,8 @@ import axios from "axios";
 
 const uid = JSON.parse(localStorage.getItem("uid"));
 const user = JSON.parse(localStorage.getItem("user"));
-// const url = "https://chore-monkey.herokuapp.com/api";
-const url = "http://localhost:9000/api";
+const url = "https://chore-monkey.herokuapp.com/api";
+// const url = "http://localhost:9000/api";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -88,6 +88,7 @@ class Dashboard extends Component {
   render() {
     const { history } = this.props;
     console.log(this.state);
+    console.log(user)
     return (
       <div className="Dashboard">
         <div className="dash-header ">

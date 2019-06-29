@@ -16,10 +16,7 @@ const [editing, setEditing] = useState(false)
 const [editedChore, setEditedChore] = useState(title)
 const [editedAssigned, setEditedAssigned] = useState(assignedTo)
 const [editedDate, setEditedDate] = useState(dueDate)
-// const [userName, setUserName] = useState(user)
-// const [editedisComplete, setEditedisComplete] = useState(isComplete)
 const [open, setOpen] = React.useState(false);
-// const user = JSON.parse(localStorage.getItem('user')).displayName.match(/[^\s,.'"!?]+/)[0];
 
   const handleOpen = () => {
   setOpen(true);
