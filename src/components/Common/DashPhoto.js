@@ -19,7 +19,7 @@ function DashPhoto() {
   return (
     <Avatar
       alt="photo of user"
-      src={JSON.parse(localStorage.getItem('firebaseui::rememberedAccounts'))[0].photoUrl}
+      src={JSON.parse(localStorage.getItem('user')).photoUrl}
       className={classes.bigAvatar}
     />
   );

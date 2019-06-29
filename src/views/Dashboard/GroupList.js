@@ -8,7 +8,7 @@ const GroupList = ({ groups }) => {
   } else {
     return groups.map(g => {
       return (
-        <Link to={{ pathname: `groups/g.id` }}>
+        <Link to={{ pathname: `groups/${g.groupId}` }}>
           <ComplexButton groupName={g.name} />
         </Link>
       );
