@@ -87,6 +87,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ComplexButton = props => {
+  console.log(props.groupName);
   const classes = useStyles();
   const image = {
     url: `https://source.unsplash.com/1600x900/?${

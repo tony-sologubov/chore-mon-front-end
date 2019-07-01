@@ -67,10 +67,11 @@ class Dashboard extends Component {
       });
       return;
     }
-    const group = {
+    let group = {
       creatorId: this.state.uid,
       name: this.state.groupName
     };
+    console.log(group);
     axios
       .post(`${url}/group`, group)
       .then(res => {
@@ -251,29 +252,3 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
-
-// NOTE: I'm keeping this just in case. If the backend gives us back the
-// group members like we want, this can safely be deleted
-// fetchMembers = (groupId) => {
-
-//   axios
-//     .get(`${groupMembersUrl}/group/${groupId}`)
-//     .then(groupMems => groupMems.data.forEach(data =>
-//       axios
-//       .get(`${usersUrl}/${data.userId}`)
-//       .then(user => {
-//         const arr = [1,2,3]
-//         (this.state.members.includes(user.data.data[0]))
-//         if (!this.state.members.includes(user.data.data[0])){
-//           this.setState({ members: [...this.state.members, user.data.data[0]]})
-//         }
-//       })
-//       .catch(error => console.log(error))
-//       ))
-//     .catch(error => console.log(error))
-//     }
-
-// setCurrentGroup = (id) => {
-//   console.log("Set Group Firing")
-//   this.setState({ currentGroup: id})
-// }
