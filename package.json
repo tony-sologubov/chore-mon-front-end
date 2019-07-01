@@ -21,6 +21,7 @@
     "react-datepicker": "^2.7.0",
     "react-dom": "^16.8.6",
     "react-firebaseui": "^3.1.2",
+    "react-inline-editing": "^1.0.10",
     "react-modal": "^3.8.1",
     "react-pose": "^4.0.8",
     "react-responsive-modal": "^4.0.1",
