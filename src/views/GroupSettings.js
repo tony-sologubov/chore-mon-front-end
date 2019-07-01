@@ -2,7 +2,7 @@ import React from "react";
 import "../../src/styles/settings.css";
 import Modal from "react-modal";
 import axios from "axios";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 
 const url = "https://chore-monkey.herokuapp.com/api";
 class GroupSettings extends React.Component {

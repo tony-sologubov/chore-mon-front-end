@@ -13,13 +13,13 @@ const useStyles = makeStyles({
   }
 });
 
-function DashPhoto() {
+function DashPhoto(props) {
   const classes = useStyles();
 
   return (
     <Avatar
       alt="photo of user"
-      src={JSON.parse(localStorage.getItem("user")).photoURL}
+      src={props.photo}
       className={classes.bigAvatar}
     />
   );

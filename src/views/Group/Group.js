@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import Pic from "../../components/Pic";
 import TaskTable from "./TaskTable";
 
-const groupId = window.location.href.split("/").pop();
 class Group extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +16,7 @@ class Group extends Component {
   }
 
   componentDidMount() {
-    console.log(groupId);
+    const groupId = window.location.href.split("/").pop();
     axios
       .get(`https://chore-monkey.herokuapp.com/api/group/${groupId}`)
       .then(res => {
@@ -29,7 +28,9 @@ class Group extends Component {
       });
   }
   render() {
+    console.log(this.state.name);
     const { name, members } = this.state;
+    const groupId = window.location.href.split("/").pop();
     return (
       <div className="Dashboard">
         <h1>{name}</h1>
@@ -50,4 +51,4 @@ class Group extends Component {
   }
 }
 
-export default Group;
+export default withRouter(Group);

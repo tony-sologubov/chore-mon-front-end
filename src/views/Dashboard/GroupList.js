@@ -1,6 +1,6 @@
 import React from "react";
 import ComplexButton from "../../components/ComplexButton";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const GroupList = ({ groups }) => {
   if (!groups.length) {
@@ -16,4 +16,4 @@ const GroupList = ({ groups }) => {
   }
 };
 
-export default GroupList;
+export default withRouter(GroupList);

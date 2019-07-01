@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useFormValidation from '../components/Auth/useFormValidation';
-import validateLogin from '../components/Auth/validateLogin';
-import firebase from '../firebase';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { uiConfig } from '../../firebase/uiconfig';
+import React, { useState } from "react";
+import { Link, withrouter } from "react-router";
+import useFormValidation from "../components/Auth/useFormValidation";
+import validateLogin from "../components/Auth/validateLogin";
+import firebase from "../firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { uiConfig } from "../../firebase/uiconfig";
 
 const INITIAL_STATE = {
-  name: '',
-  email: '',
-  password: ''
+  name: "",
+  email: "",
+  password: ""
 };
 
 function Login({ history }) {
@@ -30,9 +30,9 @@ function Login({ history }) {
       login
         ? await firebase.login(email, password)
         : await firebase.register(name, email, password);
-      history.push('/');
+      history.push("/");
     } catch (err) {
-      console.error('Authentication Error', err);
+      console.error("Authentication Error", err);
       setAuthError(err.message);
     }
   }
@@ -42,14 +42,17 @@ function Login({ history }) {
       <div className="login-button-container">
         <img
           className="logo "
-          src={require('../assets/landing-page/png/logo.png')}
+          src={require("../assets/landing-page/png/logo.png")}
           alt="monkey logo"
         />
 
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
       </div>
     </div>
   );
 }
 
-export default Login;
+export default withRouter(Login);

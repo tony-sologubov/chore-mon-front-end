@@ -17,37 +17,24 @@ import Profile from "../views/Profile";
 import Settings from "../views/Settings";
 import GroupSettings from "../views/GroupSettings";
 
-const RouteContainer = posed.div({
-  enter: { opacity: 1, delay: 300 },
-  exit: { opacity: 0 }
-});
-
 const App = () => {
   const user = useAuth();
   return (
     <FirebaseContext.Provider value={{ user, firebase }}>
-      <Route
-        render={({ location }) => (
-          <div id="site-container">
-            <PoseGroup>
-              <RouteContainer key={location.pathname}>
-                <Switch>
-                  <Route exact path="/" component={Landing} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/forgot" component={ForgotPassword} />
-                  <Route path="/dashboard" component={Dashboard} />
-                  <Route path="/billing" component={BillingPage} />
-                  <Route path="/404" component={InProgress} />
-                  <Route exact path="/groups/:groupId" component={Group} />
-                  <Route path="/profile" component={Profile} />
-                  <Route path="/settings" component={Settings} />
-                  <Route path="/groupsettings" component={GroupSettings} />
-                </Switch>
-              </RouteContainer>
-            </PoseGroup>
-          </div>
-        )}
-      />
+      <div id="site-container">
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route path="/login" component={Login} />
+          <Route path="/forgot" component={ForgotPassword} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/billing" component={BillingPage} />
+          <Route path="/404" component={InProgress} />
+          <Route exact path="/groups/:groupId" component={Group} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/groupsettings" component={GroupSettings} />
+        </Switch>
+      </div>
     </FirebaseContext.Provider>
   );
 };

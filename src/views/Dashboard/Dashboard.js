@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import GroupList from "./GroupList";
 import { DashPhoto } from "../../components/Common";
@@ -41,6 +42,7 @@ class Dashboard extends Component {
         this.setState({
           name: res.data.name,
           groups: res.data.groups,
+          photo: res.data.profilePicture,
           groupName: "",
           open: false,
           error: false
@@ -98,10 +100,10 @@ class Dashboard extends Component {
     return (
       <div className="Dashboard">
         <div className="dash-header ">
-          <DashPhoto />
+          <DashPhoto photo={this.state.photo} />
           <h1>
             Welcome Back,
-            {" " + user.displayName}
+            {" " + this.state.name}
           </h1>
         </div>
 
@@ -251,4 +253,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);
