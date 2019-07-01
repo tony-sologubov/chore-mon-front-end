@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 
 import Pic from "../../components/Pic";
 import TaskTable from "./TaskTable";
-import Modal from "react-modal";
+import Modal from "react-responsive-modal";
 import TaskForm from "./TaskForm";
 
 class Group extends Component {
@@ -69,14 +69,15 @@ class Group extends Component {
           Add Task
         </button>
         <Modal
-          isOpen={this.state.showModal}
-          onRequestClose={this.closeModal}
+          open={this.state.showModal}
+          onClose={this.closeModal}
           contentLabel="Add Task"
         >
           <TaskForm
             groupId={groupId}
             members={this.state.members}
             addTask={this.addTask}
+            openModal={this.openModal}
           />
         </Modal>
         <h2>Task List</h2>

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+
+import moment from "moment";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -38,102 +40,110 @@ const styles = () => ({
   }
 });
 
-const TaskForm = props => {
-  const [formData, setFormData] = useState({
-    title: "",
-    assignedTo: 0,
-    dueDate: new Date(),
-    isComplete: false
-  });
-  //hooks
-  const updateFormData = e => {
-    console.log(e.target.value);
-    setFormData({
-      ...formData,
+class TaskForm extends React.Component {
+  constructor(props) {
+    super(props);
 
-      [e.target.name]: e.target.value
-    });
-  };
-  const updateDate = date => {
-    console.log(date);
-    console.log(formData);
-    setFormData({
-      dueDate: date
-    });
-  };
-  const addTaskHandler = e => {
-    e.preventDefault();
-    console.log(props.groupId);
-    console.log(formData);
-    props.addTask({
-      title: formData.title,
-      assignedTo: formData.assignedTo,
-      dueDate: formData.dueDate,
+    this.state = {
+      title: "",
+      assignedTo: 0,
+      selected: new Date(),
       isComplete: false,
-      groupId: props.groupId
+      startDate: moment()
+    };
+    this.handleDate = this.handleDate.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.onChange) {
+      this.props.onChange(this.state.selected);
+    }
+  }
+
+  handleChange = async e => {
+    await this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state);
+  };
+
+  handleDate(date) {
+    if (this.props.onChange) {
+      this.props.onChange(date);
+    }
+    this.setState({
+      selected: date
+    });
+  }
+  addTaskHandler = e => {
+    e.preventDefault();
+
+    this.props.addTask({
+      title: this.state.title,
+      assignedTo: this.state.assignedTo,
+      dueDate: this.state.selected,
+      isComplete: false,
+      groupId: this.props.groupId
     });
 
-    setFormData({
+    this.setState({
       title: "",
       assignedTo: "",
-      dueDate: new Date()
+      selected: new Date()
     });
   };
-
-  const { classes, members, groupId } = props;
-  const { title, assignedTo, dueDate } = formData;
-
-  return (
-    <form
-      className={classes.container}
-      noValidate
-      autoComplete="on"
-      onSubmit={addTaskHandler}
-    >
-      <h1>Point-O-Matic</h1>
-      <h2>Assigned To</h2>
-      <TextField
-        id="dropdown"
-        select
-        className={classes.textField}
-        value={assignedTo}
-        name="assignedTo"
-        onChange={e => updateFormData(e)}
-        SelectProps={{
-          MenuProps: {
-            className: classes.menu
-          }
-        }}
-        margin="normal"
+  render() {
+    const { classes, members, groupId } = this.props;
+    const { title, assignedTo, dueDate } = this.state;
+    return (
+      <form
+        className={classes.container}
+        noValidate
+        autoComplete="on"
+        onSubmit={this.addTaskHandler}
       >
-        {members.map(m => (
-          <MenuItem key={m.userId} value={m.uid}>
-            {m.name}
-          </MenuItem>
-        ))}
-      </TextField>
-      <h2>Title</h2>
-      <TextField
-        id="input"
-        className={classes.textField}
-        value={title}
-        name="title"
-        onChange={e => updateFormData(e)}
-        margin="normal"
-      />
-      {/* <DatePicker
-        name="dueDate"
-        allowSameDay={true}
-        placeholderText="due date"
-        value={dueDate}
-        onChange={updateDate}
-      /> */}
-      <button className="button form-submit" type="submit">
-        Save
-      </button>
-    </form>
-  );
-};
+        <h1>Point-O-Matic</h1>
+        <h2>Assigned To</h2>
+        <TextField
+          id="dropdown"
+          select
+          className={classes.textField}
+          value={assignedTo}
+          name="assignedTo"
+          onChange={this.handleChange}
+          SelectProps={{
+            MenuProps: {
+              className: classes.menu
+            }
+          }}
+          margin="normal"
+        >
+          {members.map(m => (
+            <MenuItem key={m.userId} value={m.uid}>
+              {m.name}
+            </MenuItem>
+          ))}
+        </TextField>
+        <h2>Title</h2>
+        <TextField
+          id="input"
+          className={classes.textField}
+          value={title}
+          name="title"
+          onChange={this.handleChange}
+          margin="normal"
+        />
+        <DatePicker
+          selected={this.state.selected}
+          onChange={this.handleDate}
+          dateFormat="yyyy/MM/dd"
+        />
+        ;
+        <button className="button form-submit" type="submit">
+          Save
+        </button>
+      </form>
+    );
+  }
+}
 
 TaskForm.propTypes = {
   classes: PropTypes.object.isRequired

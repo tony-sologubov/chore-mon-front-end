@@ -30,11 +30,12 @@ class TaskTable extends Component {
 
         <tbody>
           {this.props.tasks.map(t => {
+            const date = new Date(t.dueDate).toLocaleDateString("en-US");
             return (
               <tr>
                 <td>{t.title}</td>
                 <td>{this.find(t.assignedTo)}</td>
-                <td>{t.dueDate}</td>
+                <td>{date}</td>
                 <td>Actions</td>
               </tr>
             );
