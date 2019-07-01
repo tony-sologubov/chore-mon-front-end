@@ -106,7 +106,7 @@ class Group extends Component {
         <TaskTable
           members={this.state.members}
           tasks={this.state.tasks}
-          groupId={this.props.match.params.id}
+          groupId={groupId}
           edit={this.editTask}
           titleSubmit={this.editTask}
         />

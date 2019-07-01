@@ -6,13 +6,14 @@ class TaskTable extends Component {
     super(props);
     this.state = {
       title: "",
-      editing: false
+      editing: false,
+      editTaskId: "",
+      assignedTo: ""
     };
   }
 
   find = id => {
     const mem = this.props.members.filter(m => m.uid === id);
-    console.log(mem);
     if (mem[0]) {
       return mem[0].profilePicture;
     } else {
@@ -20,17 +21,34 @@ class TaskTable extends Component {
     }
   };
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  edit = () => {
-    return this.setState({ editing: !this.state.editing });
+  edit = (task) => {
+    if (!this.state.editTaskId) {
+      return this.setState({ editing: !this.state.editing, editTaskId: task.id, assignedTo: task.assignedTo });
+    } else {
+      return this.setState({ editing: !this.state.editing, editTaskId: "", title: "" });
+    }
   };
 
-  submit = () => {};
+  submit = (e) => {
+    e.preventDefault();
+    console.log("We Update here!")
+    console.log(this.props)
+    console.log(this.props.groupId)
+    this.props.edit({
+      assignedTo: this.state.assignedTo,
+      title: this.state.title,
+      groupId: this.props.groupId,
+    }, this.state.editTaskId)
+    return this.setState({ editing: !this.state.editing, editTaskId: "" });
+  };
 
   render() {
+    console.log("State")
+    console.log(this.state)
     return (
       <div>
         <table className="pink striped highlight responsive-table">
@@ -55,7 +73,7 @@ class TaskTable extends Component {
                   </td>
                   <td>{date}</td>
                   <td>
-                    <button onClick={this.edit}>Edit</button>
+                    <button onClick={() => this.edit(t)}>Edit</button>
                   </td>
                 </tr>
               );
@@ -63,12 +81,12 @@ class TaskTable extends Component {
           </tbody>
         </table>
         {this.state.editing && (
-          <form onSubmit={this.props.edit}>
+          <form onSubmit={(e) => this.submit(e)}>
             <input
               type="text"
               name="title"
               value={this.state.title}
-              onChange={this.handleTitleChange}
+              onChange={this.handleChange}
             />
           </form>
         )}
