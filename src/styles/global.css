@@ -1,6 +1,10 @@
 svg {
   cursor: pointer;
 }
+table .striped tbody:nth-child(odd) {
+  background-color: white !important;
+}
+
 body * {
   max-height: 100vh;
   font-family: "Poppins", sans-serif;

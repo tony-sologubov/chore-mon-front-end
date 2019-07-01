@@ -102,8 +102,10 @@ class Dashboard extends Component {
         <div className="dash-header ">
           <DashPhoto photo={this.state.photo} />
           <h1>
-            Welcome Back,
-            {" " + this.state.name}
+            {"Welcome Back, " +
+              JSON.parse(
+                localStorage.getItem("firebaseui::rememberedAccounts")
+              )[0].displayName.match(/[^\s,.'"!?]+/)[0]}
           </h1>
         </div>
 
