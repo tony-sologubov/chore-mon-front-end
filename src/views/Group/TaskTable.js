@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TinyPic from "../../components/TinyPic";
 
 class TaskTable extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class TaskTable extends Component {
     const mem = this.props.members.filter(m => m.uid === id);
     console.log(mem);
     if (mem[0]) {
-      return mem[0].name;
+      return mem[0].profilePicture;
     } else {
       return "no asignee";
     }
@@ -31,10 +32,13 @@ class TaskTable extends Component {
         <tbody>
           {this.props.tasks.map(t => {
             const date = new Date(t.dueDate).toLocaleDateString("en-US");
+            const photo = this.find(t.assignedTo);
             return (
               <tr>
                 <td>{t.title}</td>
-                <td>{this.find(t.assignedTo)}</td>
+                <td>
+                  <TinyPic photo={photo} />
+                </td>
                 <td>{date}</td>
                 <td>Actions</td>
               </tr>
