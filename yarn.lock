@@ -9990,6 +9990,14 @@ react-firebaseui@^3.1.2:
   dependencies:
     firebaseui "^3.2.0"
 
+react-inline-editing@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/react-inline-editing/-/react-inline-editing-1.0.10.tgz#0e2b89c03f8506e8d02feccf66a658dd809a8dfd"
+  integrity sha1-DiuJwD+FBujQL+zPZqZY3YCajf0=
+  dependencies:
+    prop-types "^15.6.0"
+    react "^16.2.0"
+
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
@@ -10190,7 +10198,7 @@ react-transition-group@^4.0.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@^16.8.6:
+react@^16.2.0, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==

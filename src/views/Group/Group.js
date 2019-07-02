@@ -58,6 +58,27 @@ class Group extends Component {
       .catch(er => console.log(er.message));
   };
 
+  editTask = (task, id) => {
+    console.log("Edit Task Firing:");
+    console.log(task);
+    axios
+      .put(`https://chore-monkey.herokuapp.com/api/tasks/${id}`, task)
+      .then(res => {
+        console.log("Success");
+        this.fetchGroup();
+      })
+      .catch(er => console.log(er.message));
+  };
+
+  deleteTask = id => {
+    axios
+      .delete(`https://chore-monkey.herokuapp.com/api/tasks/${id}`)
+      .then(res => {
+        this.fetchGroup();
+      })
+      .catch(er => console.log(er.message));
+  };
+
   render() {
     console.log(this.state.name);
     const { name, members } = this.state;
@@ -74,6 +95,7 @@ class Group extends Component {
           contentLabel="Add Task"
         >
           <TaskForm
+            delete={this.deleteTask}
             groupId={groupId}
             members={this.state.members}
             addTask={this.addTask}
@@ -81,7 +103,13 @@ class Group extends Component {
           />
         </Modal>
         <h2>Task List</h2>
-        <TaskTable members={this.state.members} tasks={this.state.tasks} />
+        <TaskTable
+          members={this.state.members}
+          tasks={this.state.tasks}
+          groupId={groupId}
+          edit={this.editTask}
+          titleSubmit={this.editTask}
+        />
         <h2>Collaborators</h2>
 
         {members.map(m => {
