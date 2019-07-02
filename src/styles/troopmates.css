@@ -1,8 +1,9 @@
 .search-cards {
   display: flex;
   flex-flow: row wrap;
+  width: 100%;
 }
-.search-cards .card {
-  width: 20%;
+.search-cards a {
   margin: 1rem;
+  width: 20%;
 }

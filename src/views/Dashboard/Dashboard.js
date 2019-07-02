@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import GroupList from "./GroupList";
 import { DashPhoto } from "../../components/Common";
@@ -14,7 +14,7 @@ import axios from "axios";
 const uid = JSON.parse(localStorage.getItem("uid"));
 const user = JSON.parse(localStorage.getItem("user"));
 const url = "https://chore-monkey.herokuapp.com/api";
-console.log(uid);
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -28,17 +28,13 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    console.log("mounting");
     this.fetch();
-    console.log(this.state);
   }
 
   fetch = () => {
-    console.log(uid);
     axios
       .get(`${url}/users/${uid}`)
       .then(res => {
-        console.log(res);
         this.setState({
           name: res.data.name,
           groups: res.data.groups,
@@ -73,11 +69,10 @@ class Dashboard extends Component {
       creatorId: this.state.uid,
       name: this.state.groupName
     };
-    console.log(group);
+
     axios
       .post(`${url}/group`, group)
       .then(res => {
-        console.log(res);
         this.fetch();
       })
       .catch(er => console.log(er.message));
@@ -95,8 +90,7 @@ class Dashboard extends Component {
 
   render() {
     const { history } = this.props;
-    console.log(this.state);
-    console.log(user);
+
     return (
       <div className="Dashboard">
         <div className="dash-header ">
@@ -119,24 +113,27 @@ class Dashboard extends Component {
             <GroupList groups={this.state.groups} className="cards" />
           </div>
         </div>
-
         <div className="dash-buttons">
-          <div className="icon-div">
-            <ContactsIcon
-              className="di  hvr-push"
-              onClick={() => {
-                history.push("/find-friend");
-              }}
-            />
-            <p
-              className="  hvr-push"
-              onClick={() => {
-                history.push("/find-friend");
-              }}
-            >
-              FRIENDS
-            </p>
-          </div>
+          <Link
+            to={{
+              pathname: `/find-friend`,
+              state: {
+                groups: this.state.groups
+              }
+            }}
+          >
+            <div className="icon-div">
+              <ContactsIcon className="di  hvr-push" />
+              <p
+                className="  hvr-push"
+                onClick={() => {
+                  history.push("/find-friend");
+                }}
+              >
+                FRIENDS
+              </p>
+            </div>
+          </Link>
 
           <div className="icon-div">
             <ProfileIcon

@@ -5,7 +5,9 @@ import { ReactComponent as PhoneIcon } from "../assets/profile-page/Phone.svg";
 import { ReactComponent as ThumbIcon } from "../assets/profile-page/Thumb.svg";
 import { ReactComponent as TweetIcon } from "../assets/profile-page/Tweet.svg";
 import axios from "axios";
-class Profile extends React.Component {
+import Select from "../components/Select";
+
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,7 +17,8 @@ class Profile extends React.Component {
     this.getUser();
   }
 
-  getUser = id => {
+  getUser = () => {
+    const id = window.location.href.split("/").pop();
     axios
       .get(`https://chore-monkey.herokuapp.com/api/users/${id}`)
       .then(res => {
@@ -24,25 +27,39 @@ class Profile extends React.Component {
           uid: res.data.uid,
           location: res.data.location,
           profilePicture: res.data.profilePicture,
-          coverPhoto: res.data.coverPhoto
+          coverPhoto: res.data.coverPhoto,
+          memberId: "",
+          groupId: 0
         });
       });
   };
+
+  add = (m, props) => {
+    axios
+      .post(`https://chore-monkey.herokuapp.com/api/groupmembers`, m)
+      .then(res => {
+        console.log(res);
+        this.props.history.push("/dashboard");
+      })
+      .catch(er => console.log(er.message));
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
+    console.log(this.props.location.state);
+
     return (
       <div className="profileContainer">
         <div className="header">
           <div className="coverPhoto">.</div>
-          {JSON.parse(localStorage.getItem("firebaseui::rememberedAccounts"))[0]
-            .photoUrl !== null ? (
+          {this.state.profilePicture !== null ? (
             <img
               className="profilePhoto"
               alt="profile"
-              src={
-                JSON.parse(
-                  localStorage.getItem("firebaseui::rememberedAccounts")
-                )[0].photoUrl
-              }
+              src={this.state.profilePicture}
             />
           ) : (
             <img
@@ -56,19 +73,19 @@ class Profile extends React.Component {
         </div>
 
         <div className="lower-block">
-          <h1 className="profileName">
-            {" " +
-              JSON.parse(
-                localStorage.getItem("firebaseui::rememberedAccounts")
-              )[0].displayName.match(/^[a-z ,.'-]+$/i)[0]}
-          </h1>
-          <h3 className="profileLocation">DENVER, CO</h3>
+          <h1 className="profileName">{this.state.name}</h1>
+          <h3 className="profileLocation">{this.state.location}</h3>
           <div className="socialLinks">
             <PhoneIcon className="hvr-push" />
             <ThumbIcon className="hvr-push" />
             <TweetIcon className="hvr-push" />
             <InstaIcon className="hvr-push" />
           </div>
+          <Select
+            userId={this.state.uid}
+            add={this.add}
+            groups={this.props.location.state.groups}
+          />
           <div className="profileBtn">
             <button className="connectBtn hvr-push">CONNECT</button>
           </div>
@@ -78,4 +95,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default UserProfile;

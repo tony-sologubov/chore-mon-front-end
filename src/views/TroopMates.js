@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class TroopMates extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class TroopMates extends Component {
 
   render() {
     const { name, users, email } = this.state;
+
     return (
       <div className="search">
         <form onSubmit={this.searchName}>
@@ -54,22 +56,31 @@ class TroopMates extends Component {
         <div className="search-cards">
           {users.map(m => {
             return (
-              <div className="card hoverable">
-                <div className="card-image center-align">
-                  <img src={m.profilePicture} alt="profile of user" />
+              <Link
+                to={{
+                  pathname: `/user/${m.uid}`,
+                  state: {
+                    groups: this.props.location.state
+                  }
+                }}
+              >
+                <div className="card hoverable">
+                  <div className="card-image center-align">
+                    <img src={m.profilePicture} alt="profile of user" />
 
-                  <a
-                    className="btn-floating halfway-fab waves-effect waves-light red"
-                    href="www.google.com"
-                  >
-                    <i className="material-icons">add</i>
-                  </a>
+                    <a
+                      className="btn-floating halfway-fab waves-effect waves-light red"
+                      href="www.google.com"
+                    >
+                      <i className="material-icons">add</i>
+                    </a>
+                  </div>
+                  <div class="card-content">
+                    <h3 className="card-title">{m.name}</h3>
+                    <p>{m.location}</p>
+                  </div>
                 </div>
-                <div class="card-content">
-                  <h3 className="card-title">{m.name}</h3>
-                  <p>Boise, Idaho</p>
-                </div>
-              </div>
+              </Link>
             );
           })}
         </div>

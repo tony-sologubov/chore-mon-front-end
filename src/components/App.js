@@ -16,6 +16,7 @@ import TroopMates from "../views/TroopMates";
 import Profile from "../views/Profile";
 import Settings from "../views/Settings";
 import GroupSettings from "../views/GroupSettings";
+import UserProfile from "../views/UserProfile";
 
 const App = () => {
   const user = useAuth();
@@ -24,6 +25,7 @@ const App = () => {
       <div id="site-container">
         <Switch>
           <Route exact path="/" component={Landing} />
+          <Route exact path="/user/:userId" component={UserProfile} />
           <Route path="/find-friend" component={TroopMates} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={ForgotPassword} />
