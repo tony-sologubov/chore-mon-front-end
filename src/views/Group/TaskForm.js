@@ -62,7 +62,6 @@ class TaskForm extends React.Component {
 
   handleChange = async e => {
     await this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
   };
 
   handleDate(date) {

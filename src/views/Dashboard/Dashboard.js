@@ -125,16 +125,16 @@ class Dashboard extends Component {
             <ContactsIcon
               className="di  hvr-push"
               onClick={() => {
-                history.push("/404");
+                history.push("/find-friend");
               }}
             />
             <p
               className="  hvr-push"
               onClick={() => {
-                history.push("/404");
+                history.push("/find-friend");
               }}
             >
-              CONTACTS
+              FRIENDS
             </p>
           </div>
 

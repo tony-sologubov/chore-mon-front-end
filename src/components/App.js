@@ -12,7 +12,7 @@ import "../styles/index.css";
 import Login from "./Auth/Login";
 import ForgotPassword from "./Auth/ForgotPassword";
 import Group from "../views/Group/Group";
-
+import TroopMates from "../views/TroopMates";
 import Profile from "../views/Profile";
 import Settings from "../views/Settings";
 import GroupSettings from "../views/GroupSettings";
@@ -24,6 +24,7 @@ const App = () => {
       <div id="site-container">
         <Switch>
           <Route exact path="/" component={Landing} />
+          <Route path="/find-friend" component={TroopMates} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={ForgotPassword} />
           <Route path="/dashboard" component={Dashboard} />

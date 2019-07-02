@@ -1,0 +1,81 @@
+import React, { Component } from "react";
+import axios from "axios";
+
+class TroopMates extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      email: "",
+      name: "",
+      results: [],
+      term: ""
+    };
+  }
+
+  componentDidMount() {
+    this.users();
+  }
+  handleChange = async e => {
+    await this.setState({ [e.target.name]: e.target.value });
+  };
+  users = () => {
+    axios
+      .get("https://chore-monkey.herokuapp.com/api/users")
+      .then(res => {
+        this.setState({ users: res.data });
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
+
+  search = term => {
+    let arr = this.state.users.filter(
+      u => u.name.includes(term) || u.email === term
+    );
+    console.log(arr);
+    if (arr[0]) {
+      this.setState({
+        results: arr
+      });
+    } else {
+      return "no members by that name";
+    }
+  };
+
+  render() {
+    const { name, users, email } = this.state;
+    return (
+      <div className="search">
+        <form onSubmit={this.searchName}>
+          <input onChange={this.handleChange} />
+        </form>
+        <div className="search-cards">
+          {users.map(m => {
+            return (
+              <div className="card hoverable">
+                <div className="card-image center-align">
+                  <img src={m.profilePicture} alt="profile of user" />
+
+                  <a
+                    className="btn-floating halfway-fab waves-effect waves-light red"
+                    href="www.google.com"
+                  >
+                    <i className="material-icons">add</i>
+                  </a>
+                </div>
+                <div class="card-content">
+                  <h3 className="card-title">{m.name}</h3>
+                  <p>Boise, Idaho</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default TroopMates;

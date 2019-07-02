@@ -112,9 +112,11 @@ class Group extends Component {
         />
         <h2>Collaborators</h2>
 
-        {members.map(m => {
-          return <Pic key={m.id} photo={m.profilePicture} />;
-        })}
+        <div className="collaborators">
+          {members.map(m => {
+            return <Pic key={m.id} photo={m.profilePicture} />;
+          })}
+        </div>
         <Link to={`/groupsettings/${groupId}`}>
           <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
             <span className="iconLinks">Edit Group</span>
