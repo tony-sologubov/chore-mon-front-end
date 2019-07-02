@@ -6,7 +6,7 @@ import Dashboard from "../views/Dashboard/Dashboard";
 import BillingPage from "../components/Billing/BillingPage";
 import firebase, { FirebaseContext } from "../firebase";
 import useAuth from "../components/Auth/useAuth";
-import requiresAuth from '../components/Auth/requiresAuth'
+import PrivateRoute from '../components/Auth/PrivateRoute'
 
 import InProgress from "../views/InProgress";
 
@@ -27,17 +27,17 @@ const App = () => {
       <div id="site-container">
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/user/:userId" component={requiresAuth(UserProfile)} />
-          <Route path="/find-friend" component={requiresAuth(TroopMates)} />
+          <PrivateRoute exact path="/user/:userId" component={UserProfile} />
+          <PrivateRoute path="/find-friend" component={TroopMates} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={ForgotPassword} />
-          <Route path="/dashboard" component={requiresAuth(Dashboard)} />
-          <Route path="/billing" component={requiresAuth(BillingPage)} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/billing" component={BillingPage} />
           <Route path="/404" component={InProgress} />
-          <Route exact path="/groups/:groupId" component={requiresAuth(Group)} />
-          <Route path="/profile" component={requiresAuth(Profile)} />
-          <Route path="/settings" component={requiresAuth(Settings)} />
-          <Route path="/groupsettings" component={requiresAuth(GroupSettings)} />
+          <PrivateRoute exact path="/groups/:groupId" component={Group} />
+          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/settings" component={Settings} />
+          <PrivateRoute path="/groupsettings" component={GroupSettings} />
         </Switch>
       </div>
     </FirebaseContext.Provider>
