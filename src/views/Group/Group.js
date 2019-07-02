@@ -89,6 +89,9 @@ class Group extends Component {
         <button className="updateEmailButton" onClick={this.openModal}>
           Add Task
         </button>
+        <Link to={{ pathname: `/dashboard` }}>
+          <button className="updateEmailButton">Back To Dashboard</button>
+        </Link>
         <Modal
           open={this.state.showModal}
           onClose={this.closeModal}
