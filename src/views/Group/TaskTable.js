@@ -25,9 +25,11 @@ class TaskTable extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  edit = (task) => {
+  editTask = (task) => {
+    console.log("Edit Task")
+    console.log(task)
     if (!this.state.editTaskId) {
-      return this.setState({ editing: !this.state.editing, editTaskId: task.id, assignedTo: task.assignedTo });
+      return this.setState({ editing: !this.state.editing, editTaskId: task.taskId, assignedTo: task.assignedTo });
     } else {
       return this.setState({ editing: !this.state.editing, editTaskId: "", title: "" });
     }
@@ -35,20 +37,17 @@ class TaskTable extends Component {
 
   submit = (e) => {
     e.preventDefault();
-    console.log("We Update here!")
-    console.log(this.props)
-    console.log(this.props.groupId)
-    this.props.edit({
-      assignedTo: this.state.assignedTo,
-      title: this.state.title,
-      groupId: this.props.groupId,
-    }, this.state.editTaskId)
-    return this.setState({ editing: !this.state.editing, editTaskId: "" });
+    if (this.state.title) {
+      this.props.edit({
+        assignedTo: this.state.assignedTo,
+        title: this.state.title,
+        groupId: this.props.groupId,
+      }, this.state.editTaskId)
+    }
+    return this.setState({ editing: !this.state.editing, editTaskId: "", title: "" });
   };
 
   render() {
-    console.log("State")
-    console.log(this.state)
     return (
       <div>
         <table className="pink striped highlight responsive-table">
@@ -73,7 +72,7 @@ class TaskTable extends Component {
                   </td>
                   <td>{date}</td>
                   <td>
-                    <button onClick={() => this.edit(t)}>Edit</button>
+                    <button onClick={() => this.editTask(t)}>Edit</button>
                   </td>
                 </tr>
               );
