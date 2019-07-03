@@ -40,13 +40,21 @@ class Dashboard extends Component {
           groups: res.data.groups,
           photo: res.data.profilePicture,
           groupName: "",
-          open: false,
+          o: false,
           error: false
         });
       })
       .catch(err => {
         console.log(err.message);
       });
+  };
+
+  o = () => {
+    this.setState({ o: true });
+  };
+
+  c = () => {
+    this.setState({ o: false });
   };
 
   //Change Handler
@@ -95,7 +103,7 @@ class Dashboard extends Component {
 
         <div className="section-ctr">
           <div className="sidebar">
-            <button className="btn hvr-glow" onClick={this.openModal}>
+            <button className="btn hvr-glow" onClick={this.o}>
               New Group
             </button>
           </div>
@@ -213,8 +221,8 @@ class Dashboard extends Component {
 
         {/* addGroupForm */}
         <Modal
-          open={this.state.open}
-          onClose={this.closeModal}
+          open={this.state.o}
+          onClose={this.c}
           center
           showCloseIcon={false}
         >
