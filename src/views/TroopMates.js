@@ -32,11 +32,9 @@ class TroopMates extends Component {
   };
 
   search = term => {
-    let arr = this.state.users.filter(
-      u => u.name.includes(term) || u.email === term
-    );
+    let arr = this.state.users.filter(u => u.name.includes(term));
     console.log(arr);
-    if (arr[0]) {
+    if (arr) {
       this.setState({
         results: arr
       });
@@ -46,15 +44,13 @@ class TroopMates extends Component {
   };
 
   render() {
-    const { name, users, email } = this.state;
+    const { name, users, results, email, term } = this.state;
 
     return (
       <div className="search">
-        <form onSubmit={this.searchName}>
-          <input onChange={this.handleChange} />
-        </form>
+        <form> </form>
         <div className="search-cards">
-          {users.map(m => {
+          {results.map(m => {
             return (
               <Link
                 to={{

@@ -18,7 +18,12 @@ const sendToDB = async () => {
   // deleteUserFromDB();
   localStorage.setItem("uid", JSON.stringify(uid));
   localStorage.setItem("user", JSON.stringify(user));
-  return await axios.post(url, user);
+  return await axios
+    .post(url, user)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err.message));
 };
 
 export default sendToDB;
