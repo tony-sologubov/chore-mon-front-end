@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TinyPic from "../../components/TinyPic";
+import Modal from "react-responsive-modal";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
@@ -57,7 +58,8 @@ class TaskTable extends Component {
       marginBottom: theme.spacing(2)
     },
     table: {
-      minWidth: 750
+      minWidth: 750,
+      width: "100%"
     },
     tableWrapper: {
       overflowX: "auto"
@@ -72,9 +74,7 @@ class TaskTable extends Component {
             color: theme.palette.text.primary,
             backgroundColor: theme.palette.secondary.dark
           },
-    spacer: {
-      flex: "1 1 100%"
-    },
+
     actions: {
       color: theme.palette.text.secondary
     },
@@ -230,6 +230,16 @@ class TaskTable extends Component {
     });
   };
 
+  //Opens delete modal
+  open = () => {
+    this.setState({ open: true, error: false });
+  };
+
+  //Closes delete modal
+  close = () => {
+    this.setState({ open: false, error: false });
+  };
+
   render() {
     const {
       rowsPerPage,
@@ -289,7 +299,7 @@ class TaskTable extends Component {
     ];
 
     return (
-      <div>
+      <div className="mytable">
         <Paper className={classes.paper}>
           <Toolbar
             className={clsx(classes, {
@@ -310,7 +320,7 @@ class TaskTable extends Component {
             <div className={classes.spacer} />
             <div className={classes.actions}>
               {numSelected > 0 ? (
-                <Tooltip title="Delete">
+                <Tooltip title="Delete" onClick={this.props.open}>
                   <IconButton aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
@@ -409,26 +419,29 @@ class TaskTable extends Component {
               </TableBody>
             </Table>
           </div>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            backIconButtonProps={{
-              "aria-label": "Previous Page"
-            }}
-            nextIconButtonProps={{
-              "aria-label": "Next Page"
-            }}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
+          <div className="table-footer">
+            <FormControlLabel
+              control={<Switch checked={dense} onChange={handleChangeDense} />}
+              label="Dense padding"
+            />
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              backIconButtonProps={{
+                "aria-label": "Previous Page"
+              }}
+              nextIconButtonProps={{
+                "aria-label": "Next Page"
+              }}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </div>
         </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
-        />
+
         {this.state.editing && (
           <form onSubmit={e => this.submit(e)}>
             <input

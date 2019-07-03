@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import GroupList from "./GroupList";
-import { DashPhoto } from "../../components/Common";
+import DashPhoto from "../../components/DashPhoto";
 import { ReactComponent as ContactsIcon } from "../../assets/dashboard/icons/contacts-icon.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/dashboard/icons/profile.svg";
 import { ReactComponent as HomeIcon } from "../../assets/dashboard/icons/home.svg";
@@ -76,16 +76,6 @@ class Dashboard extends Component {
         this.fetch();
       })
       .catch(er => console.log(er.message));
-  };
-
-  //Opens delete modal
-  openModal = () => {
-    this.setState({ open: true, error: false });
-  };
-
-  //Closes delete modal
-  closeModal = () => {
-    this.setState({ open: false, error: false });
   };
 
   render() {
@@ -220,6 +210,8 @@ class Dashboard extends Component {
             </p>
           </div>
         </div>
+
+        {/* addGroupForm */}
         <Modal
           open={this.state.open}
           onClose={this.closeModal}

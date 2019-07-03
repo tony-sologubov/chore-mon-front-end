@@ -14,7 +14,7 @@ import Button from "@material-ui/core/Button";
 
 const styles = () => ({
   container: {
-    backgroundColor: "#adcfbe",
+    backgroundColor: "#f2bd1d",
     height: "100vh",
     display: "flex",
     flexDirection: "column",
@@ -25,7 +25,7 @@ const styles = () => ({
   textField: {
     margin: "1rem auto",
     width: "50%",
-    backgroundColor: "#fff5e9",
+    backgroundColor: "white",
     borderRadius: "0.2rem",
     fontSize: "2rem"
   },
@@ -99,7 +99,7 @@ class TaskForm extends React.Component {
         autoComplete="on"
         onSubmit={this.addTaskHandler}
       >
-        <h1>Point-O-Matic</h1>
+        <h1>Add New Task</h1>
         <h2>Assigned To</h2>
         <TextField
           id="dropdown"

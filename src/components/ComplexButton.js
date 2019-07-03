@@ -90,7 +90,7 @@ const ComplexButton = props => {
   console.log(props.groupName);
   const classes = useStyles();
   const image = {
-    url: `https://source.unsplash.com/1600x900/?${
+    url: `https://source.unsplash.com/800x450/?${
       props.groupName.match(/[^\s,.'"!?]+/)[0]
     }`,
     title: props.groupName,

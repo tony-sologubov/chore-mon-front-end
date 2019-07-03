@@ -5,12 +5,12 @@ import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles({
   avatar: {
-    margin: 10
+    margin: 5
   },
   bigAvatar: {
-    margin: "1.5rem",
-    width: "8rem",
-    height: "8rem"
+    margin: "1rem",
+    width: "5rem",
+    height: "5rem"
   }
 });
 
