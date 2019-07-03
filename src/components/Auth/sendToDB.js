@@ -1,8 +1,8 @@
 import firebase from "../../firebase/firebase.js";
 import axios from "axios";
 
-const sendToDB = () => {
-  const currentUser = firebase.auth.currentUser.toJSON();
+const sendToDB = async () => {
+  const currentUser = await firebase.auth.currentUser.toJSON();
   const { displayName, email, uid, photoURL } = currentUser;
   const user = {
     name: displayName,
@@ -18,6 +18,7 @@ const sendToDB = () => {
   // deleteUserFromDB();
   localStorage.setItem("uid", JSON.stringify(uid));
   localStorage.setItem("user", JSON.stringify(user));
+  return await axios.post(url, user);
 };
 
 export default sendToDB;
