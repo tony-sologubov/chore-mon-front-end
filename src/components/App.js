@@ -16,7 +16,7 @@ import ForgotPassword from "./Auth/ForgotPassword";
 import Group from "../views/Group/Group";
 import TroopMates from "../views/TroopMates";
 import Profile from "../views/Profile";
-import Settings from "../views/Settings";
+import NewSettings from "../views/NewSettings";
 import GroupSettings from "../views/GroupSettings";
 import UserProfile from "../views/UserProfile";
 import MyTasks from "../views/MyTasks";
@@ -38,7 +38,7 @@ const App = () => {
           <Route path="/404" component={InProgress} />
           <PrivateRoute exact path="/groups/:groupId" component={Group} />
           <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/settings" component={Settings} />
+          <PrivateRoute path="/settings" component={NewSettings} />
           <PrivateRoute path="/groupsettings" component={GroupSettings} />
         </Switch>
       </div>

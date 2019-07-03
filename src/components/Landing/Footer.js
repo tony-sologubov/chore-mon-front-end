@@ -50,8 +50,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a className="grey-text text-lighten-3" href="#!">
-                  Team Members
+                <a
+                  className="grey-text text-lighten-3"
+                  href="https://www.termsfeed.com/privacy-policy/5e247d90e61471783bc5f5d53613b6e3"
+                >
+                  Privacy Policy
                 </a>
               </li>
               <li>

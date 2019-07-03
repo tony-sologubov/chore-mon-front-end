@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import GroupList from "./GroupList";
-import { DashPhoto } from "../../components/Common";
+import DashPhoto from "../../components/DashPhoto";
 import { ReactComponent as ContactsIcon } from "../../assets/dashboard/icons/contacts-icon.svg";
 import { ReactComponent as ProfileIcon } from "../../assets/dashboard/icons/profile.svg";
 import { ReactComponent as HomeIcon } from "../../assets/dashboard/icons/home.svg";
@@ -40,13 +40,21 @@ class Dashboard extends Component {
           groups: res.data.groups,
           photo: res.data.profilePicture,
           groupName: "",
-          open: false,
+          o: false,
           error: false
         });
       })
       .catch(err => {
         console.log(err.message);
       });
+  };
+
+  o = () => {
+    this.setState({ o: true });
+  };
+
+  c = () => {
+    this.setState({ o: false });
   };
 
   //Change Handler
@@ -78,16 +86,6 @@ class Dashboard extends Component {
       .catch(er => console.log(er.message));
   };
 
-  //Opens delete modal
-  openModal = () => {
-    this.setState({ open: true, error: false });
-  };
-
-  //Closes delete modal
-  closeModal = () => {
-    this.setState({ open: false, error: false });
-  };
-
   render() {
     const { history } = this.props;
 
@@ -105,7 +103,7 @@ class Dashboard extends Component {
 
         <div className="section-ctr">
           <div className="sidebar">
-            <button className="btn hvr-glow" onClick={this.openModal}>
+            <button className="btn hvr-glow" onClick={this.o}>
               New Group
             </button>
           </div>
@@ -207,22 +205,24 @@ class Dashboard extends Component {
             <SettingsIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push("/settings");
+                history.push("/settings/profile");
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push("/settings");
+                history.push("/settings/profile");
               }}
             >
               SETTINGS
             </p>
           </div>
         </div>
+
+        {/* addGroupForm */}
         <Modal
-          open={this.state.open}
-          onClose={this.closeModal}
+          open={this.state.o}
+          onClose={this.c}
           center
           showCloseIcon={false}
         >

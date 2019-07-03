@@ -2,7 +2,7 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
-const URL = 'http://localhost:9000/api/charge';
+const URL = 'https://chore-monkey.herokuapp.com/api/charge';
 
 const successPayment = (data) => {
 	alert('Payment Successful');

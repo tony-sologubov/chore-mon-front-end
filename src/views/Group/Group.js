@@ -7,6 +7,8 @@ import TaskTable from "./TaskTable";
 import Modal from "react-responsive-modal";
 import TaskForm from "./TaskForm";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 class Group extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,11 @@ class Group extends Component {
       tasks: [],
       members: [],
       name: "",
-      showModal: false
+      showModal: false,
+      open: false,
+      isAdmin: "amigos",
+      fetchedGroups: false,
+      setAdmin: false,
     };
   }
 
@@ -30,17 +36,32 @@ class Group extends Component {
         this.setState({
           tasks: res.data.tasks,
           members: res.data.members,
-          name: res.data.name
+          name: res.data.name,
+          fetchedGroups: true
         });
       });
   };
 
+  checkAdmin = () => {
+    const member =  this.state.members.filter(member => member.uid == user.uid)
+    console.log(member)
+    this.setState({
+      isAdmin: member[0].isAdmin,
+      setAdmin: true
+    })
+  }
+
   openModal = () => {
     this.setState({ showModal: true });
   };
-
+  open = () => {
+    this.setState({ open: true });
+  };
   closeModal = () => {
     this.setState({ showModal: false });
+  };
+  close = () => {
+    this.setState({ open: false });
   };
 
   handleChange = e => {
@@ -80,18 +101,52 @@ class Group extends Component {
   };
 
   render() {
-    console.log(this.state.name);
+    console.log(user)
+    console.log(this.state)
+    if (this.state.fetchedGroups && !this.state.setAdmin) {
+      this.checkAdmin()
+    }
     const { name, members } = this.state;
     const groupId = window.location.href.split("/").pop();
     return (
-      <div className="Dashboard">
-        <h1>{name}</h1>
-        <button className="updateEmailButton" onClick={this.openModal}>
-          Add Task
-        </button>
-        <Link to={{ pathname: `/dashboard` }}>
-          <button className="updateEmailButton">Back To Dashboard</button>
-        </Link>
+      <div className="group-dash ">
+        <header className="g-head">
+          <h1>{name}</h1>
+          <Link to={{ pathname: `/dashboard` }}>
+            <button>Back To Dashboard</button>
+          </Link>
+        </header>
+
+        <section className="g-mid">
+          <div className="g-mid-left ">
+            <TaskTable
+              members={this.state.members}
+              tasks={this.state.tasks}
+              groupId={groupId}
+              open={this.open}
+              add={this.openModal}
+              edit={this.editTask}
+              titleSubmit={this.editTask}
+            />
+          </div>
+
+          <div className="g-mid-right card">
+            <h2>Collaborators</h2>
+
+            <div className="collaborators">
+              {members.map(m => {
+                return <Pic key={m.id} photo={m.profilePicture} />;
+              })}
+            </div>
+            <button onClick={this.openModal}>add task</button>
+          </div>
+        </section>
+
+        <Modal id="d" open={this.state.open} onClose={this.close}>
+          Delete Selected Tasks?
+          <button>yeah</button>
+        </Modal>
+
         <Modal
           open={this.state.showModal}
           onClose={this.closeModal}
@@ -105,26 +160,13 @@ class Group extends Component {
             openModal={this.openModal}
           />
         </Modal>
-        <h2>Task List</h2>
-        <TaskTable
-          members={this.state.members}
-          tasks={this.state.tasks}
-          groupId={groupId}
-          edit={this.editTask}
-          titleSubmit={this.editTask}
-        />
-        <h2>Collaborators</h2>
 
-        <div className="collaborators">
-          {members.map(m => {
-            return <Pic key={m.id} photo={m.profilePicture} />;
-          })}
-        </div>
+{ this.state.isAdmin &&  (
         <Link to={`/groupsettings/${groupId}`}>
           <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
             <span className="iconLinks">Edit Group</span>
           </button>
-        </Link>
+        </Link> )}
       </div>
     );
   }

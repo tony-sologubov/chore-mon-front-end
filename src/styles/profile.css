@@ -66,7 +66,7 @@
 }
 
 .coverPhoto {
-  background: url("https://source.unsplash.com/random");
+  background: url("https://loremflickr.com/1600/900/scenic");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
