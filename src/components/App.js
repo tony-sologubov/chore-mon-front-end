@@ -19,6 +19,7 @@ import Profile from "../views/Profile";
 import NewSettings from "../views/NewSettings";
 import GroupSettings from "../views/GroupSettings";
 import UserProfile from "../views/UserProfile";
+import MyTasks from "../views/MyTasks";
 
 const App = () => {
   const user = useAuth();
@@ -31,6 +32,7 @@ const App = () => {
           <PrivateRoute path="/find-friend" component={TroopMates} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={ForgotPassword} />
+          <PrivateRoute exact path="/mytasks/:uid" component={MyTasks} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/billing" component={BillingPage} />
           <Route path="/404" component={InProgress} />
