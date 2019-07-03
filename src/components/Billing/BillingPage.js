@@ -49,7 +49,7 @@ export default class BillingPage extends React.Component {
 										<li class="collection-item">10000 Messages</li>
 									</ul>
 									<StripeCheckout
-										stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
+										stripeKey="pk_live_gBhspBN8ogZH14d76xNXFbvg00QK73FdEK"
 										token={this.onToken}
 										description="ListMonkey Premium Plan"
 										amount={1000}
@@ -71,7 +71,7 @@ export default class BillingPage extends React.Component {
 										<li class="collection-item">Ultd Messages</li>
 									</ul>
 									<StripeCheckout
-										stripeKey="pk_test_DxmfbYWW8YHJec5ESRF9n0XS002ib6dHug"
+										stripeKey="pk_live_gBhspBN8ogZH14d76xNXFbvg00QK73FdEK"
 										token={this.onToken}
 										description="ListMonkey Platinum Plan"
 										amount={2000}
