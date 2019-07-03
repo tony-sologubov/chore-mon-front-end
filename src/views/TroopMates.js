@@ -50,7 +50,7 @@ class TroopMates extends Component {
       <div className="search">
         <form> </form>
         <div className="search-cards">
-          {results.map(m => {
+          {users.map(m => {
             return (
               <Link
                 to={{
