@@ -205,13 +205,13 @@ class Dashboard extends Component {
             <SettingsIcon
               className="di hvr-push  "
               onClick={() => {
-                history.push("/settings");
+                history.push("/settings/profile");
               }}
             />
             <p
               className=" hvr-push  "
               onClick={() => {
-                history.push("/settings");
+                history.push("/settings/profile");
               }}
             >
               SETTINGS

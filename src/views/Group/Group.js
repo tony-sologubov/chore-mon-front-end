@@ -7,6 +7,8 @@ import TaskTable from "./TaskTable";
 import Modal from "react-responsive-modal";
 import TaskForm from "./TaskForm";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 class Group extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,10 @@ class Group extends Component {
       members: [],
       name: "",
       showModal: false,
-      open: false
+      open: false,
+      isAdmin: "amigos",
+      fetchedGroups: false,
+      setAdmin: false,
     };
   }
 
@@ -31,10 +36,20 @@ class Group extends Component {
         this.setState({
           tasks: res.data.tasks,
           members: res.data.members,
-          name: res.data.name
+          name: res.data.name,
+          fetchedGroups: true
         });
       });
   };
+
+  checkAdmin = () => {
+    const member =  this.state.members.filter(member => member.uid == user.uid)
+    console.log(member)
+    this.setState({
+      isAdmin: member[0].isAdmin,
+      setAdmin: true
+    })
+  }
 
   openModal = () => {
     this.setState({ showModal: true });
@@ -86,7 +101,11 @@ class Group extends Component {
   };
 
   render() {
-    console.log(this.state.name);
+    console.log(user)
+    console.log(this.state)
+    if (this.state.fetchedGroups && !this.state.setAdmin) {
+      this.checkAdmin()
+    }
     const { name, members } = this.state;
     const groupId = window.location.href.split("/").pop();
     return (
@@ -142,11 +161,12 @@ class Group extends Component {
           />
         </Modal>
 
+{ this.state.isAdmin &&  (
         <Link to={`/groupsettings/${groupId}`}>
           <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
             <span className="iconLinks">Edit Group</span>
           </button>
-        </Link>
+        </Link> )}
       </div>
     );
   }
