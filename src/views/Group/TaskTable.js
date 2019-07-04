@@ -21,6 +21,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from '@material-ui/core/MenuItem';
 
 class TaskTable extends Component {
   constructor(props) {
@@ -30,6 +32,8 @@ class TaskTable extends Component {
       editing: false,
       editTaskId: "",
       assignedTo: "",
+      editingAssignedUser: false,
+      editingAssignedUserTaskID: "",
       order: "asc",
       orderBy: "dueDate",
       selected: [],
@@ -45,7 +49,6 @@ class TaskTable extends Component {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     if (this.props.tasks !== prevProps.tasks || !this.state.setRows) {
-      console.log('FIRING')
       this.setState({ rows: this.props.tasks, setRows:true });
     }
   }
@@ -232,6 +235,28 @@ class TaskTable extends Component {
     });
   };
 
+  openAssignedUserEdit(task) {
+    if (!this.state.editingAssignedUser && !this.state.editingAssignedUserTaskID) {
+      this.setState({
+        editingAssignedUser: !this.state.editingAssignedUser,
+        editingAssignedUserTaskID: task.taskId
+      })
+    }
+  }
+
+  submitAssignedUserEdit(task) {
+    if (task.assignedTo != this.state.assignedTo && this.state.assignedTo) {
+      this.props.edit({
+        assignedTo: this.state.assignedTo,
+      }, this.state.editingAssignedUserTaskID)
+    }
+      this.setState({
+        editingAssignedUser: !this.state.editingAssignedUser,
+        editingAssignedUserTaskID: "",
+        assignedTo: ""
+      })
+  }
+
   //Opens delete modal
   open = () => {
     this.setState({ open: true, error: false });
@@ -300,7 +325,7 @@ class TaskTable extends Component {
       { id: "actions", numeric: false, disablePadding: false, label: "Actions" }
     ];
 
-    console.log(this.props)
+    console.log(this.state)
     console.log(this.props.tasks)
     this.props.tasks.forEach(task => console.log(task.title))
 
@@ -407,7 +432,39 @@ class TaskTable extends Component {
                           {row.title}
                         </TableCell>
                         <TableCell>
-                          <TinyPic photo={photo} />
+
+                        <div onClick={() => this.openAssignedUserEdit(row)}>
+                    { this.state.editingAssignedUserTaskID == row.taskId 
+                      ?
+                      <form>
+                      <TextField
+                      id="dropdown"
+                      select
+                      // className={classes.textField}
+                      value={this.state.assignedTo}
+                      name="assignedTo"
+                      onChange={this.handleChange}
+                      onSubmit={() => console.log("submitting")}
+                      // SelectProps={{
+                      //   MenuProps: {
+                      //     className: classes.menu
+                      //   }
+                      // }}
+                      margin="normal"
+                    >
+                      {this.props.members.map(m => (
+                        <MenuItem key={m.userId} value={m.uid}>
+                          {m.name}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                      <button onClick={(e) =>{ e.preventDefault(); this.submitAssignedUserEdit(row) }}> ¯\_(ツ)_/¯ </button>
+                    </form>
+                      // </form>
+                    :
+                      <TinyPic photo={photo} /> }
+                      </div>
+
                         </TableCell>
                         <TableCell>{date}</TableCell>
                         <TableCell>
