@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TinyPic from "../../components/TinyPic";
 import Modal from "react-responsive-modal";
+import axios from "axios";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
@@ -37,7 +38,8 @@ class TaskTable extends Component {
       dense: false,
       rowsPerPage: 5,
       rows: [],
-      checked: false
+      checked: false,
+      open: false
     };
   }
 
@@ -47,6 +49,28 @@ class TaskTable extends Component {
       this.setState({ rows: this.props.tasks });
     }
   }
+
+  open = () => {
+    this.setState({ open: true });
+  };
+  close = () => {
+    this.setState({ open: false });
+  };
+
+  delete = () => {
+    this.state.selected.forEach(e => {
+      axios
+        .delete(`https://chore-monkey.herokuapp.com/api/tasks/${e}`)
+        .then(res => {
+          this.props.fg();
+        })
+        .catch(err => {
+          this.setState({ em: true });
+        });
+    });
+    this.setState({ selected: [] });
+    this.close();
+  };
 
   useStyles = makeStyles => theme => ({
     root: {
@@ -194,8 +218,6 @@ class TaskTable extends Component {
   };
 
   editTask = task => {
-    console.log("Edit Task");
-    console.log(task);
     if (!this.state.editTaskId) {
       return this.setState({
         editing: !this.state.editing,
@@ -320,7 +342,7 @@ class TaskTable extends Component {
             <div className={classes.spacer} />
             <div className={classes.actions}>
               {numSelected > 0 ? (
-                <Tooltip title="Delete" onClick={this.props.open}>
+                <Tooltip title="Delete" onClick={this.open}>
                   <IconButton aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
@@ -452,6 +474,11 @@ class TaskTable extends Component {
             />
           </form>
         )}
+
+        <Modal center id="d" open={this.state.open} onClose={this.close}>
+          Delete Selected Tasks?
+          <button onClick={this.delete}>yep they're done!</button>
+        </Modal>
       </div>
     );
   }

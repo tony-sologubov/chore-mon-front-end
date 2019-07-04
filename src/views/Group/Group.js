@@ -29,7 +29,7 @@ class Group extends Component {
   }
 
   fetchGroup = () => {
-    const groupId = window.location.href.split("/").pop();
+    const groupId = this.props.location.state.groupId;
     axios
       .get(`https://chore-monkey.herokuapp.com/api/group/${groupId}`)
       .then(res => {
@@ -44,7 +44,7 @@ class Group extends Component {
 
   checkAdmin = () => {
     const member = this.state.members.filter(member => member.uid == user.uid);
-    console.log(member);
+
     this.setState({
       isAdmin: member[0].isAdmin,
       setAdmin: true
@@ -54,25 +54,18 @@ class Group extends Component {
   openModal = () => {
     this.setState({ showModal: true });
   };
-  open = () => {
-    this.setState({ open: true });
-  };
+
   closeModal = () => {
     this.setState({ showModal: false });
-  };
-  close = () => {
-    this.setState({ open: false });
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   addTask = task => {
-    console.log(task);
     axios
       .post("https://chore-monkey.herokuapp.com/api/tasks", task)
       .then(res => {
-        console.log(res);
         this.setState({ showModal: false });
         this.fetchGroup();
       })
@@ -80,8 +73,6 @@ class Group extends Component {
   };
 
   editTask = (task, id) => {
-    console.log("Edit Task Firing:");
-    console.log(task);
     axios
       .put(`https://chore-monkey.herokuapp.com/api/tasks/${id}`, task)
       .then(res => {
@@ -91,23 +82,13 @@ class Group extends Component {
       .catch(er => console.log(er.message));
   };
 
-  deleteTask = id => {
-    axios
-      .delete(`https://chore-monkey.herokuapp.com/api/tasks/${id}`)
-      .then(res => {
-        this.fetchGroup();
-      })
-      .catch(er => console.log(er.message));
-  };
-
   render() {
-    console.log(user);
-    console.log(this.state);
     if (this.state.fetchedGroups && !this.state.setAdmin) {
       this.checkAdmin();
     }
     const { name, members } = this.state;
-    const groupId = window.location.href.split("/").pop();
+
+    const groupId = this.props.location.state.groupId;
     return (
       <div className="group-dash ">
         <header className="g-head">
@@ -127,6 +108,8 @@ class Group extends Component {
               add={this.openModal}
               edit={this.editTask}
               titleSubmit={this.editTask}
+              delete={this.delete}
+              fg={this.fetchGroup}
             />
           </div>
 
@@ -150,10 +133,6 @@ class Group extends Component {
             </Link>
           )}
         </div>
-        <Modal id="d" open={this.state.open} onClose={this.close}>
-          Delete Selected Tasks?
-          <button>yeah</button>
-        </Modal>
 
         <Modal
           open={this.state.showModal}
