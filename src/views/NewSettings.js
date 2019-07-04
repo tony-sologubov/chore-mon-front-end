@@ -30,7 +30,7 @@ class Settings extends React.Component {
   render() {
     return (
       <div className="settingsContainer">
-      <MiniDrawer props={this.props} />
+        <MiniDrawer props={this.props} />
         <Switch>
             <Route exact path="/settings/profile" component={Profile} />
             <Route exact path="/settings/groups" component={GroupSettings} />

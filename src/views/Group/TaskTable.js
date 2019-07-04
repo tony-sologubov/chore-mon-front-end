@@ -37,14 +37,16 @@ class TaskTable extends Component {
       dense: false,
       rowsPerPage: 5,
       rows: [],
-      checked: false
+      checked: false,
+      setRows: false,
     };
   }
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    if (this.props.tasks !== prevProps.tasks) {
-      this.setState({ rows: this.props.tasks });
+    if (this.props.tasks !== prevProps.tasks || !this.state.setRows) {
+      console.log('FIRING')
+      this.setState({ rows: this.props.tasks, setRows:true });
     }
   }
 
@@ -297,6 +299,10 @@ class TaskTable extends Component {
       },
       { id: "actions", numeric: false, disablePadding: false, label: "Actions" }
     ];
+
+    console.log(this.props)
+    console.log(this.props.tasks)
+    this.props.tasks.forEach(task => console.log(task.title))
 
     return (
       <div className="mytable">

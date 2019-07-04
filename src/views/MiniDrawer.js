@@ -148,7 +148,7 @@ export default function MiniDrawer(props) {
         <List>
           {['Profile', 'Groups', 'Account', 'Billing'].map((text, index) => (
             // <div >
-            <div onClick={(e) => history.push(`${text.toLowerCase()}`)}>
+            <div onClick={() => history.push(`${text.toLowerCase()}`)}>
               <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
@@ -160,7 +160,7 @@ export default function MiniDrawer(props) {
         <Divider />
         <List>
           {['Dashboard', 'Trash', 'Spam'].map((text, index) => (
-             <div onClick={(e) => history.push(`/${text.toLowerCase()}`)}>
+             <div onClick={() => history.push(`/${text.toLowerCase()}`)}>
               <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
