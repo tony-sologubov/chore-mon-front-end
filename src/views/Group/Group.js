@@ -20,7 +20,7 @@ class Group extends Component {
       open: false,
       isAdmin: "amigos",
       fetchedGroups: false,
-      setAdmin: false,
+      setAdmin: false
     };
   }
 
@@ -43,13 +43,13 @@ class Group extends Component {
   };
 
   checkAdmin = () => {
-    const member =  this.state.members.filter(member => member.uid == user.uid)
-    console.log(member)
+    const member = this.state.members.filter(member => member.uid == user.uid);
+    console.log(member);
     this.setState({
       isAdmin: member[0].isAdmin,
       setAdmin: true
-    })
-  }
+    });
+  };
 
   openModal = () => {
     this.setState({ showModal: true });
@@ -101,10 +101,10 @@ class Group extends Component {
   };
 
   render() {
-    console.log(user)
-    console.log(this.state)
+    console.log(user);
+    console.log(this.state);
     if (this.state.fetchedGroups && !this.state.setAdmin) {
-      this.checkAdmin()
+      this.checkAdmin();
     }
     const { name, members } = this.state;
     const groupId = window.location.href.split("/").pop();
@@ -141,7 +141,15 @@ class Group extends Component {
             <button onClick={this.openModal}>add task</button>
           </div>
         </section>
-
+        <div className="g-bot">
+          {this.state.isAdmin && (
+            <Link to={`/groupsettings/${groupId}`}>
+              <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
+                <span className="iconLinks">List Board Settings</span>
+              </button>
+            </Link>
+          )}
+        </div>
         <Modal id="d" open={this.state.open} onClose={this.close}>
           Delete Selected Tasks?
           <button>yeah</button>
@@ -160,13 +168,6 @@ class Group extends Component {
             openModal={this.openModal}
           />
         </Modal>
-
-{ this.state.isAdmin &&  (
-        <Link to={`/groupsettings/${groupId}`}>
-          <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
-            <span className="iconLinks">Edit Group</span>
-          </button>
-        </Link> )}
       </div>
     );
   }

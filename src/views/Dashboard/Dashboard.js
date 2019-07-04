@@ -90,163 +90,210 @@ class Dashboard extends Component {
     const { history } = this.props;
 
     return (
-      <div className="Dashboard">
-        <div className="dash-header ">
-          <DashPhoto photo={this.state.photo} />
-          <h1>
-            {"Welcome Back, " +
-              JSON.parse(
-                localStorage.getItem("firebaseui::rememberedAccounts")
-              )[0].displayName.match(/[^\s,.'"!?]+/)[0]}
-          </h1>
-        </div>
+      <div className=" background">
+        <div className=" z-depth-1 Dashboard">
+          <section className="top">
+            <div className="tr">
+              {/* Header */}
+              <div className="dash-header ">
+                <h1 className="message">
+                  {"Hello there, " +
+                    JSON.parse(
+                      localStorage.getItem("firebaseui::rememberedAccounts")
+                    )[0].displayName.match(/[^\s,.'"!?]+/)[0]}
+                </h1>
+              </div>
 
-        <div className="section-ctr">
-          <div className="sidebar">
-            <button className="btn hvr-glow" onClick={this.o}>
-              New Group
-            </button>
-          </div>
-          <div className="cards">
-            <GroupList groups={this.state.groups} className="cards" />
-          </div>
-        </div>
-        <div className="dash-buttons">
-          <Link
-            to={{
-              pathname: `/find-friend`,
-              state: {
-                groups: this.state.groups
-              }
-            }}
-          >
-            <div className="icon-div">
-              <ContactsIcon className="di  hvr-push" />
-              <p
-                className="  hvr-push"
-                onClick={() => {
-                  history.push("/find-friend");
-                }}
-              >
-                FRIENDS
-              </p>
+              {/* group list */}
+
+              <div className="section-ctr">
+                <div className="cards">
+                  <GroupList groups={this.state.groups} className="cards" />
+                </div>
+              </div>
             </div>
-          </Link>
 
-          <div className="icon-div">
-            <ProfileIcon
-              className="di hvr-push  "
-              onClick={() => {
-                history.push("/profile");
-              }}
-            />
-            <p
-              className=" hvr-push  "
-              onClick={() => {
-                history.push("/404");
-              }}
-            >
-              PROFILE
-            </p>
-          </div>
+            {/* sidebar  */}
+            <div className="sidebar">
+              <div className="tlt">
+                {" "}
+                <DashPhoto photo={this.state.photo} />
+              </div>
 
-          <div className="icon-div">
-            <HomeIcon
-              className="di hvr-push  "
-              onClick={() => {
-                history.push("/");
-              }}
-            />
-            <p
-              className=" hvr-push  "
-              onClick={() => {
-                history.push("/");
-              }}
-            >
-              HOME
-            </p>
-          </div>
-
-          <div className="icon-div">
-            <ListIcon
-              className="di hvr-push  "
-              onClick={() => {
-                history.push(`/mytasks/${uid}`);
-              }}
-            />
-            <p
-              className=" hvr-push  "
-              onClick={() => {
-                history.push(`/mytasks/${uid}`);
-              }}
-            >
-              MY TASKS
-            </p>
-          </div>
-
-          <div className="icon-div">
-            <CalendarIcon
-              className="di hvr-push  "
-              onClick={() => {
-                history.push("/404");
-              }}
-            />
-            <p
-              className=" hvr-push  "
-              onClick={() => {
-                history.push("/404");
-              }}
-            >
-              CALENDAR
-            </p>
-          </div>
-
-          <div className="icon-div">
-            <SettingsIcon
-              className="di hvr-push  "
-              onClick={() => {
-                history.push("/settings/profile");
-              }}
-            />
-            <p
-              className=" hvr-push  "
-              onClick={() => {
-                history.push("/settings/profile");
-              }}
-            >
-              SETTINGS
-            </p>
-          </div>
-        </div>
-
-        {/* addGroupForm */}
-        <Modal
-          open={this.state.o}
-          onClose={this.c}
-          center
-          showCloseIcon={false}
-        >
-          <div className="modal">
-            <form onSubmit={e => this.submit(e)} className="addGroupForm">
-              <input
-                type="text"
-                name="groupName"
-                placeholder="Add a Group"
-                value={this.state.groupName}
-                onChange={event => this.handleChange(event)}
-              />
               <button
-                type="submit"
-                className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical"
+                className="btn hvr-glow dash-but z-depth-1"
+                onClick={this.o}
               >
-                Submit
+                Make a List!
               </button>
-              {this.state.error && (
-                <p className="form-error">Name cannot be empty!</p>
-              )}
-            </form>
+            </div>
+          </section>
+
+          {/* icon buttons */}
+
+          <div className="dash-buttons">
+            <Link
+              to={{
+                pathname: `/find-friend`,
+                state: {
+                  groups: this.state.groups
+                }
+              }}
+            >
+              <div className="icon-div">
+                <ContactsIcon className="di  hvr-push" />
+                <p
+                  className="  hvr-push"
+                  onClick={() => {
+                    history.push("/find-friend");
+                  }}
+                >
+                  FRIENDS
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              to={{
+                pathname: `/profile`
+              }}
+            >
+              <div className="icon-div">
+                <ProfileIcon
+                  className="di hvr-push  "
+                  onClick={() => {
+                    history.push("/profile");
+                  }}
+                />
+                <p
+                  className=" hvr-push  "
+                  onClick={() => {
+                    history.push("/404");
+                  }}
+                >
+                  PROFILE
+                </p>
+              </div>
+            </Link>
+
+            <Link to={{ pathname: `/` }}>
+              <div className="icon-div">
+                <HomeIcon
+                  className="di hvr-push  "
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                />
+                <p
+                  className=" hvr-push  "
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                >
+                  HOME
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              to={{
+                pathname: `/mytasks/${uid}`
+              }}
+            >
+              <div className="icon-div">
+                <ListIcon
+                  className="di hvr-push  "
+                  onClick={() => {
+                    history.push(`/mytasks/${uid}`);
+                  }}
+                />
+                <p
+                  className=" hvr-push  "
+                  onClick={() => {
+                    history.push(`/mytasks/${uid}`);
+                  }}
+                >
+                  MY TASKS
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              to={{
+                pathname: `/404`
+              }}
+            >
+              <div className="icon-div">
+                <CalendarIcon
+                  className="di hvr-push  "
+                  onClick={() => {
+                    history.push("/404");
+                  }}
+                />
+                <p
+                  className=" hvr-push  "
+                  onClick={() => {
+                    history.push("/404");
+                  }}
+                >
+                  CALENDAR
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              to={{
+                pathname: `/settings/profile`
+              }}
+            >
+              <div className="icon-div">
+                <SettingsIcon
+                  className="di hvr-push  "
+                  onClick={() => {
+                    history.push("/settings/profile");
+                  }}
+                />
+                <p
+                  className=" hvr-push  "
+                  onClick={() => {
+                    history.push("/settings/profile");
+                  }}
+                >
+                  SETTINGS
+                </p>
+              </div>
+            </Link>
           </div>
-        </Modal>
+
+          {/* addGroupForm */}
+          <Modal
+            open={this.state.o}
+            onClose={this.c}
+            center
+            showCloseIcon={false}
+          >
+            <div className="modal">
+              <form onSubmit={e => this.submit(e)} className="addGroupForm">
+                <input
+                  type="text"
+                  name="groupName"
+                  placeholder="Add a Group"
+                  value={this.state.groupName}
+                  onChange={event => this.handleChange(event)}
+                />
+                <button
+                  type="submit"
+                  className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical"
+                >
+                  Submit
+                </button>
+                {this.state.error && (
+                  <p className="form-error">Name cannot be empty!</p>
+                )}
+              </form>
+            </div>
+          </Modal>
+        </div>
       </div>
     );
   }

@@ -4,7 +4,19 @@ import { Link, withRouter } from "react-router-dom";
 
 const GroupList = ({ groups }) => {
   if (!groups.length) {
-    return <h2>No Groups</h2>;
+    return (
+      <div className="n-g-list">
+        <h2 className="ff">
+          You know what you should do? Eat a banana. But then you should
+          probably make a list!
+        </h2>
+        {/* <img
+          src={require("../../assets/bananas/arrow.png")}
+          alt="whatever"
+          className="arrow"
+        /> */}
+      </div>
+    );
   } else {
     return groups.map(g => {
       return (
