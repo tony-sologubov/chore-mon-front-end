@@ -66,7 +66,7 @@ class UserProfile extends React.Component {
         axios
           .post("https://chore-monkey.herokuapp.com/api/friends", friend2)
           .then(res => {
-            history.push("/find-friends");
+            history.push("/dashboard");
           })
           .catch(err => console.log(err))
       )
