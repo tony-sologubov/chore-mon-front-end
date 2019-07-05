@@ -48,8 +48,9 @@ class TaskForm extends React.Component {
       title: "",
       assignedTo: 0,
       selected: new Date(),
+      startDate: moment(),
       isComplete: false,
-      startDate: moment()
+      description: ""
     };
     this.handleDate = this.handleDate.bind(this);
   }
@@ -80,18 +81,20 @@ class TaskForm extends React.Component {
       assignedTo: this.state.assignedTo,
       dueDate: this.state.selected,
       isComplete: false,
-      groupId: this.props.groupId
+      groupId: this.props.groupId,
+      description: this.state.description
     });
 
     this.setState({
       title: "",
       assignedTo: "",
+      description: "",
       selected: new Date()
     });
   };
   render() {
     const { classes, members, groupId } = this.props;
-    const { title, assignedTo, dueDate } = this.state;
+    const { title, assignedTo, dueDate, description } = this.state;
     return (
       <form
         className={classes.container}
@@ -130,12 +133,21 @@ class TaskForm extends React.Component {
           onChange={this.handleChange}
           margin="normal"
         />
+        <h2>Title</h2>
         <DatePicker
           selected={this.state.selected}
           onChange={this.handleDate}
           dateFormat="yyyy/MM/dd"
         />
-        ;
+        <h2>Details</h2>
+        <TextField
+          id="input"
+          className={classes.textField}
+          value={description}
+          name="description"
+          onChange={this.handleChange}
+          margin="normal"
+        />
         <button className="button form-submit" type="submit">
           Save
         </button>
