@@ -25,6 +25,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import DatePicker from "../../components/DatePicker";
 
 class TaskTable extends Component {
   constructor(props) {
@@ -36,6 +37,9 @@ class TaskTable extends Component {
       assignedTo: "",
       editingAssignedUser: false,
       editingAssignedUserTaskID: "",
+      editingDate: false,
+      editDateId: "",
+      newDate: "",
       order: "asc",
       orderBy: "dueDate",
       selected: [],
@@ -166,11 +170,8 @@ class TaskTable extends Component {
   };
 
   handleSelectAllClick = event => {
-    console.log("event");
     if (event.target.checked) {
-      console.log("checkfired");
       const newSelecteds = this.state.rows.map(m => m.id);
-      console.log(newSelecteds);
       this.setState({
         selected: newSelecteds
       });
@@ -278,6 +279,21 @@ class TaskTable extends Component {
     }
   };
 
+  editDate = (task) => {
+    if (!this.state.editDateId) {
+      return this.setState({
+        editingDate: !this.state.editingDate,
+        editDateId: task.taskId,
+      });
+    } else {
+      return this.setState({
+        editingDate: !this.state.editingDate,
+        editDateId: "",
+        newDate: ""
+      });
+    }
+  };
+
   submit = e => {
     e.preventDefault();
     if (this.state.title) {
@@ -297,7 +313,24 @@ class TaskTable extends Component {
     });
   };
 
+  submitDate = (newDate) => {
+    if (newDate != this.state.editDate) {
+      this.props.edit(
+        {
+          dueDate: newDate
+        },
+        this.state.editDateId
+      );
+    }
+    this.setState({
+      editingDate: !this.state.editingDate,
+      editDateId: "",
+    });
+  }
+
   openAssignedUserEdit(task) {
+
+    console.log(this.state)
     if (
       !this.state.editingAssignedUser &&
       !this.state.editingAssignedUserTaskID
@@ -310,10 +343,6 @@ class TaskTable extends Component {
   }
 
   submitAssignedUserEdit(task) {
-    console.log("Submiting Assigned User Edit");
-    console.log(task);
-    console.log("Assigned To");
-    console.log(this.state.assignedTo);
     if (task != this.state.assignedTo) {
       this.props.edit(
         {
@@ -321,8 +350,6 @@ class TaskTable extends Component {
         },
         this.state.editingAssignedUserTaskID
       );
-
-      console.log("runs");
     }
     this.setState({
       editingAssignedUser: !this.state.editingAssignedUser,
@@ -408,8 +435,6 @@ class TaskTable extends Component {
       },
       { id: "actions", numeric: false, disablePadding: false, label: "Actions" }
     ];
-
-    this.props.tasks.forEach(task => console.log(task.title));
 
     const style = {
       borderRadius: 5,
@@ -543,24 +568,15 @@ class TaskTable extends Component {
                                 <TextField
                                   id="dropdown"
                                   select
-                                  // className={classes.textField}
                                   value={this.state.assignedTo}
                                   name="assignedTo"
                                   onChange={this.handleChange}
-                                  onSubmit={() => console.log("submitting")}
-                                  // SelectProps={{
-                                  //   MenuProps: {
-                                  //     className: classes.menu
-                                  //   }
-                                  // }}
                                   margin="normal"
                                 >
                                   {this.props.members.map(m => (
                                     <div>
                                       <MenuItem
                                         onClick={e => {
-                                          e.preventDefault();
-                                          console.log("sexxyy");
                                           this.submitAssignedUserEdit(m.userId);
                                         }}
                                         key={m.userId}
@@ -571,15 +587,26 @@ class TaskTable extends Component {
                                     </div>
                                   ))}
                                 </TextField>
-                                {/* <button onClick={(e) =>{ e.preventDefault(); this.submitAssignedUserEdit(row) }}> ¯\_(ツ)_/¯ </button> */}
                               </form>
                             ) : (
-                              // </form>
                               <TinyPic photo={photo} />
                             )}
                           </div>
                         </TableCell>
-                        <TableCell>{date}</TableCell>
+                        <TableCell>
+                        {this.state.editDateId == row.taskId ?
+                        (
+                          <DatePicker 
+                            dueDate={row.dueDate}
+                            submitDate={this.submitDate}
+                            />
+                        )
+                        :
+                        <div onClick={() => this.editDate(row)}> 
+                          {date}
+                        </div>
+                        }
+                        </TableCell>
                         <TableCell>
                           <div
                             className={row.isComplete ? "banana" : "no-banana"}
