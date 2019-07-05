@@ -3,6 +3,7 @@ import TinyPic from "../../components/TinyPic";
 import Modal from "react-responsive-modal";
 import axios from "axios";
 import clsx from "clsx";
+import { Icon, Popup } from "semantic-ui-react";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import Table from "@material-ui/core/Table";
@@ -408,10 +409,15 @@ class TaskTable extends Component {
       { id: "actions", numeric: false, disablePadding: false, label: "Actions" }
     ];
 
-    console.log(this.state);
-    console.log(this.props.tasks);
     this.props.tasks.forEach(task => console.log(task.title));
 
+    const style = {
+      borderRadius: 5,
+      opacity: 1,
+      backgroundColor: "#e91e63",
+      color: "white",
+      padding: "1em"
+    };
     return (
       <div className="mytable">
         <Paper className={classes.paper}>
@@ -584,7 +590,19 @@ class TaskTable extends Component {
                           )}
                         </TableCell>
                         <TableCell>
-                          <button onClick={() => editTask(row)}>Edit</button>
+                          <Popup
+                            trigger={<button>details</button>}
+                            content={
+                              row.description
+                                ? row.description
+                                : "no bananas here!"
+                            }
+                            on="click"
+                            pinned
+                            style={style}
+                            position="bottom right"
+                            size="small"
+                          />
                         </TableCell>
                       </TableRow>
                     );
