@@ -478,6 +478,7 @@ class TaskTable extends Component {
                             className={row.isComplete ? "banana" : "no-banana"}
                             onClick={() => this.toggleComplete(row)}
                           />
+                          {row.isComplete && <p className="tiny">banana for you!</p>}
                         </TableCell>
                         <TableCell>
                           <button onClick={() => editTask(row)}>Edit</button>
