@@ -1,4 +1,4 @@
-# Choremonkey
+# ListMonkey, a Collaboration App 
 
 You can find the deployed project at [https://chore-monkey-app.web.app/](Choremonkey)
 
@@ -28,7 +28,7 @@ You can find the deployed project at [https://chore-monkey-app.web.app/](Choremo
 
 1️⃣ [Product Canvas](https://docs.google.com/document/d/1DgIjeg_DlJUZZfEXjqDOaIQKjTYQlJ9nDokVOYMwfjk/edit?usp=sharing)
 
-Large family?  Sick of whiteboards on the fridge that just get smudgy?  Hate it when some responsibilities end up not completed when someone assumes someone else already did it? Or worse, did you just clean that already clean bathroom sink?  Well, those days are gone now that Choremonkey is in the house!  Can't remember which kid you asked to scrub the toilet?  Forget just exactly who's week it is to take out the trash?  Don't have a Roomba and fighting with your significant other over who vaccuums on Monday?  If so, then let Choremonkey take care of the planning.  We promise, once you incorporate Choremonkey into your busy family and its busy life, you won't go bananas over a messy living room or unmopped kitchen floor ever again!
+Large family?  Sick of whiteboards on the fridge that just get smudgy?  Hate it when some responsibilities end up not completed when someone assumes someone else already did it? Or worse, did you just clean that already clean bathroom sink?  Well, those days are gone now that ListMonkey is in the house!  Can't remember which kid you asked to scrub the toilet?  Forget just exactly who's week it is to take out the trash?  Don't have a Roomba and fighting with your significant other over who vaccuums on Monday?  If so, then let Choremonkey take care of the planning.  We promise, once you incorporate Choremonkey into your busy family and its busy life, you won't go bananas over a messy living room or unmopped kitchen floor ever again!
 
 Key Features
 
