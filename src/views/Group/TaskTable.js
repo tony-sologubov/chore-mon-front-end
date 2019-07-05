@@ -123,14 +123,20 @@ class TaskTable extends Component {
   useStyles = makeStyles => theme => ({
     root: {
       width: "100%",
-      marginTop: theme.spacing(3)
+      marginTop: theme.spacing(3),
+      overflowX: "auto",
+      maxWidth: "100%"
     },
     paper: {
       width: "100%",
-      marginBottom: theme.spacing(2)
+      maxWidth: "100%",
+      marginBottom: theme.spacing(2),
+      overflowX: "auto"
     },
     table: {
-      minWidth: 750,
+      minWidth: 700,
+      maxWidth: "100%",
+      overflowX: "auto",
       width: "100%"
     },
     tableWrapper: {
@@ -279,11 +285,11 @@ class TaskTable extends Component {
     }
   };
 
-  editDate = (task) => {
+  editDate = task => {
     if (!this.state.editDateId) {
       return this.setState({
         editingDate: !this.state.editingDate,
-        editDateId: task.taskId,
+        editDateId: task.taskId
       });
     } else {
       return this.setState({
@@ -313,7 +319,7 @@ class TaskTable extends Component {
     });
   };
 
-  submitDate = (newDate) => {
+  submitDate = newDate => {
     if (newDate != this.state.editDate) {
       this.props.edit(
         {
@@ -324,13 +330,12 @@ class TaskTable extends Component {
     }
     this.setState({
       editingDate: !this.state.editingDate,
-      editDateId: "",
+      editDateId: ""
     });
-  }
+  };
 
   openAssignedUserEdit(task) {
-
-    console.log(this.state)
+    console.log(this.state);
     if (
       !this.state.editingAssignedUser &&
       !this.state.editingAssignedUserTaskID
@@ -439,8 +444,8 @@ class TaskTable extends Component {
     const style = {
       borderRadius: 5,
       opacity: 1,
-      backgroundColor: "#e91e63",
-      color: "white",
+      backgroundColor: "#f2bd1d",
+      color: "black",
       padding: "1em"
     };
     return (
@@ -594,18 +599,14 @@ class TaskTable extends Component {
                           </div>
                         </TableCell>
                         <TableCell>
-                        {this.state.editDateId == row.taskId ?
-                        (
-                          <DatePicker 
-                            dueDate={row.dueDate}
-                            submitDate={this.submitDate}
+                          {this.state.editDateId == row.taskId ? (
+                            <DatePicker
+                              dueDate={row.dueDate}
+                              submitDate={this.submitDate}
                             />
-                        )
-                        :
-                        <div onClick={() => this.editDate(row)}> 
-                          {date}
-                        </div>
-                        }
+                          ) : (
+                            <div onClick={() => this.editDate(row)}>{date}</div>
+                          )}
                         </TableCell>
                         <TableCell>
                           <div
@@ -618,7 +619,7 @@ class TaskTable extends Component {
                         </TableCell>
                         <TableCell>
                           <Popup
-                            trigger={<button>details</button>}
+                            trigger={<div className=" icons8-about" />}
                             content={
                               row.description
                                 ? row.description
