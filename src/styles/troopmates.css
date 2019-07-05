@@ -1,3 +1,21 @@
+.search {
+  background: url("../assets/bananas/p-o-w.jpg");
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.search-bg {
+  background: white;
+  width: 80vw;
+  margin: 0 auto;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
+  text-align: center;
+}
 .search-cards {
   display: flex;
   flex-flow: row wrap;
@@ -6,4 +24,10 @@
 .search-cards a {
   margin: 1rem;
   width: 20%;
+}
+
+.results {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
 }

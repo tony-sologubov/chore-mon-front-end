@@ -7,6 +7,7 @@ import { ReactComponent as TweetIcon } from "../assets/profile-page/Tweet.svg";
 import axios from "axios";
 import Select from "../components/Select";
 
+const user = JSON.parse(localStorage.getItem("user"));
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -42,6 +43,34 @@ class UserProfile extends React.Component {
         this.props.history.push("/dashboard");
       })
       .catch(er => console.log(er.message));
+  };
+
+  addFriend = (e, uid, friendId) => {
+    const { history } = this.props;
+
+    e.preventDefault();
+    console.log("Add Friend Hiring");
+    const friend1 = {
+      userId: uid,
+      friendId: friendId
+    };
+
+    const friend2 = {
+      userId: friendId,
+      friendId: uid
+    };
+
+    axios
+      .post("https://chore-monkey.herokuapp.com/api/friends", friend1)
+      .then(
+        axios
+          .post("https://chore-monkey.herokuapp.com/api/friends", friend2)
+          .then(res => {
+            history.push("/find-friends");
+          })
+          .catch(err => console.log(err))
+      )
+      .catch(err => console.log(err));
   };
 
   handleChange = e => {
@@ -87,7 +116,12 @@ class UserProfile extends React.Component {
             groups={this.props.location.state.groups}
           />
           <div className="profileBtn">
-            <button className="connectBtn hvr-push">CONNECT</button>
+            <button
+              onClick={e => this.addFriend(e, user.uid, this.state.uid)}
+              className="connectBtn hvr-push"
+            >
+              CONNECT
+            </button>
           </div>
         </div>
       </div>
