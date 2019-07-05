@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TinyPic from "../../components/TinyPic";
 import Modal from "react-responsive-modal";
+import axios from "axios";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
@@ -42,7 +43,7 @@ class TaskTable extends Component {
       rowsPerPage: 5,
       rows: [],
       checked: false,
-      setRows: false,
+      open: false
     };
   }
 
@@ -52,6 +53,67 @@ class TaskTable extends Component {
       this.setState({ rows: this.props.tasks, setRows:true });
     }
   }
+
+  open = () => {
+    this.setState({ open: true });
+  };
+  close = () => {
+    this.setState({ open: false });
+  };
+
+  delete = () => {
+    this.state.selected.forEach(e => {
+      axios
+        .delete(`https://chore-monkey.herokuapp.com/api/tasks/${e}`)
+        .then(res => {
+          this.props.fg();
+        })
+        .catch(err => {
+          this.setState({ em: true });
+        });
+    });
+    this.setState({ selected: [] });
+    this.close();
+  };
+
+  complete = () => {
+    this.state.selected.forEach(e => {
+      axios
+        .update(`https://chore-monkey.herokuapp.com/api/tasks/${e}`)
+        .then(res => {
+          this.props.fg();
+        })
+        .catch(err => {
+          this.setState({ em: true });
+        });
+    });
+    this.setState({ selected: [] });
+    this.close();
+  };
+
+  toggleComplete = task => {
+    const i = this.state.rows.findIndex(t => t.taskId === task.taskId);
+
+    const newTask = {
+      ...task,
+      isComplete: !task.isComplete
+    };
+    const newRows = this.state.rows;
+    newRows.splice(i, 1, newTask);
+
+    this.setState({
+      rows: newRows
+    });
+    const u = { isComplete: this.state.rows[i].isComplete };
+    axios
+      .put(`https://chore-monkey.herokuapp.com/api/tasks/${task.taskId}`, u)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        this.setState({ err: true });
+      });
+  };
 
   useStyles = makeStyles => theme => ({
     root: {
@@ -119,7 +181,6 @@ class TaskTable extends Component {
   handleClick = (event, id) => {
     event.preventDefault();
     const selectedIndex = this.state.selected.indexOf(id);
-    console.log(selectedIndex);
 
     let newSelected = [];
 
@@ -187,6 +248,7 @@ class TaskTable extends Component {
 
   find = id => {
     const mem = this.props.members.filter(m => m.uid === id);
+
     if (mem[0]) {
       return mem[0].profilePicture;
     } else {
@@ -199,8 +261,6 @@ class TaskTable extends Component {
   };
 
   editTask = task => {
-    console.log("Edit Task");
-    console.log(task);
     if (!this.state.editTaskId) {
       return this.setState({
         editing: !this.state.editing,
@@ -322,6 +382,12 @@ class TaskTable extends Component {
         disablePadding: false,
         label: "Due Date:"
       },
+      {
+        id: "isComplete",
+        numeric: false,
+        disablePadding: false,
+        label: "Complete?"
+      },
       { id: "actions", numeric: false, disablePadding: false, label: "Actions" }
     ];
 
@@ -351,7 +417,7 @@ class TaskTable extends Component {
             <div className={classes.spacer} />
             <div className={classes.actions}>
               {numSelected > 0 ? (
-                <Tooltip title="Delete" onClick={this.props.open}>
+                <Tooltip title="Delete" onClick={this.open}>
                   <IconButton aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
@@ -415,14 +481,16 @@ class TaskTable extends Component {
                     return (
                       <TableRow
                         hover
-                        onClick={event => handleClick(event, row.id)}
                         role="checkbox"
                         aria-checked={selected}
                         tabIndex={-1}
                         key={row.id}
                         selected={selected}
                       >
-                        <TableCell padding="checkbox">
+                        <TableCell
+                          onClick={event => handleClick(event, row.id)}
+                          padding="checkbox"
+                        >
                           <Checkbox
                             checked={selected}
                             inputProps={{ "aria-labelledby": labelId }}
@@ -467,6 +535,13 @@ class TaskTable extends Component {
 
                         </TableCell>
                         <TableCell>{date}</TableCell>
+                        <TableCell>
+                          <div
+                            className={row.isComplete ? "banana" : "no-banana"}
+                            onClick={() => this.toggleComplete(row)}
+                          />
+                          {row.isComplete && <p className="tiny">banana for you!</p>}
+                        </TableCell>
                         <TableCell>
                           <button onClick={() => editTask(row)}>Edit</button>
                         </TableCell>
@@ -515,6 +590,11 @@ class TaskTable extends Component {
             />
           </form>
         )}
+
+        <Modal center id="d" open={this.state.open} onClose={this.close}>
+          Delete these tasks?
+          <button onClick={this.delete}>Yep They're Done!</button>
+        </Modal>
       </div>
     );
   }

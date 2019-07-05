@@ -11,7 +11,7 @@ const sendToDB = async () => {
     profilePicture: photoURL
   };
 
-  console.log("User:", user);
+  
 
   let url = "https://chore-monkey.herokuapp.com/api/users";
 

@@ -12,6 +12,7 @@ const Footer = () => {
               network="linkedin"
               bgColor="white"
               fgColor="#e91e63"
+              url="https://www.linkedin.com/company/listmonkey-net/"
             />
             <SocialIcon
               className="si"
@@ -73,7 +74,7 @@ const Footer = () => {
       </div>
       <div className="footer-copyright">
         <div className="container">
-          © 2019 ChoreList, LLC.
+          © 2019 Listmonkey, LLC., a Lambda Labs Group
           <a className="grey-text text-lighten-4 right" href="#!">
             Sitemap
           </a>

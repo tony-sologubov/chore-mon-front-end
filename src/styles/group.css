@@ -55,6 +55,11 @@
   flex-wrap: wrap;
   justify-content: flex-end;
 }
+
+.g-bot {
+  width: 95%;
+  margin: 0 auto;
+}
 .group-dash .styles_modal__gNwvD {
   width: 50%;
   height: 50%;
