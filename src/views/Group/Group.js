@@ -29,7 +29,7 @@ class Group extends Component {
   }
 
   fetchGroup = () => {
-    const groupId = this.props.location.state.groupId;
+    const groupId = this.props.match.params.groupId;
     axios
       .get(`https://chore-monkey.herokuapp.com/api/group/${groupId}`)
       .then(res => {
@@ -88,7 +88,7 @@ class Group extends Component {
     }
     const { name, members } = this.state;
 
-    const groupId = this.props.location.state.groupId;
+    const groupId = this.props.match.params.groupId
     return (
       <div className="group-dash ">
         <header className="g-head">
