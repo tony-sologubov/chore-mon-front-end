@@ -20,7 +20,13 @@ const GroupList = ({ groups }) => {
   } else {
     return groups.map(g => {
       return (
-        <Link key={g.id} to={{ pathname: `groups/${g.groupId}` }}>
+        <Link
+          key={g.id}
+          to={{
+            pathname: `groups/${g.groupId}`,
+            state: { groupId: `${g.groupId}` }
+          }}
+        >
           <ComplexButton groupName={g.name} />
         </Link>
       );

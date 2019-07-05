@@ -31,28 +31,17 @@ class TroopMates extends Component {
       });
   };
 
-  search = term => {
-    let arr = this.state.users.filter(u => u.name.includes(term));
-    console.log(arr);
-    if (arr) {
-      this.setState({
-        results: arr
-      });
-    } else {
-      return "no members by that name";
-    }
-  };
-
   render() {
     const { name, users, results, email, term } = this.state;
 
     return (
-      <div className="search">
-        <form> </form>
+      <div>
         <div className="search-cards">
           {users.map(m => {
             return (
               <Link
+                id={m.uid}
+                key={m.uid}
                 to={{
                   pathname: `/user/${m.uid}`,
                   state: {
@@ -60,18 +49,11 @@ class TroopMates extends Component {
                   }
                 }}
               >
-                <div className="card hoverable">
+                <div className="card ">
                   <div className="card-image center-align">
                     <img src={m.profilePicture} alt="profile of user" />
-
-                    <a
-                      className="btn-floating halfway-fab waves-effect waves-light red"
-                      href="www.google.com"
-                    >
-                      <i className="material-icons">add</i>
-                    </a>
                   </div>
-                  <div class="card-content">
+                  <div className="card-content">
                     <h3 className="card-title">{m.name}</h3>
                     <p>{m.location}</p>
                   </div>
