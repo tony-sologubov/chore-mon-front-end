@@ -30,8 +30,13 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    minWidth: 250,
-    width: "100%"
+    minWidth: "17vw",
+    width: "100%",
+    [theme.breakpoints.down("m")]: {
+      width: "100% !important", // Overrides inline-style
+      height: "100%",
+      fontSize: ".5rem"
+    }
   },
   image: {
     position: "relative",
