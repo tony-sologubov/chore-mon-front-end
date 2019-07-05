@@ -75,7 +75,7 @@ const Selector = props => {
   };
 
   return (
-    <div>
+    <div className="select" style={{ textAlign: "center" }}>
       <Button onClick={handleClickOpen}>Invite to List</Button>
       <Dialog open={state.open} onClose={handleClickClose}>
         <DialogTitle>Select a List</DialogTitle>
