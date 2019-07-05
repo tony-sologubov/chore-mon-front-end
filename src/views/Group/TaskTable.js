@@ -23,7 +23,7 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import TextField from "@material-ui/core/TextField";
-import MenuItem from '@material-ui/core/MenuItem';
+import MenuItem from "@material-ui/core/MenuItem";
 
 class TaskTable extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class TaskTable extends Component {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     if (this.props.tasks !== prevProps.tasks || !this.state.setRows) {
-      this.setState({ rows: this.props.tasks, setRows:true });
+      this.setState({ rows: this.props.tasks, setRows: true });
     }
   }
 
@@ -260,7 +260,8 @@ class TaskTable extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  editTask = task => {
+  editTask = (e, task) => {
+    e.preventDefault();
     if (!this.state.editTaskId) {
       return this.setState({
         editing: !this.state.editing,
@@ -296,25 +297,37 @@ class TaskTable extends Component {
   };
 
   openAssignedUserEdit(task) {
-    if (!this.state.editingAssignedUser && !this.state.editingAssignedUserTaskID) {
+    if (
+      !this.state.editingAssignedUser &&
+      !this.state.editingAssignedUserTaskID
+    ) {
       this.setState({
         editingAssignedUser: !this.state.editingAssignedUser,
         editingAssignedUserTaskID: task.taskId
-      })
+      });
     }
   }
 
   submitAssignedUserEdit(task) {
-    if (task.assignedTo != this.state.assignedTo && this.state.assignedTo) {
-      this.props.edit({
-        assignedTo: this.state.assignedTo,
-      }, this.state.editingAssignedUserTaskID)
+    console.log("Submiting Assigned User Edit");
+    console.log(task);
+    console.log("Assigned To");
+    console.log(this.state.assignedTo);
+    if (task != this.state.assignedTo) {
+      this.props.edit(
+        {
+          assignedTo: task
+        },
+        this.state.editingAssignedUserTaskID
+      );
+
+      console.log("runs");
     }
-      this.setState({
-        editingAssignedUser: !this.state.editingAssignedUser,
-        editingAssignedUserTaskID: "",
-        assignedTo: ""
-      })
+    this.setState({
+      editingAssignedUser: !this.state.editingAssignedUser,
+      editingAssignedUserTaskID: "",
+      assignedTo: ""
+    });
   }
 
   //Opens delete modal
@@ -368,6 +381,10 @@ class TaskTable extends Component {
       this.handleRequestSort(event, property);
     };
 
+    if (!this.state.setRows) {
+      this.setState({ rows: this.props.tasks, setRows: true });
+    }
+
     const headRows = [
       { id: "title", numeric: false, disablePadding: true, label: "Task" },
       {
@@ -391,9 +408,9 @@ class TaskTable extends Component {
       { id: "actions", numeric: false, disablePadding: false, label: "Actions" }
     ];
 
-    console.log(this.state)
-    console.log(this.props.tasks)
-    this.props.tasks.forEach(task => console.log(task.title))
+    console.log(this.state);
+    console.log(this.props.tasks);
+    this.props.tasks.forEach(task => console.log(task.title));
 
     return (
       <div className="mytable">
@@ -496,43 +513,65 @@ class TaskTable extends Component {
                             inputProps={{ "aria-labelledby": labelId }}
                           />
                         </TableCell>
-                        <TableCell component="th" id={labelId}>
-                          {row.title}
+                        <TableCell>
+                          {this.state.editTaskId === row.taskId ? (
+                            <form onSubmit={e => this.submit(e)}>
+                              <input
+                                type="text"
+                                name="title"
+                                value={this.state.title}
+                                onChange={this.handleChange}
+                              />
+                            </form>
+                          ) : (
+                            <span onClick={e => this.editTask(e, row)}>
+                              {row.title}
+                            </span>
+                          )}
                         </TableCell>
                         <TableCell>
-
-                        <div onClick={() => this.openAssignedUserEdit(row)}>
-                    { this.state.editingAssignedUserTaskID == row.taskId 
-                      ?
-                      <form>
-                      <TextField
-                      id="dropdown"
-                      select
-                      // className={classes.textField}
-                      value={this.state.assignedTo}
-                      name="assignedTo"
-                      onChange={this.handleChange}
-                      onSubmit={() => console.log("submitting")}
-                      // SelectProps={{
-                      //   MenuProps: {
-                      //     className: classes.menu
-                      //   }
-                      // }}
-                      margin="normal"
-                    >
-                      {this.props.members.map(m => (
-                        <MenuItem key={m.userId} value={m.uid}>
-                          {m.name}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                      <button onClick={(e) =>{ e.preventDefault(); this.submitAssignedUserEdit(row) }}> ¯\_(ツ)_/¯ </button>
-                    </form>
-                      // </form>
-                    :
-                      <TinyPic photo={photo} /> }
-                      </div>
-
+                          <div onClick={() => this.openAssignedUserEdit(row)}>
+                            {this.state.editingAssignedUserTaskID ==
+                            row.taskId ? (
+                              <form>
+                                <TextField
+                                  id="dropdown"
+                                  select
+                                  // className={classes.textField}
+                                  value={this.state.assignedTo}
+                                  name="assignedTo"
+                                  onChange={this.handleChange}
+                                  onSubmit={() => console.log("submitting")}
+                                  // SelectProps={{
+                                  //   MenuProps: {
+                                  //     className: classes.menu
+                                  //   }
+                                  // }}
+                                  margin="normal"
+                                >
+                                  {this.props.members.map(m => (
+                                    <div>
+                                      <MenuItem
+                                        onClick={e => {
+                                          e.preventDefault();
+                                          console.log("sexxyy");
+                                          this.submitAssignedUserEdit(m.userId);
+                                        }}
+                                        key={m.userId}
+                                        value={m.uid}
+                                      >
+                                        {m.name}
+                                      </MenuItem>
+                                    </div>
+                                  ))}
+                                </TextField>
+                                {/* <button onClick={(e) =>{ e.preventDefault(); this.submitAssignedUserEdit(row) }}> ¯\_(ツ)_/¯ </button> */}
+                              </form>
+                            ) : (
+                              // </form>
+                              <TinyPic photo={photo} />
+                            )}
+                          </div>
                         </TableCell>
                         <TableCell>{date}</TableCell>
                         <TableCell>
@@ -540,7 +579,9 @@ class TaskTable extends Component {
                             className={row.isComplete ? "banana" : "no-banana"}
                             onClick={() => this.toggleComplete(row)}
                           />
-                          {row.isComplete && <p className="tiny">banana for you!</p>}
+                          {row.isComplete && (
+                            <p className="tiny">banana for you!</p>
+                          )}
                         </TableCell>
                         <TableCell>
                           <button onClick={() => editTask(row)}>Edit</button>
@@ -579,17 +620,6 @@ class TaskTable extends Component {
             />
           </div>
         </Paper>
-
-        {this.state.editing && (
-          <form onSubmit={e => this.submit(e)}>
-            <input
-              type="text"
-              name="title"
-              value={this.state.title}
-              onChange={this.handleChange}
-            />
-          </form>
-        )}
 
         <Modal center id="d" open={this.state.open} onClose={this.close}>
           Delete these tasks?
