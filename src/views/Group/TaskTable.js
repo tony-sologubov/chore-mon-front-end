@@ -596,23 +596,16 @@ class TaskTable extends Component {
                         <TableCell>
                         {this.state.editDateId == row.taskId ?
                         (
-                        // <div
-                          // onClick={() => console.log("I can be clicked!")}
-                        // >
                           <DatePicker 
                             dueDate={row.dueDate}
                             submitDate={this.submitDate}
-                          />
-                        // </div>
+                            />
                         )
-
                         :
-                        
                         <div onClick={() => this.editDate(row)}> 
                           {date}
                         </div>
                         }
-                        
                         </TableCell>
                         <TableCell>
                           <div

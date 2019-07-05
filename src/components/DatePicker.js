@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 });
 
 export default function MaterialUIPickers(props) {
-  // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date(props.dueDate));
 
   const classes = useStyles();
@@ -25,15 +24,11 @@ export default function MaterialUIPickers(props) {
         props.submitDate(date)
     }
     setSelectedDate(date);
-    console.log(date)
   }
 
-console.log(props)
-console.log(props.dueDate)
-// console.log(else)
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      {/* <Grid container className={classes.grid} justify="space-around"> */}
+      <Grid container className={classes.grid} justify="space-around">
         <KeyboardDatePicker
           margin="normal"
           id="mui-pickers-date"
@@ -44,7 +39,7 @@ console.log(props.dueDate)
             'aria-label': 'change date',
           }}
         />
-      {/* </Grid> */}
+      </Grid>
     </MuiPickersUtilsProvider>
   );
 }
