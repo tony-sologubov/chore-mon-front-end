@@ -33,15 +33,15 @@ class Profile extends React.Component {
       <div className="profileContainer">
         <div className="header">
           <div className="coverPhoto">.</div>
-          {JSON.parse(localStorage.getItem("firebaseui::rememberedAccounts"))[0]
-            .photoUrl !== null ? (
+          {JSON.parse(localStorage.getItem("user"))
+            .photoURL !== null ? (
             <img
               className="profilePhoto"
               alt="profile"
               src={
                 JSON.parse(
-                  localStorage.getItem("firebaseui::rememberedAccounts")
-                )[0].photoUrl
+                  localStorage.getItem("user")
+                ).photoURL
               }
             />
           ) : (
@@ -59,8 +59,8 @@ class Profile extends React.Component {
           <h1 className="profileName">
             {" " +
               JSON.parse(
-                localStorage.getItem("firebaseui::rememberedAccounts")
-              )[0].displayName.match(/^[a-z ,.'-]+$/i)[0]}
+                localStorage.getItem("user")
+              ).displayName.match(/[^\s,.'"!?]+/)[0]}
           </h1>
           <h3 className="profileLocation">DENVER, CO</h3>
           <div className="socialLinks">
