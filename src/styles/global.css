@@ -38,6 +38,25 @@ h2 {
   font-size: 2rem;
 }
 
+/* button */
+.fun-button {
+  cursor: pointer;
+  border-radius: 1.5rem;
+  background: var(--accentpink);
+  color: white;
+  font-family: "Indie Flower", cursive;
+  border: none;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+.fun-button:hover {
+  cursor: pointer;
+  color: var(--accentpink);
+  background: white;
+  font-family: "Indie Flower", cursive;
+}
+
 /* Hover Animations */
 
 /* Push */

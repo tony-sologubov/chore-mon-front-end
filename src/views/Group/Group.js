@@ -88,13 +88,13 @@ class Group extends Component {
     }
     const { name, members } = this.state;
 
-    const groupId = this.props.match.params.groupId
+    const groupId = this.props.match.params.groupId;
     return (
       <div className="group-dash ">
         <header className="g-head">
           <h1>{name}</h1>
           <Link to={{ pathname: `/dashboard` }}>
-            <button>Back To Dashboard</button>
+            <button className="hvr-glow fun-button">Back To Dashboard</button>
           </Link>
         </header>
 
@@ -121,14 +121,16 @@ class Group extends Component {
                 return <Pic key={m.id} photo={m.profilePicture} />;
               })}
             </div>
-            <button onClick={this.openModal}>add task</button>
+            <button className="fun-button hvr-glow" onClick={this.openModal}>
+              add task
+            </button>
           </div>
         </section>
         <div className="g-bot">
           {this.state.isAdmin && (
             <Link to={`/groupsettings/${groupId}`}>
-              <button className="waves-effect waves-light btn-large  pink hvr-shutter-out-vertical">
-                <span className="iconLinks">List Board Settings</span>
+              <button className="gsb fun-button hvr-glow">
+                <i className="icon-settings chief" /> Chief Monkey Only!
               </button>
             </Link>
           )}
