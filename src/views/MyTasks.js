@@ -76,8 +76,7 @@ class MyTasks extends Component {
   render() {
     if (this.state.fetchedGroups && !this.state.fetchedTasks) { this.fetchTasks() }
     const { name, members } = this.state;
-    const groupId = window.location.href.split("/").pop();
-
+    console.log(this.state)
     return (
         <div>
             <thead>
@@ -120,3 +119,8 @@ class MyTasks extends Component {
 }
 
 export default withRouter(MyTasks);
+
+
+
+
+// -----------
