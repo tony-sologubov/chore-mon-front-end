@@ -13,6 +13,11 @@ const Landing = () => {
       <div className="landing">
         <NavBar />
         <div className="cta">
+          <img
+            src={require("../assets/login-page/logo.png")}
+            alt="monkey"
+            className="mobile-monkey"
+          />
           <h1 className="flow-text">
             Time to Get <br /> Your Bananas <br />
             in a row?

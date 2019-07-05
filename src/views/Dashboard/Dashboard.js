@@ -107,7 +107,7 @@ class Dashboard extends Component {
               {/* group list */}
 
               <div className="section-ctr">
-                <div className="cards">
+                <div className="cards" id="style-6">
                   <GroupList groups={this.state.groups} className="cards" />
                 </div>
               </div>

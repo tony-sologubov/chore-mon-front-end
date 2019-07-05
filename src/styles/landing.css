@@ -20,6 +20,10 @@
 .cta h1 {
   line-height: 1;
 }
+
+.mobile-monkey {
+  display: none;
+}
 .store-logos {
   width: 30%;
 }
@@ -197,4 +201,28 @@
 
 .si {
   margin: 0.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    overflow-y: hidden;
+  }
+
+  .landing h1 {
+    font-size: 3rem;
+  }
+
+  .landing {
+    background: url("../assets/login-page/login-wallpaper.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .mobile-monkey {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+  }
 }
