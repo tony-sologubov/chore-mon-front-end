@@ -7,6 +7,9 @@ import { ReactComponent as TweetIcon } from "../assets/profile-page/Tweet.svg";
 import axios from "axios";
 import Select from "../components/Select";
 
+import Snackbar from "@material-ui/core/Snackbar";
+import Slide from "@material-ui/core/Slide";
+
 const user = JSON.parse(localStorage.getItem("user"));
 class UserProfile extends React.Component {
   constructor(props) {
@@ -30,7 +33,8 @@ class UserProfile extends React.Component {
           profilePicture: res.data.profilePicture,
           coverPhoto: res.data.coverPhoto,
           memberId: "",
-          groupId: 0
+          groupId: 0,
+          open: false
         });
       });
   };
@@ -40,7 +44,6 @@ class UserProfile extends React.Component {
       .post(`https://chore-monkey.herokuapp.com/api/groupmembers`, m)
       .then(res => {
         console.log(res);
-        this.props.history.push("/dashboard");
       })
       .catch(er => console.log(er.message));
   };
@@ -65,9 +68,7 @@ class UserProfile extends React.Component {
       .then(
         axios
           .post("https://chore-monkey.herokuapp.com/api/friends", friend2)
-          .then(res => {
-            history.push("/dashboard");
-          })
+          .then(this.handleToast(this.Transition))
           .catch(err => console.log(err))
       )
       .catch(err => console.log(err));
@@ -75,6 +76,18 @@ class UserProfile extends React.Component {
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  // ----------------toast -------------------//
+  Transition = props => {
+    return <Slide {...props} direction="up" />;
+  };
+  handleToast = Transition => () => {
+    this.setState({ open: true, Transition });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -122,6 +135,19 @@ class UserProfile extends React.Component {
             >
               CONNECT
             </button>
+            <Snackbar
+              open={this.state.open}
+              onClose={this.handleClose}
+              TransitionComponent={this.state.Transition}
+              ContentProps={{
+                "aria-describedby": "message-id"
+              }}
+              message={
+                <span id="message-id">
+                  You and {this.state.name} are friends!
+                </span>
+              }
+            />
           </div>
         </div>
       </div>
