@@ -243,7 +243,7 @@ class Dashboard extends Component {
 
             <Link
               to={{
-                pathname: `/settings/profile`
+                pathname: `/settings/`
               }}
             >
               <div className="icon-div">

@@ -1,7 +1,7 @@
 import firebase from "../../firebase/firebase.js";
 import axios from "axios";
 
-const sendToDB = async () => {
+const Send = async () => {
   const currentUser = await firebase.auth.currentUser.toJSON();
   const { displayName, email, uid, photoURL } = currentUser;
   const user = {
@@ -11,8 +11,6 @@ const sendToDB = async () => {
     profilePicture: photoURL
   };
 
-  
-
   let url = "https://chore-monkey.herokuapp.com/api/users";
 
   // deleteUserFromDB();
@@ -21,4 +19,4 @@ const sendToDB = async () => {
   return await axios.post(url, user);
 };
 
-export default sendToDB;
+export default Send;

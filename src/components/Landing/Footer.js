@@ -25,12 +25,14 @@ const Footer = () => {
               network="facebook"
               bgColor="white"
               fgColor="#e91e63"
-            />{" "}
+              url="https://www.facebook.com/List-Monkey-203337330601812/"
+            />
             <SocialIcon
               className="si"
               network="pinterest"
               bgColor="white"
               fgColor="#e91e63"
+              url="https://www.pinterest.com/rinafil/"
             />
             <SocialIcon
               className="si"

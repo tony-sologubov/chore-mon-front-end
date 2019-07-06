@@ -1,113 +1,91 @@
-import React from "react";
-import "../../src/styles/settings.css";
-import Modal from "react-modal";
-class Settings extends React.Component {
+import React, { Component } from "react";
+import firebase from "../firebase/firebase";
+import axios from "axios";
+import Send from "../components/Auth/Send";
+
+class Settings extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: false
-    };
+    this.state = {};
   }
 
-  openModal = () => {
-    this.setState({ showModal: true });
-  };
+  updateUser = (uid, obj) => {
+    var user = firebase.auth().currentUser;
 
-  closeModal = () => {
-    this.setState({ showModal: false });
-  };
+    user
+      .updateProfile({
+        displayName: obj.name,
+        photoURL: obj.profilePicture,
+        email: obj.email
+      })
+      .then(function() {
+        const currentUser = firebase.auth.currentUser.toJSON();
+        const { displayName, email, uid, photoURL } = currentUser;
+        const user = {
+          name: displayName,
+          email,
+          uid,
+          profilePicture: photoURL
+        };
 
+        let url = "https://chore-monkey.herokuapp.com/api/users";
+
+        // deleteUserFromDB();
+        localStorage.setItem("uid", JSON.stringify(uid));
+        localStorage.setItem("user", JSON.stringify(user));
+        return axios.post(url, user);
+        // Update successful.
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
   render() {
     return (
-      <div className="settingsContainer">
-        <h1 className="settingsHeader">Settings</h1>
-        <img
-          className="settingsPhoto"
-          alt="settings"
-          src={
-            JSON.parse(
-              localStorage.getItem("firebaseui::rememberedAccounts")
-            )[0].photoUrl
-          }
-        />
-        <h1 className="settingsName">
-          {" " +
-            JSON.parse(
-              localStorage.getItem("firebaseui::rememberedAccounts")
-            )[0].displayName.match(/^[a-z ,.'-]+$/i)[0]}
-        </h1>
-        <p className="settingsEmail">
-          {
-            JSON.parse(
-              localStorage.getItem("firebaseui::rememberedAccounts")
-            )[0].email
-          }
-        </p>
-        <button className="updateEmailButton" onClick={this.openModal}>
-          Update Info
-        </button>
-
-        <Modal
-          isOpen={this.state.showModal}
-          onRequestClose={this.closeModal}
-          contentLabel="Update Email"
-        >
-          <div className="modal">
-            <div className="modal-prompt">
-              <h2>Update Info</h2>
-            </div>
-            <div className="modal-button-container">
-              <input
-                className="settingsInput"
-                onEnter={this.closeModal}
-                type="text"
-                placeholder="Name"
-              />
-              <input
-                className="settingsInput"
-                onEnter={this.closeModal}
-                type="text"
-                placeholder="Email"
-              />
-              <input
-                className="settingsInput"
-                onEnter={this.closeModal}
-                type="password"
-                placeholder="Password"
-              />
-              <input
-                className="settingsInput"
-                onEnter={this.closeModal}
-                type="number"
-                placeholder="Phone Number"
-              />
-            </div>
-            <button
-              className="settingsCloseButton"
-              type="button"
-              onClick={this.closeModal}
-            >
-              Submit
-            </button>
+      <div className="settings">
+        <form className="settings-form hundred">
+          <h1>Update Your Settings</h1>
+          <div className="input-field fifty">
+            <input
+              id="display-name"
+              value={this.state.displayName}
+              name="displayName"
+              type="text"
+              className="validate fifty"
+            />
+            <label for="display-name">Display Name</label>
           </div>
-        </Modal>
+
+          <div className="input-field fifty">
+            <input
+              value={this.state.email}
+              name="email"
+              id="email"
+              type="text"
+              className="validate fifty"
+            />
+            <label for="email">Email</label>
+          </div>
+
+          <div className="input-field fifty">
+            <input
+              name="location"
+              value={this.state.location}
+              id="location"
+              type="text"
+              className="validate fifty"
+            />
+            <label for="location">Location</label>
+          </div>
+
+          <button className="fun-button hvr-glow twenty">Submit</button>
+        </form>
       </div>
     );
   }
 }
 
 export default Settings;
-
-// var user = firebase.auth().currentUser;
-
-// user.updateProfile({
-//   displayName: "Jane Q. User",
-//   photoURL: "https://example.com/jane-q-user/profile.jpg"
-// }).then(function() {
-//   // Update successful.
-// }).catch(function(error) {
-//   // An error happened.
-// });
 
 // var user = firebase.auth().currentUser;
 

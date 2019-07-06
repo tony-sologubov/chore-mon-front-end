@@ -6,7 +6,7 @@ import Dashboard from "../views/Dashboard/Dashboard";
 import BillingPage from "../components/Billing/BillingPage";
 import firebase, { FirebaseContext } from "../firebase";
 import useAuth from "../components/Auth/useAuth";
-import PrivateRoute from '../components/Auth/PrivateRoute'
+import PrivateRoute from "../components/Auth/PrivateRoute";
 
 import InProgress from "../views/InProgress";
 
@@ -20,6 +20,7 @@ import NewSettings from "../views/NewSettings";
 import GroupSettings from "../views/GroupSettings";
 import UserProfile from "../views/UserProfile";
 import MyTasks from "../views/MyTasks";
+import Settings from "../views/Settings";
 
 const App = () => {
   const user = useAuth();
@@ -38,7 +39,7 @@ const App = () => {
           <Route path="/404" component={InProgress} />
           <PrivateRoute exact path="/groups/:groupId" component={Group} />
           <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/settings" component={NewSettings} />
+          <PrivateRoute path="/settings" component={Settings} />
           <PrivateRoute path="/groupsettings" component={GroupSettings} />
         </Switch>
       </div>

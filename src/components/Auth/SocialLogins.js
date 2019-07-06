@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import firebase from 'firebase';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { uiConfig } from '../../firebase/uiconfig';
-import sendToDB from './sendToDB';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { uiConfig } from "../../firebase/uiconfig";
+import Send from "./Send";
 
 class SocialLogins extends Component {
   constructor(props) {
@@ -27,12 +27,15 @@ class SocialLogins extends Component {
     if (!this.state.isSignedIn) {
       return (
         <div>
-          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
         </div>
       );
     }
-    sendToDB();
-    return <div>{this.props.history.push('/dashboard')}</div>;
+    Send();
+    return <div>{this.props.history.push("/dashboard")}</div>;
   }
 }
 
