@@ -10,10 +10,12 @@ import { ReactComponent as ListIcon } from "../../assets/dashboard/icons/list.sv
 import { ReactComponent as CalendarIcon } from "../../assets/dashboard/icons/calendar.svg";
 import { ReactComponent as SettingsIcon } from "../../assets/dashboard/icons/settings.svg";
 import axios from "axios";
+import firebase from "../../firebase/firebase.js";
 
 const uid = JSON.parse(localStorage.getItem("uid"));
+console.log(uid);
 const user = JSON.parse(localStorage.getItem("user"));
-const url = "https://chore-monkey.herokuapp.com/api";
+const url = "https://chore-monkey.herokuapp.com/api/";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -35,12 +37,13 @@ class Dashboard extends Component {
     axios
       .get(`${url}/users/${uid}`)
       .then(res => {
+        console.log(res);
         this.setState({
           name: res.data.name,
           groups: res.data.groups,
           photo: res.data.profilePicture,
           groupName: "",
-          o: false,
+          open: false,
           error: false
         });
       })
@@ -49,12 +52,12 @@ class Dashboard extends Component {
       });
   };
 
-  o = () => {
-    this.setState({ o: true });
+  open = () => {
+    this.setState({ open: true });
   };
 
-  c = () => {
-    this.setState({ o: false });
+  close = () => {
+    this.setState({ open: false });
   };
 
   //Change Handler
@@ -122,7 +125,7 @@ class Dashboard extends Component {
 
               <button
                 className="btn hvr-glow dash-but z-depth-1"
-                onClick={this.o}
+                onClick={this.open}
               >
                 Make a List!
               </button>
@@ -267,12 +270,12 @@ class Dashboard extends Component {
 
           {/* addGroupForm */}
           <Modal
-            open={this.state.o}
-            onClose={this.c}
+            open={this.state.open}
+            onClose={this.close}
             center
-            showCloseIcon={false}
+            showCloseIcon={true}
           >
-            <div className="modal">
+            <div className="m">
               <form onSubmit={e => this.submit(e)} className="addGroupForm">
                 <input
                   type="text"

@@ -34,7 +34,7 @@ class SocialLogins extends Component {
         </div>
       );
     }
-    Send();
+    // Send();
     return <div>{this.props.history.push("/dashboard")}</div>;
   }
 }

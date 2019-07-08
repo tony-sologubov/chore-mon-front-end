@@ -9,7 +9,7 @@ class Settings extends Component {
     this.state = {};
   }
 
-  updateUser = (uid, obj) => {
+  updateUser = obj => {
     var user = firebase.auth().currentUser;
 
     user
@@ -28,16 +28,20 @@ class Settings extends Component {
           profilePicture: photoURL
         };
 
-        let url = "https://chore-monkey.herokuapp.com/api/users";
+        let url = `https://chore-monkey.herokuapp.com/api/users/${user.uid}`;
 
         // deleteUserFromDB();
         localStorage.setItem("uid", JSON.stringify(uid));
         localStorage.setItem("user", JSON.stringify(user));
-        return axios.post(url, user);
-        // Update successful.
-      })
-      .catch(function(error) {
-        console.log(error);
+        return axios
+          .put(url, user)
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        this.props.history.push("/dashboard");
       });
   };
   render() {
@@ -53,7 +57,7 @@ class Settings extends Component {
               type="text"
               className="validate fifty"
             />
-            <label for="display-name">Display Name</label>
+            <label htmlFor="display-name">Display Name</label>
           </div>
 
           <div className="input-field fifty">
@@ -64,7 +68,7 @@ class Settings extends Component {
               type="text"
               className="validate fifty"
             />
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
           </div>
 
           <div className="input-field fifty">
@@ -75,7 +79,7 @@ class Settings extends Component {
               type="text"
               className="validate fifty"
             />
-            <label for="location">Location</label>
+            <label htmlFor="location">Location</label>
           </div>
 
           <button className="fun-button hvr-glow twenty">Submit</button>
