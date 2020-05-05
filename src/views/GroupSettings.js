@@ -5,7 +5,7 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 
 
-const url = "https://chore-monkey.herokuapp.com/api";
+const url = "https://uffizzi-test.herokuapp.com/api";
 class GroupSettings extends React.Component {
   constructor(props) {
     super(props);

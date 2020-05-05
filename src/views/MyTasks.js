@@ -10,7 +10,7 @@ import TaskTable from "./Group/TaskTable";
 
 const uid = JSON.parse(localStorage.getItem("uid"));
 const user = JSON.parse(localStorage.getItem("user"));
-const url = "https://chore-monkey.herokuapp.com/api";
+const url = "https://uffizzi-test.herokuapp.com/api";
 
 class MyTasks extends Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class MyTasks extends Component {
     fetchGroup = (group) => {
         const { groupId } = group
         axios
-        .get(`https://chore-monkey.herokuapp.com/api/group/${groupId}`)
+        .get(`https://uffizzi-test.herokuapp.com/api/group/${groupId}`)
         .then(res => {
         this.setState({
             tasks: [ 

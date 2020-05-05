@@ -32,7 +32,7 @@ class TroopMates extends Component {
   fetchMonkeys = () => {
     const uid = user.uid;
     axios
-      .get("https://chore-monkey.herokuapp.com/api/users")
+      .get("https://uffizzi-test.herokuapp.com/api/users")
       .then(res => {
         this.setState({ filtered: "", users: res.data });
       })
@@ -41,7 +41,7 @@ class TroopMates extends Component {
       });
 
     axios
-      .get(`https://chore-monkey.herokuapp.com/api/friends/`)
+      .get(`https://uffizzi-test.herokuapp.com/api/friends/`)
       .then(res => {
         this.setState({
           allFriendships: res.data
@@ -50,7 +50,7 @@ class TroopMates extends Component {
       .catch(err => console.log(err));
 
     axios
-      .get(`https://chore-monkey.herokuapp.com/api/friends/${uid}`)
+      .get(`https://uffizzi-test.herokuapp.com/api/friends/${uid}`)
       .then(res => {
         this.setState({
           friends: res.data

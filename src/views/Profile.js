@@ -17,7 +17,7 @@ class Profile extends React.Component {
 
   getUser = id => {
     axios
-      .get(`https://chore-monkey.herokuapp.com/api/users/${id}`)
+      .get(`https://uffizzi-test.herokuapp.com/api/users/${id}`)
       .then(res => {
         this.setState({
           name: res.data.name,

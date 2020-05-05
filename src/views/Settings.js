@@ -28,7 +28,7 @@ class Settings extends Component {
           profilePicture: photoURL
         };
 
-        let url = `https://chore-monkey.herokuapp.com/api/users/${user.uid}`;
+        let url = `https://uffizzi-test.herokuapp.com/api/users/${user.uid}`;
 
         // deleteUserFromDB();
         localStorage.setItem("uid", JSON.stringify(uid));

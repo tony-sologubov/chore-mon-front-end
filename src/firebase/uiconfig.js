@@ -19,7 +19,7 @@ export const uiConfig = {
 
       console.log(newUser);
 
-      let url = "https://chore-monkey.herokuapp.com/api/users";
+      let url = "https://uffizzi-test.herokuapp.com/api/users";
 
       // deleteUserFromDB();
       localStorage.setItem("uid", JSON.stringify(user.uid));

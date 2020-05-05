@@ -24,7 +24,7 @@ class UserProfile extends React.Component {
   getUser = () => {
     const id = window.location.href.split("/").pop();
     axios
-      .get(`https://chore-monkey.herokuapp.com/api/users/${id}`)
+      .get(`https://uffizzi-test.herokuapp.com/api/users/${id}`)
       .then(res => {
         this.setState({
           name: res.data.name,
@@ -41,7 +41,7 @@ class UserProfile extends React.Component {
 
   add = (m, props) => {
     axios
-      .post(`https://chore-monkey.herokuapp.com/api/groupmembers`, m)
+      .post(`https://uffizzi-test.herokuapp.com/api/groupmembers`, m)
       .then(res => {
         console.log(res);
       })
@@ -64,10 +64,10 @@ class UserProfile extends React.Component {
     };
 
     axios
-      .post("https://chore-monkey.herokuapp.com/api/friends", friend1)
+      .post("https://uffizzi-test.herokuapp.com/api/friends", friend1)
       .then(
         axios
-          .post("https://chore-monkey.herokuapp.com/api/friends", friend2)
+          .post("https://uffizzi-test.herokuapp.com/api/friends", friend2)
           .then(this.handleToast(this.Transition))
           .catch(err => console.log(err))
       )
