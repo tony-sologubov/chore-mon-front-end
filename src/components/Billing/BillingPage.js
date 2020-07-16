@@ -2,7 +2,7 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
-const URL = 'https://uffizzi-test.herokuapp.com/api/charge';
+const URL = 'https://tonys-demo-backend.herokuapp.com/api/charge';
 
 const successPayment = (data) => {
 	alert('Payment Successful');

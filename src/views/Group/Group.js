@@ -31,7 +31,7 @@ class Group extends Component {
   fetchGroup = () => {
     const groupId = this.props.match.params.groupId;
     axios
-      .get(`https://uffizzi-test.herokuapp.com/api/group/${groupId}`)
+      .get(`https://tonys-demo-backend.herokuapp.com/api/group/${groupId}`)
       .then(res => {
         this.setState({
           tasks: res.data.tasks,
@@ -64,7 +64,7 @@ class Group extends Component {
   };
   addTask = task => {
     axios
-      .post("https://uffizzi-test.herokuapp.com/api/tasks", task)
+      .post("https://tonys-demo-backend.herokuapp.com/api/tasks", task)
       .then(res => {
         this.setState({ showModal: false });
         this.fetchGroup();
@@ -74,7 +74,7 @@ class Group extends Component {
 
   editTask = (task, id) => {
     axios
-      .put(`https://uffizzi-test.herokuapp.com/api/tasks/${id}`, task)
+      .put(`https://tonys-demo-backend.herokuapp.com/api/tasks/${id}`, task)
       .then(res => {
         console.log("Success");
         this.fetchGroup();

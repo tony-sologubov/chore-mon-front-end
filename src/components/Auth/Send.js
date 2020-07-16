@@ -14,7 +14,7 @@ const Send = () => {
     profilePicture: photoURL
   };
 
-  let url = "https://uffizzi-test.herokuapp.com/api/users";
+  let url = "https://tonys-demo-backend.herokuapp.com/api/users";
 
   // deleteUserFromDB();
   localStorage.setItem("uid", JSON.stringify(user.uid));

@@ -69,7 +69,7 @@ class TaskTable extends Component {
   delete = () => {
     this.state.selected.forEach(e => {
       axios
-        .delete(`https://uffizzi-test.herokuapp.com/api/tasks/${e}`)
+        .delete(`https://tonys-demo-backend.herokuapp.com/api/tasks/${e}`)
         .then(res => {
           this.props.fg();
         })
@@ -84,7 +84,7 @@ class TaskTable extends Component {
   complete = () => {
     this.state.selected.forEach(e => {
       axios
-        .update(`https://uffizzi-test.herokuapp.com/api/tasks/${e}`)
+        .update(`https://tonys-demo-backend.herokuapp.com/api/tasks/${e}`)
         .then(res => {
           this.props.fg();
         })
@@ -111,7 +111,7 @@ class TaskTable extends Component {
     });
     const u = { isComplete: this.state.rows[i].isComplete };
     axios
-      .put(`https://uffizzi-test.herokuapp.com/api/tasks/${task.taskId}`, u)
+      .put(`https://tonys-demo-backend.herokuapp.com/api/tasks/${task.taskId}`, u)
       .then(res => {
         console.log(res);
       })

@@ -15,7 +15,7 @@ import firebase from "../../firebase/firebase.js";
 const uid = JSON.parse(localStorage.getItem("uid"));
 console.log(uid);
 const user = JSON.parse(localStorage.getItem("user"));
-const url = "https://uffizzi-test.herokuapp.com/api/";
+const url = "https://tonys-demo-backend.herokuapp.com/api/";
 
 class Dashboard extends Component {
   constructor(props) {
